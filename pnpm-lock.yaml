@@ -243,6 +243,12 @@ importers:
         specifier: workspace:*
         version: link:../trace-model
 
+  packages/trace-view-timeline:
+    dependencies:
+      '@ggx/trace-model':
+        specifier: workspace:*
+        version: link:../trace-model
+
 packages:
 
   '@babel/code-frame@7.29.7':

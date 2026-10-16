@@ -1,0 +1,13 @@
+{
+  "name": "@ggx/trace-view-timeline",
+  "version": "0.0.0",
+  "description": "A compact, fast timeline strip for agent traces, drawn on a 2D canvas.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": { ".": "./src/index.ts" },
+  "files": ["src"],
+  "dependencies": { "@ggx/trace-model": "workspace:*" }
+}
