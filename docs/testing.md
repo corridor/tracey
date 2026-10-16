@@ -23,6 +23,7 @@ pull request and push to `master`.
 | Format detection and mapping for OpenInference, OTel GenAI, OpenLLMetry, Claude Code | `packages/trace-adapters/test`, against the real fixtures in `fixtures/` |
 | Findings: failed, swallowed, repeated, slow, grouping | `packages/trace-insights/test` |
 | Graph layout (no overlaps, 50k spans) and timeline strip level-of-detail | `packages/trace-view-*/test` |
+| Desktop bridge (asset-protocol read, launch file, later opens): `apps/web/test/desktop.test.ts`; Rust argument parsing: `pnpm --filter @ggx/tracey-desktop test` | automated |
 | CLI output, `detect`, `check` exit codes, `--json`, bad input | `apps/cli/test` |
 | Offline and install: manifest and icons served, site reopens and loads a sample with the network off (production build on port 4199) | `apps/web/e2e/offline.spec.ts` |
 | Website: landing, sample, every supported format, paste, finding clicks, keyboard walk, list view, close inspector, theme change repaints the canvas, phone/tablet/wide viewports, unrecognised file, 20,000-span trace under 5 s | `apps/web/e2e` |
@@ -73,3 +74,16 @@ you change parsing or rendering, and compare against the budgets in
 
 Put real exporter output (scrubbed of secrets and private data) or a clearly synthetic file under
 `fixtures/<source>/`, add a README saying how it was made, and add a test that reads it.
+
+## Desktop app by hand
+
+There is no automated UI test for the native window (Tauri's WebDriver does not support macOS).
+
+1. `pnpm --filter @ggx/tracey-desktop build:app`, then launch the `.app` it prints.
+2. The landing page appears; *Try a sample* works; the window resizes down to phone width.
+3. Quit, then `open -a <path>/tracey.app $PWD/fixtures/openinference/travel-planner.collector-file.jsonl`:
+   the trace opens straight away.
+4. With the app running, run that `open -a` command again with another fixture: the new trace replaces the old one.
+5. Right-click a `.jsonl` file in Finder: *Open With > tracey* is offered.
+6. Drop a file onto the window, and use *Choose one*.
+7. The offline service worker is deliberately not registered in the desktop app.

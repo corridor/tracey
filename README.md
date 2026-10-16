@@ -94,6 +94,7 @@ tracey is a set of small, separately usable packages under the `@ggx/` scope, pl
 | `@ggx/trace-theme` | GGX design tokens (dark, light, auto) |
 | `apps/web` | The website |
 | `apps/cli` | The terminal app |
+| `apps/desktop` | Desktop app (Tauri, about 3 MB) |
 
 Not published to npm yet.
 
@@ -116,8 +117,8 @@ See [docs/testing.md](docs/testing.md) for what is covered and how to test by ha
 
 ## Status
 
-Early. The core packages, CLI and website work and are tested; the VS Code extension, desktop
-app, live receiver (`tracey listen`) and more sources are planned.
+Early. The core packages, CLI, website and a macOS desktop build work; the VS Code extension, live
+receiver (`tracey listen`), session picker and more sources are planned.
 
 ## License
 

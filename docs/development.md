@@ -55,6 +55,23 @@ Claude Code sessions: sub-agent files next to a session
 CLI. Your own sessions live under your Claude config dir, `~/.claude/projects/` by default
 (or wherever `CLAUDE_CONFIG_DIR` points).
 
+## The desktop app (macOS, Linux, Windows)
+
+A Tauri window around the website, with "Open with tracey" for `.json` and `.jsonl` files. It needs
+the Rust toolchain (`rustup`; `cargo -V` should work) and, on Linux, Tauri's system libraries
+([prerequisites](https://v2.tauri.app/start/prerequisites/)).
+
+```bash
+pnpm --filter @ggx/tracey-desktop dev          # live-reloading window (starts the web dev server)
+pnpm --filter @ggx/tracey-desktop build:app    # macOS: apps/desktop/src-tauri/target/release/bundle/macos/tracey.app (~3 MB)
+pnpm --filter @ggx/tracey-desktop build        # all installers for this OS
+pnpm --filter @ggx/tracey-desktop test         # Rust unit tests
+```
+
+Open a file with it: `open -a apps/desktop/src-tauri/target/release/bundle/macos/tracey.app path/to/trace.jsonl`
+on macOS, or pass the path as an argument on Windows and Linux. Dropping a file onto the window and
+**Choose one** work as on the website.
+
 ## Tests and type checks
 
 ```bash
@@ -68,6 +85,7 @@ pnpm typecheck      # strict TypeScript across every package
 ```
 apps/web                 website (Vite + Solid)
 apps/cli                 terminal app
+apps/desktop             desktop app (Tauri shell around apps/web)
 packages/trace-model     span model (typed arrays)
 packages/trace-adapters  read + detect OTLP JSON and Claude Code transcripts
 packages/trace-insights  findings (errors, loops, slow steps, ...)

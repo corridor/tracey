@@ -13,19 +13,15 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Next step
 
-> **8.1 Desktop shell** (`apps/desktop`): wrap `apps/web` in a native window with file association
-> and "Open with tracey". Plan says Tauri, which needs the Rust toolchain; **Rust/cargo is not
-> installed on the owner's machine** (checked 2026-10-17), so installing it (rustup) or switching to
-> Electron (npm only, ~80 MB) is the owner's call. Default if no answer: Tauri.
+> **Desktop follow-ups, then CLI.** (1) Verify the desktop app by hand on macOS (see `docs/testing.md`;
+> the native window cannot be driven by the automated tests) and try Linux/Windows builds in CI (8.3).
+> (2) Session scan on start for desktop and CLI, with the picker from `docs/mockups/` (option B) (6.1b, 8.2).
+> (3) `tracey listen` (6.4): OTLP/HTTP receiver with a protobuf decoder, real protobuf fixtures from the Python
+> exporter. (4) Website: Claude Code sub-agent folder drop, tabbed phone layout, perf budgets in CI. (5) Diff.
 >
-> Other open website items, in order: folder drop for Claude Code sub-agents, tabbed phone layout,
-> perf budgets enforced in CI, then Phase 5 (diff) and `tracey listen` (6.4).
->
-> Done so far: monorepo, trace-model (worker-transferable), adapters (OTLP + Claude Code),
-> insights, theme, graph and strip views, CLI, the website (landing, graph canvas, findings,
-> verdict line, inspector, list view, shortcuts, themes, responsive, worker parsing, offline and
-> installable), 22 browser tests, 40 unit tests, CI, Pages workflow.
-> The GitHub Pages domain still needs its DNS CNAME (`tracey.genguardx.ai` -> `corridor.github.io`).
+> Done so far: monorepo, trace-model, adapters (OTLP + Claude Code), insights, theme, graph and strip views,
+> CLI, website (worker parsing, offline, installable), desktop shell (builds and launches on macOS),
+> 43 unit tests, 22 browser tests, 2 Rust tests, CI, Pages (live at https://tracey.genguardx.ai).
 
 ## Phase 0: Vision and docs (done)
 
@@ -107,7 +103,7 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Phase 8: Desktop app
 
-- [ ] 8.1 Tauri shell, file association, recent files.
+- [~] 8.1 Tauri shell (`apps/desktop`), file association and open-with built; macOS .app builds at 3.2 MB and launches with a file. Recent files pending. Linux/Windows untested.
 - [ ] 8.2 Folder watching; session scan on start (see surfaces.md).
 - [ ] 8.3 Renderer QA on WebKit, WebView2, WebKitGTK; installers for macOS/Windows/Linux.
 - [ ] 8.4 "Listen" toggle in the desktop app (shared receiver), endpoint shown with copy button.
