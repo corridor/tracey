@@ -43,10 +43,10 @@ mobile-first and add space as it appears.
 
 | Width | Layout |
 |---|---|
-| < 640px (phone) | One pane at a time. Bottom tab bar: Findings, Timeline, Inspector. Tapping a finding or span moves to the inspector pane; back returns. Drop zone becomes "Choose a file" (touch has no drag). |
-| 640-1024px (tablet, small window) | Two panes: timeline plus a slide-over inspector. Findings collapse into a top strip/drawer. |
-| > 1024px (laptop, desktop) | Three panes: findings, timeline/graph, inspector, as in the wireframe. |
-| > 1800px (ultrawide) | Extra width goes to the timeline; panes get a max width; optional side-by-side diff. |
+| < 640px (phone) | Full-screen canvas. Findings and inspector become **bottom sheets** (swipe up/down); the timeline strip stays docked above them. Tapping a finding frames its node and opens the inspector sheet. Drop zone becomes "Choose a file" (touch has no drag). |
+| 640-1024px (tablet, small window) | Canvas with **docked drawers**: inspector slides in from the right, findings collapse to a badge row that opens a drawer. Floating panels are off to save space. |
+| > 1024px (laptop, desktop) | Canvas with **floating** findings and inspector panels and the timeline strip, as in the wireframe. |
+| > 1800px (ultrawide) | Extra width goes to the canvas; panels keep a max width; optional side-by-side diff. |
 
 Rules:
 
@@ -88,20 +88,32 @@ Rules:
 ```
 
 ```
- After drop (<1s): detected chip, verdict, findings, timeline, inspector
+ After drop (<1s). CHOSEN LAYOUT: canvas first, floating panels (owner pick: "C")
 
  ┌──────────────────────────────────────────────────────────────┐
- │ tracey  ● OpenInference · 142 spans · 38s · 12.4k tok · $0.21 │
- ├───────────────┬───────────────────────────────┬──────────────┤
- │ FINDINGS      │ TIMELINE   [graph] [json]     │ INSPECTOR    │
- │ ▲ Tool failed │  agent ████████████████████   │ search_docs  │
- │ ◆ Loop x5     │   llm  ███                    │ input  ▸     │
- │ ◆ Slow llm    │   tool   ██ ✕                 │ output ▸     │
- │               │   llm      ████               │ error ...    │
- └───────────────┴───────────────────────────────┴──────────────┘
+ │ tracey  ● OpenInference · 142 spans · 38s · 12.4k tok  [graph▾]│
+ ├──────────────────────────────────────────────────────────────┤
+ │  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ┌─ Findings ─────────┐  ·  │
+ │  ┌──────────────┐                  │ ✕ search_docs fail │     │
+ │  │ research_agent│                  │ ↻ loop: web_search │     │
+ │  └──────┬───────┘                  └────────────────────┘     │
+ │   ┌─────┴──┐   ┌──────────────┐    ┌─ search_docs ──────┐     │
+ │   │llm plan│───│ llm answer   │    │ status  error      │     │
+ │   └─────┬──┘   └──────────────┘    │ 429 Too Many Req.. │     │
+ │   ┌─────┴────────┐ ┌────────────┐  └────────────────────┘     │
+ │   │ search_docs ✕│ │web_search×3│                             │
+ │   └──────────────┘ └────────────┘                             │
+ │ ┌ timeline strip ███▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ ┐ │
+ └──────────────────────────────────────────────────────────────┘
 ```
 
-These sketches are structural only; real mockups come from the visual companion or a spike.
+The **graph is the main canvas** (pan, zoom, netron/excalidraw feel). **Findings** and the
+**inspector** are floating panels that can be dragged, collapsed, or pinned. A **timeline
+strip** along the bottom shows the run in time; scrubbing it highlights nodes, and clicking a
+node highlights its segment. The full waterfall timeline is a view switch (`[graph ▾]`).
+Failing nodes are marked and the first error is framed on load.
+
+Chosen mockups are saved in [mockups/](mockups/README.md). The sketches here are structural only.
 
 ## Surfaces, simply
 
