@@ -5,42 +5,54 @@ import type { Finding, Rule } from './types'
 const secs = (ms: number) => (ms >= 1000 ? `${(ms / 1000).toFixed(1)}s` : `${Math.round(ms)}ms`)
 const byStart = (t: Trace) => (a: number, b: number) => t.start[a]! - t.start[b]!
 
-/** Errors that did not simply bubble up from a failing child. */
+/** Errors that did not simply bubble up from a failing child, grouped by step name and message. */
 export const failedSpans: Rule = (t) => {
-  const out: Finding[] = []
+  const groups = new Map<string, number[]>()
   for (const i of t.where(SpanStatus.Error)) {
     if (t.children(i).some((c) => t.status[c] === SpanStatus.Error)) continue
+    const key = `${t.nameOf(i)}\u0000${t.errors[i] ?? ''}`
+    const g = groups.get(key)
+    if (g) g.push(i)
+    else groups.set(key, [i])
+  }
+  return [...groups.values()].map((g) => {
+    const i = g[0]!
     const msg = t.errors[i]
-    out.push({
+    return {
       id: `failed-span:${i}`,
       rule: 'failed-span',
-      severity: 'error',
-      title: `${t.nameOf(i)} failed`,
+      severity: 'error' as const,
+      title: g.length > 1 ? `${t.nameOf(i)} failed ${g.length}×` : `${t.nameOf(i)} failed`,
       ...(msg ? { detail: msg } : {}),
-      spans: [i],
-    })
-  }
-  return out
+      spans: g,
+    }
+  })
 }
 
-/** A failing step whose parent carried on and finished without error. */
+/** A failing step whose parent carried on and finished without error, grouped by parent and step. */
 export const swallowedError: Rule = (t) => {
-  const out: Finding[] = []
+  const groups = new Map<string, number[]>()
   for (const i of t.where(SpanStatus.Error)) {
     const p = t.parent[i]!
     if (p < 0 || t.status[p] === SpanStatus.Error) continue
-    const later = t.children(p).some((c) => t.start[c]! >= t.end[i]! && c !== i)
-    if (!later) continue
-    out.push({
+    if (!t.children(p).some((c) => t.start[c]! >= t.end[i]! && c !== i)) continue
+    const key = `${p}\u0000${t.nameOf(i)}`
+    const g = groups.get(key)
+    if (g) g.push(i)
+    else groups.set(key, [i])
+  }
+  return [...groups.values()].map((g) => {
+    const i = g[0]!
+    const p = t.parent[i]!
+    return {
       id: `swallowed-error:${i}`,
       rule: 'swallowed-error',
-      severity: 'warning',
-      title: `${t.parent[i]! >= 0 ? t.nameOf(p) : 'The agent'} continued after ${t.nameOf(i)} failed`,
+      severity: 'warning' as const,
+      title: `${t.nameOf(p)} carried on after ${t.nameOf(i)} failed${g.length > 1 ? ` ${g.length}×` : ''}`,
       detail: 'The failure did not stop the run, so later steps may be working without that result.',
-      spans: [i],
-    })
-  }
-  return out
+      spans: g,
+    }
+  })
 }
 
 /** The same tool called with the same input three or more times. */

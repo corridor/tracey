@@ -23,6 +23,19 @@ describe('analyze on the travel-planner fixtures', () => {
   }
 })
 
+describe('grouping', () => {
+  it('reports repeated identical failures once', () => {
+    const b = new TraceBuilder()
+    b.add({ id: 'a', name: 'agent', kind: SpanKind.Agent, start: 0, end: 100, status: SpanStatus.Ok })
+    for (let i = 0; i < 3; i++) b.add({ id: `t${i}`, parentId: 'a', name: 'fetch', kind: SpanKind.Tool, start: i * 10, end: i * 10 + 5, error: 'timeout' })
+    b.add({ id: 'z', parentId: 'a', name: 'answer', kind: SpanKind.Llm, start: 50, end: 90 })
+    const f = analyze(b.build())
+    expect(f.filter((x) => x.rule === 'failed-span')).toHaveLength(1)
+    expect(f.find((x) => x.rule === 'failed-span')!.spans).toHaveLength(3)
+    expect(f.filter((x) => x.rule === 'swallowed-error')).toHaveLength(1)
+  })
+})
+
 describe('rules', () => {
   const t = (fn: (b: TraceBuilder) => void) => {
     const b = new TraceBuilder()
