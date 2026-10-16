@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import { SpanKind, SpanStatus } from '@ggx/trace-model'
-import { decodeOtlpProtobuf, parseTraceBytes, parseTraceFile } from '../src/index'
+import { decodeOtlpProtobuf, parseTraceBytes, parseTraceFile, spansFromBody } from '../src/index'
 
 const fixture = (p: string) => readFileSync(fileURLToPath(new URL(`../../../fixtures/${p}`, import.meta.url)), 'utf8')
 
@@ -136,5 +136,15 @@ describe('OTLP protobuf', () => {
     const batch = decodeOtlpProtobuf(new Uint8Array(req))
     const attr = batch.resourceSpans![0]!.scopeSpans![0]!.spans![0]!['attributes'] as { key: string; value: { intValue: string } }[]
     expect(attr[0]).toEqual({ key: 'n', value: { intValue: '-5' } })
+  })
+})
+
+describe('spansFromBody', () => {
+  it('decodes protobuf and JSON request bodies into the same spans', () => {
+    const pb = new Uint8Array(readFileSync(fileURLToPath(new URL('../../../fixtures/otlp-protobuf/sample.pb', import.meta.url))))
+    expect(spansFromBody(pb, 'application/x-protobuf')).toHaveLength(5)
+    const json = new TextEncoder().encode(fixture('otel-genai/travel-planner.collector-file.jsonl'))
+    expect(spansFromBody(json, 'application/json')).toHaveLength(16)
+    expect(() => spansFromBody(new Uint8Array([1, 2, 3, 250]), 'application/x-protobuf')).toThrow()
   })
 })

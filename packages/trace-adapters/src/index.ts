@@ -66,3 +66,9 @@ export function parseTraceBytes(bytes: Uint8Array, extras: { claudeSubagents?: C
     return { detection: unknownDetection(), traces: [] }
   }
 }
+
+/** Spans from one OTLP request body (what an exporter POSTs): protobuf, or JSON when the content type says so. */
+export function spansFromBody(bytes: Uint8Array, contentType: string): RawSpan[] {
+  if (contentType.includes('json')) return parseOtlp(new TextDecoder().decode(bytes))
+  return parseBatches([decodeOtlpProtobuf(bytes)])
+}
