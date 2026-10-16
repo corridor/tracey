@@ -13,12 +13,13 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Next step
 
-> **`tracey listen`** (6.4): OTLP/HTTP receiver in the CLI with a protobuf decoder (real Python
-> exporters send protobuf), loopback only, in memory, `--save`. Generate genuine protobuf fixtures with the
-> Python exporter. Then the desktop session picker (option B, a Rust scan using the same locations as
-> `@ggx/trace-discover`, 8.2), website items (sub-agent folder drop, tabbed phone layout, perf budgets in CI), diff.
+> **Desktop: session picker and a Listen toggle** (8.2, 8.4): a Rust scan using the same locations as
+> `@ggx/trace-discover` (`$CLAUDE_CONFIG_DIR`, every `~/.claude*`), the option B picker UI in the web app when
+> running inside the desktop shell, and the receiver started from a toggle (spawn the CLI's logic or port the
+> receiver). Then website items (Claude Code sub-agent folder drop, tabbed phone layout, perf budgets in CI),
+> website drop of `.pb` protobuf files, diff (Phase 5), VS Code extension (Phase 7).
 >
-> Done so far: see the git log; CLI now has `tracey` (picker), `sessions`, `<file>`, `detect`, `check`.
+> Done so far: see the git log. CLI: `tracey` (picker), `sessions`, `listen`, `<file>`, `detect`, `check`.
 
 ## Phase 0: Vision and docs (done)
 
@@ -89,7 +90,7 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 - [x] 6.1b Session scan on start with no args: picker of found sessions (Claude Code only so far; verified in a pty on real sessions).
 - [ ] 6.2 Terminal explorer (TTY), `diff`.
 - [ ] 6.3 Single-binary distribution.
-- [ ] 6.4 `tracey listen`: local OTLP/HTTP receiver (JSON + protobuf), loopback-only, in-memory,
+- [x] 6.4 `tracey listen` (done; verified with the real Python OTLP protobuf exporter, including a pty check of the live view): local OTLP/HTTP receiver (JSON + protobuf), loopback-only, in-memory,
       `--save`, live-updating graph, runs by trace id. Test with a real Strands/OpenAI Agents/
       LangGraph script. Update `docs/guides/no-tracing.md` when it ships.
 

@@ -26,6 +26,8 @@ pull request and push to `master`.
 | Desktop bridge (asset-protocol read, launch file, later opens): `apps/web/test/desktop.test.ts`; Rust argument parsing: `pnpm --filter @ggx/tracey-desktop test` | automated |
 | Session discovery (config dirs, ordering, titles, limits, sub-agent exclusion) | `packages/trace-discover/test`, with temp folders |
 | Picker state machine, key decoding, rendering, `sessions` and bare `tracey` | `apps/cli/test` |
+| OTLP protobuf decoding (real Python-encoder bytes, negative ints, truncated input) | `packages/trace-adapters/test` |
+| `tracey listen`: JSON, protobuf and gzip bodies, bad payloads, joined batches, `--save` round trip, live render, port in use, non-loopback warning | `apps/cli/test/listen.test.ts` |
 | CLI output, `detect`, `check` exit codes, `--json`, bad input | `apps/cli/test` |
 | Offline and install: manifest and icons served, site reopens and loads a sample with the network off (production build on port 4199) | `apps/web/e2e/offline.spec.ts` |
 | Website: landing, sample, every supported format, paste, finding clicks, keyboard walk, list view, close inspector, theme change repaints the canvas, phone/tablet/wide viewports, unrecognised file, 20,000-span trace under 5 s | `apps/web/e2e` |
@@ -76,6 +78,18 @@ you change parsing or rendering, and compare against the budgets in
 
 Put real exporter output (scrubbed of secrets and private data) or a clearly synthetic file under
 `fixtures/<source>/`, add a README saying how it was made, and add a test that reads it.
+
+## `tracey listen` against a real exporter
+
+The automated tests post fixtures with `fetch`. To check with the real Python exporter (what most agents use):
+
+```bash
+python3 -m venv /tmp/pbvenv && /tmp/pbvenv/bin/pip install opentelemetry-sdk opentelemetry-exporter-otlp-proto-http
+pnpm tracey listen --port 4318 --save /tmp/live.jsonl      # terminal 1
+OTEL_EXPORTER_OTLP_ENDPOINT=http://127.0.0.1:4318 /tmp/pbvenv/bin/python your_agent.py   # terminal 2
+```
+
+Spans appear within a fraction of a second; Ctrl-C prints a report and `pnpm tracey /tmp/live.jsonl` reopens it.
 
 ## Desktop app by hand
 

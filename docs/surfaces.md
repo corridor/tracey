@@ -53,7 +53,7 @@ Purpose: be useful without leaving the terminal and be scriptable in CI.
 - Must start fast (budget in architecture doc) and stream large files rather than load
   them whole.
 
-`tracey listen` **(decided: in scope; details are proposals)**: start a local receiver and
+`tracey listen` **(decided: in scope; built in the CLI as described, desktop toggle pending)**: start a local receiver and
 watch an agent live, with no collector and no file step.
 
 - Run `tracey listen`, then point the agent at it: `OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318`.

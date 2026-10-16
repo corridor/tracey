@@ -63,14 +63,15 @@ pnpm tracey fixtures/openinference/travel-planner.collector-file.jsonl
 ```
 
 `tracey check <file>` exits non-zero when findings reach a severity, for CI. Run `tracey` with no
-file to pick from the Claude Code sessions already on your machine.
+file to pick from the Claude Code sessions already on your machine, or `tracey listen` to point a running
+agent at tracey and watch it live (`OTEL_EXPORTER_OTLP_ENDPOINT=http://127.0.0.1:4318`).
 
 ## What it reads
 
 | Source | Notes |
 |---|---|
 | OpenInference (Arize Phoenix, `openinference-instrumentation-*`) | OTLP JSON |
-| OpenTelemetry GenAI (Strands, Dynatrace, Honeycomb, ...) | OTLP JSON |
+| OpenTelemetry GenAI (Strands, Dynatrace, Honeycomb, ...) | OTLP JSON or protobuf |
 | OpenLLMetry / Traceloop | OTLP JSON |
 | Claude Code session transcripts | JSONL, sub-agents included |
 
@@ -119,8 +120,8 @@ See [docs/testing.md](docs/testing.md) for what is covered and how to test by ha
 
 ## Status
 
-Early. The core packages, CLI, website and a macOS desktop build work; the VS Code extension, live
-receiver (`tracey listen`), session picker and more sources are planned.
+Early. The core packages, CLI (with a session picker and a live receiver), website and a macOS desktop
+build work; the VS Code extension, a desktop session picker and more sources are planned.
 
 ## License
 

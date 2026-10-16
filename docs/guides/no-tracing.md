@@ -146,7 +146,7 @@ instrumentor for that client. Same pattern: instrument with the provider above.
 `traces.json` appears next to the collector. Drop it in tracey. Expect *Detected OpenInference*
 (or OTel GenAI) and your spans.
 
-## Faster: skip the collector with `tracey listen` (planned)
+## Faster: skip the collector with `tracey listen`
 
 With the CLI or desktop app you won't need the collector or a file. Run `tracey listen`
 (or flip "Listen" in the desktop app), point your agent at it, and watch spans arrive live:
@@ -157,8 +157,13 @@ export OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
 python my_agent.py                 # your LangGraph / DeepAgents / Strands / OpenAI Agents app
 ```
 
-Steps 2 and 3 are unchanged: you still enable OpenTelemetry in your framework. Not built yet;
-see the roadmap. Use the collector route above until then, and on the website.
+Step 2 is unchanged: you still enable OpenTelemetry in your framework. `tracey listen` accepts OTLP over HTTP
+(protobuf, which Python exporters send by default, or JSON, optionally gzipped) on `/v1/traces`, shows the
+runs as they arrive, and when you press Ctrl-C prints a report per run. Add `--save run.jsonl` to keep what it
+received; `tracey run.jsonl` (or the website) opens it later. It binds to `127.0.0.1` only unless you pass
+`--host`, keeps everything in memory, and never forwards anything. It is verified with the Python SDK's
+`OTLPSpanExporter` (protobuf); other exporters should work since the wire format is standard, but only that one
+has been tried. Use the collector route above on the website, which cannot open a port.
 
 ## It didn't work
 

@@ -50,6 +50,16 @@ pnpm tracey sessions [--json]  # the same list, non-interactive
 
 `pnpm tracey` rebuilds the CLI first, then runs it. To run the built file directly after
 `pnpm build`: `node apps/cli/bin/tracey.js <file>`. Set `NO_COLOR=1` to turn colour off.
+`pnpm tracey listen` starts a local receiver for a running agent (OTLP over HTTP on `127.0.0.1:4318`):
+
+```bash
+pnpm tracey listen                      # then, in the agent's shell:
+export OTEL_EXPORTER_OTLP_ENDPOINT=http://127.0.0.1:4318
+```
+
+Options: `--port N`, `--host H` (anything but loopback prints a warning), `--save file.jsonl`. Ctrl-C prints a report.
+To try it without an agent, send a fixture: `curl -s -X POST --data-binary @fixtures/otlp-protobuf/sample.pb -H 'content-type: application/x-protobuf' http://127.0.0.1:4318/v1/traces`.
+
 The picker looks in `$CLAUDE_CONFIG_DIR` and every `~/.claude*` folder (for example `~/.claude_work`) for Claude Code
 sessions, lists the newest first, and filters as you type (`↑↓` move, `↵` open, `esc` quit).
 `check` exits 1 when findings reach the chosen severity, so it can gate CI.
