@@ -27,6 +27,7 @@ surface it applies to, or the docs say why not.
 
 ## 2. VS Code extension
 
+- Keep it simple: just open a trace file and see it. No session scanning, no landing page.
 - Registers a **custom editor** for trace files (`.otlp.json`, `.jsonl`, `.tracey`, ...), so
   clicking a trace opens tracey, as excalidraw-vscode does for its files.
 - Runs the same web UI inside a webview; the extension host reads files and talks to the
@@ -38,8 +39,12 @@ surface it applies to, or the docs say why not.
 
 Purpose: be useful without leaving the terminal and be scriptable in CI.
 
-- `tracey <file>`: detect source, print a compact summary and the **findings**, then (in a
-  TTY) open an interactive terminal view of the timeline/tree with the inspector.
+- `tracey <file>`: open that file: detect source, print a compact summary and the **findings**,
+  then (in a TTY) open an interactive terminal view of the graph/tree with the inspector.
+- `tracey listen`: start the live receiver and show traces as they arrive (below).
+- `tracey` (no arguments): scan for sessions and open the picker (see "Session discovery").
+  **(owner is still unsure about the CLI shape; this mapping is a proposal to revisit once the
+  CLI is prototyped)**
 - `tracey open <file>`: hand off to the desktop app or browser for the full visual.
 - `tracey detect <file>`: just print the detected format with evidence.
 - `tracey check <file> --fail-on error`: exit code for CI on findings.
@@ -95,8 +100,14 @@ tracey's own recent files), lists what it found newest first, and asks what to l
 Rules **(proposal)**: scanning only lists names, times and sizes and reads nothing until the
 user picks; the scan list is a documented, user-editable set of locations; it runs in the
 background so the app opens instantly and results stream in; VS Code and the website use
-the same list via "Find my sessions" where the platform allows (the website needs the user to
-grant a folder through the browser file-system picker).
+the website and VS Code do **not** scan: they stay as simple as netron/excalidraw, just open
+a file (VS Code opens trace files through its custom editor, the website by drop/paste).
+
+**Desktop picker (decided: option B)**: a sidebar of sources (All, Claude Code, Codex, Zed,
+VS Code Copilot, Files, plus a Live entry for `tracey listen`) with counts, a search box, and
+richer rows (title, project path, turns, tool calls, duration, error/warning badge). Mockup
+in `docs/mockups/`. The CLI picker is a terminal version of the same list; live runs appear in
+it too, tagged "Listening" **(proposal; owner has not answered)**.
 
 ## Cross-surface capability matrix
 

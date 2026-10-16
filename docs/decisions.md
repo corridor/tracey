@@ -21,6 +21,7 @@ Newest first. **Owner** = decided by the owner. **Mine** = my default, open to c
 | 2026-10-16 | Website with drop-a-file is needed; sample traces bundled. | Owner |
 | 2026-10-16 | Landing: option A (centered, calm drop target). Result view: option C (graph canvas first, floating findings/inspector panels, timeline strip, waterfall as a view switch). See `docs/mockups/`. | Owner |
 | 2026-10-16 | `tracey listen` is in scope: CLI and desktop run a local receiver so an agent's spans appear live, with no collector or file step. | Owner |
+| 2026-10-16 | Session picker: desktop uses option B (sidebar of sources + rich rows). Website and VS Code stay simple: just open a file (no session scanning). CLI: `tracey <file>` opens that file, `tracey listen` shows live traces, bare `tracey` opens the picker (owner unsure, treated as proposal). | Owner |
 | 2026-10-16 | Licence for all `@ggx/*` packages: Apache-2.0. | Owner |
 | 2026-10-16 | On start, the CLI and desktop app scan the common places traces are kept (`~/.claude*`, `~/.codex`, `~/.zed`, ...) and ask the user what to look at. | Owner |
 
