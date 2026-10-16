@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { SpanKind, SpanStatus, TraceBuilder } from '../src/index'
+import { SpanKind, SpanStatus, Trace, TraceBuilder } from '../src/index'
 
 function sample() {
   const b = new TraceBuilder()
@@ -50,6 +50,17 @@ describe('Trace', () => {
     b.add({ id: 'z', parentId: 'z', name: 'z', start: 0, end: 1 })
     const t = b.build()
     expect(t.order.length).toBe(3)
+  })
+
+  it('survives a structured clone (worker boundary) with identical contents', () => {
+    const t = sample()
+    const { data } = t.toTransfer()
+    const back = Trace.fromTransfer(structuredClone(data))
+    expect(back.count).toBe(t.count)
+    expect(Array.from(back.order, (i) => back.nameOf(i))).toEqual(Array.from(t.order, (i) => t.nameOf(i)))
+    expect(back.modelOf(back.where((i) => back.isKind(i, SpanKind.Llm))[0]!)).toBe('m')
+    expect(back.duration).toBe(t.duration)
+    expect(back.errors[back.where(SpanStatus.Error)[0]!]).toBe('429')
   })
 
   it('handles an empty trace', () => {

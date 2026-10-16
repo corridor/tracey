@@ -1,6 +1,6 @@
 export { SpanKind, SpanStatus, kindLabel, statusLabel } from './types'
 export type { AttrValue, Attrs, SpanInit } from './types'
 export { Trace } from './trace'
-export type { TraceData } from './trace'
+export type { TraceData, TraceTransfer } from './trace'
 export { TraceBuilder } from './builder'
 export { StringTable } from './strings'

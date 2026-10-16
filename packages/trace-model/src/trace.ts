@@ -1,5 +1,5 @@
 import type { Attrs, SpanKind, SpanStatus } from './types'
-import type { StringTable } from './strings'
+import { StringTable } from './strings'
 
 export interface TraceData {
   readonly count: number
@@ -26,6 +26,9 @@ export interface TraceData {
   readonly t0: number
   readonly t1: number
 }
+
+/** A trace flattened to plain data that survives structured clone (`postMessage`) and can move buffers. */
+export type TraceTransfer = Omit<TraceData, 'strings'> & { stringValues: string[] }
 
 /**
  * A finished, immutable trace stored as parallel arrays (struct of arrays).
@@ -142,5 +145,18 @@ export class Trace {
 
   isKind(i: number, k: SpanKind): boolean {
     return this.kind[i] === k
+  }
+
+  /** Plain data for a worker boundary. Pass `buffers` as the transfer list to move rather than copy. */
+  toTransfer(): { data: TraceTransfer; buffers: ArrayBuffer[] } {
+    const { strings, ...rest } = this
+    const data = { ...rest, stringValues: strings.values } as TraceTransfer
+    const buffers = [data.start, data.end, data.parent, data.kind, data.status, data.name, data.model, data.tokensIn, data.tokensOut, data.childStart, data.childIdx, data.depth, data.roots, data.order].map((a) => a.buffer as ArrayBuffer)
+    return { data, buffers }
+  }
+
+  static fromTransfer(t: TraceTransfer): Trace {
+    const { stringValues, ...rest } = t
+    return new Trace({ ...rest, strings: StringTable.from(stringValues) })
   }
 }
