@@ -1,0 +1,23 @@
+{
+  "name": "@ggx/tracey-web",
+  "version": "0.0.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ggx/trace-adapters": "workspace:*",
+    "@ggx/trace-insights": "workspace:*",
+    "@ggx/trace-model": "workspace:*",
+    "@ggx/trace-theme": "workspace:*",
+    "solid-js": "^1.9.0"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0",
+    "vite-plugin-solid": "^2.11.0"
+  }
+}
