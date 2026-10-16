@@ -6,6 +6,6 @@ import { App } from './App'
 render(() => <App />, document.getElementById('root')!)
 
 // Offline support in production builds only (the dev server must not be cached).
-if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+if (import.meta.env.PROD && 'serviceWorker' in navigator && !(globalThis as { __TAURI__?: unknown }).__TAURI__) {
   addEventListener('load', () => void navigator.serviceWorker.register('/sw.js').catch(() => {}))
 }

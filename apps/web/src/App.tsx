@@ -5,6 +5,7 @@ import { loadInWorker } from './loadAsync'
 import type { Loaded } from './load'
 import { SAMPLE_NAME, SAMPLE_TEXT } from './sample'
 import { Landing } from './Landing'
+import { listenForOpens } from './desktop'
 import { Result } from './Result'
 
 const THEMES: Theme[] = ['dark', 'light', 'auto']
@@ -58,6 +59,8 @@ export function App() {
     if (e.key === '?' && !typing) setHelp((h) => !h)
     else if (e.key === 'Escape') setHelp(false)
   })
+
+  listenForOpens((file) => void openFile(file))
 
   // Paste anywhere, drop anywhere.
   window.addEventListener('paste', (e) => {
