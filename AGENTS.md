@@ -13,9 +13,9 @@ exploration), netron (graph inspection), excalidraw (snappy, elegant canvas).
 
 ## Status
 
-Pre-code. Only docs exist. Do not scaffold packages, add dependencies, or pick a framework
-until the design in `docs/` is approved by the owner. Decisions marked **(proposal)** in the
-docs are not yet agreed.
+Early implementation. Foundation packages, a CLI and a website shell exist (see `docs/roadmap.md`
+for what is done and next). The owner asked to start building and tweak plans later; keep the
+roadmap and decision log current. Decisions marked **(proposal)** may still change.
 
 ## Continuing work
 
@@ -25,6 +25,7 @@ the roadmap and decision log, and report. Keep the roadmap current whenever plan
 
 ## Docs map
 
+- `docs/development.md` — how to install, run, test locally.
 - `docs/roadmap.md` — phased plan and the current **Next step**. Start here to resume.
 - `docs/decisions.md` — what the owner decided vs. my defaults, and what is still open.
 - `docs/ux-principles.md` — simplicity rules; the product should feel like fast.com/excalidraw.
