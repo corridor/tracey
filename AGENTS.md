@@ -57,6 +57,7 @@ the roadmap and decision log, and report. Keep the roadmap current whenever plan
 - Write code that matches surrounding code: comment density, naming, idiom.
 - Prefer editing existing files over adding new ones.
 - Keep docs in sync when a decision changes; update the relevant file in `docs/`.
-- **Commit in small, atomic commits** (owner's standing instruction): one logical change per
-  commit, each leaving the repo consistent, with a clear message. Don't batch unrelated work.
-  Work on a branch, not directly on `master`.
+- **Commit in small, atomic commits** (owner's standing instruction), following
+  `docs/committing.md`: Conventional Commits with an area, `type(area): outcome`, title at
+  most 72 chars, body explains *why*. Each commit leaves the repo working. Work on a branch,
+  not directly on `master`.
