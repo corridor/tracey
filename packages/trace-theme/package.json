@@ -1,0 +1,13 @@
+{
+  "name": "@ggx/trace-theme",
+  "version": "0.0.0",
+  "description": "GGX design tokens (dark, light, auto) for tracey views.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "exports": {
+    ".": "./src/index.ts",
+    "./theme.css": "./src/theme.css"
+  },
+  "files": ["src"]
+}

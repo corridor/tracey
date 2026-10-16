@@ -1,0 +1,84 @@
+/* GGX docs design tokens (docs/design.md). Dark is the default; light via [data-theme=light];
+   auto follows the OS unless a theme is set explicitly. Components read --tracey-* only. */
+:root {
+  --tracey-font: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --tracey-font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  --tracey-radius: 0.5rem;
+  --tracey-radius-lg: 0.625rem;
+  --tracey-bar-height: 3.5rem;
+
+  --tracey-bg: #0d1219;
+  --tracey-surface: #171d28;
+  --tracey-border: #2a3342;
+  --tracey-text-muted: #556072;
+  --tracey-text-secondary: #94a0b3;
+  --tracey-text: #c3cad6;
+  --tracey-text-strong: #e5e9f0;
+  --tracey-text-max: #f8fafc;
+  --tracey-accent: #0b76cc;
+  --tracey-accent-text: #7cc4fd;
+  --tracey-accent-tint: #0b2a47;
+  --tracey-hover: #94a3b81a;
+  --tracey-active: #0c8ce929;
+
+  --tracey-error: hsl(339 82% 63%);
+  --tracey-warning: #f97316;
+  --tracey-success: hsl(101 82% 63%);
+  --tracey-purple: hsl(281 82% 63%);
+
+  /* Span kinds: palette colours only, always paired with an icon or shape. */
+  --tracey-kind-agent: var(--tracey-purple);
+  --tracey-kind-llm: var(--tracey-accent);
+  --tracey-kind-tool: var(--tracey-success);
+  --tracey-kind-retrieval: var(--tracey-accent-text);
+  --tracey-kind-other: var(--tracey-text-secondary);
+
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --tracey-bg: #ffffff;
+  --tracey-surface: #f7f9fb;
+  --tracey-border: #d5dbe3;
+  --tracey-text-muted: #8a94a3;
+  --tracey-text-secondary: #566072;
+  --tracey-text: #374151;
+  --tracey-text-strong: #111827;
+  --tracey-text-max: #030712;
+  --tracey-accent: #006fc9;
+  --tracey-accent-text: #0257a2;
+  --tracey-accent-tint: #e3f1ff;
+  --tracey-hover: #1118270b;
+  --tracey-active: #0c8ce91a;
+
+  --tracey-error: hsl(339 90% 60%);
+  --tracey-warning: #c54600;
+  --tracey-success: hsl(101 90% 46%);
+  --tracey-purple: hsl(281 90% 60%);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --tracey-bg: #ffffff;
+    --tracey-surface: #f7f9fb;
+    --tracey-border: #d5dbe3;
+    --tracey-text-muted: #8a94a3;
+    --tracey-text-secondary: #566072;
+    --tracey-text: #374151;
+    --tracey-text-strong: #111827;
+    --tracey-text-max: #030712;
+    --tracey-accent: #006fc9;
+    --tracey-accent-text: #0257a2;
+    --tracey-accent-tint: #e3f1ff;
+    --tracey-hover: #1118270b;
+    --tracey-active: #0c8ce91a;
+    --tracey-error: hsl(339 90% 60%);
+    --tracey-warning: #c54600;
+    --tracey-success: hsl(101 90% 46%);
+    --tracey-purple: hsl(281 90% 60%);
+    color-scheme: light;
+  }
+}
