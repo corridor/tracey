@@ -1,0 +1,167 @@
+<style>
+.t{--bg:#0d1219;--sf:#171d28;--bd:#2a3342;--mut:#556072;--sec:#94a0b3;--tx:#c3cad6;--st:#e5e9f0;--wh:#f8fafc;--ac:#0b76cc;--act:#7cc4fd;--aca:#0c8ce929;--er:#e8508a;--wa:#f97316;--ok:#7fe05a;--pu:#b467e8;
+ background:var(--bg);color:var(--tx);font-family:"DM Sans",system-ui,sans-serif;font-size:12px;border-radius:8px;overflow:hidden;border:1px solid var(--bd);position:relative}
+.t *{box-sizing:border-box}
+.t .bar{height:30px;display:flex;align-items:center;gap:10px;padding:0 12px;border-bottom:1px solid var(--bd);color:var(--sec)}
+.t .logo{color:var(--wh);font-weight:700;letter-spacing:-.2px}
+.t .chip{border:1px solid var(--bd);background:var(--sf);border-radius:20px;padding:2px 8px;font-size:11px;color:var(--st)}
+.t .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px}
+.t .mono{font-family:"DM Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.t .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;gap:14px;text-align:center}
+.t .hero h4{margin:0;font-size:22px;color:var(--wh);font-weight:600;letter-spacing:-.4px;line-height:1.2}
+.t .drop{width:300px;height:78px;border:1.5px dashed var(--bd);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--sec);background:var(--sf)}
+.t .drop b{color:var(--act);font-weight:600;margin:0 4px}
+.t .btn{border:1px solid var(--bd);background:var(--bg);color:var(--st);padding:5px 12px;border-radius:8px;font-weight:500}
+.t .btn.p{background:var(--ac);border-color:var(--ac);color:#fff}
+.t .small{font-size:11px;color:var(--mut)}
+.t .row{display:flex;align-items:center;gap:6px}
+.t .pane{padding:8px;border-right:1px solid var(--bd);min-width:0}
+.t .h{font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--mut);margin-bottom:6px;font-weight:600}
+.t .find{border:1px solid color-mix(in srgb,var(--c) 40%,transparent);background:color-mix(in srgb,var(--c) 9%,var(--bg));border-radius:8px;padding:6px 8px;margin-bottom:6px;color:var(--st);line-height:1.35}
+.t .find small{display:block;color:var(--sec);font-size:10.5px}
+.t .gantt{position:relative}
+.t .g{height:15px;margin:3px 0;position:relative}
+.t .g i{position:absolute;top:0;height:15px;border-radius:4px;background:var(--c);opacity:.9;font-style:normal;font-size:9.5px;color:#06121f;padding:1px 5px;white-space:nowrap;overflow:hidden}
+.t .g.sel i{outline:2px solid var(--act);outline-offset:1px}
+.t .kv{display:grid;grid-template-columns:62px 1fr;gap:3px 8px;font-size:11px}
+.t .kv span:nth-child(odd){color:var(--mut)}
+.t pre{margin:6px 0 0;padding:7px;background:var(--sf);border:1px solid var(--bd);border-radius:8px;font:10.5px/1.45 "DM Mono",ui-monospace,monospace;color:var(--tx);white-space:pre-wrap}
+.t .node{position:absolute;border:1px solid var(--c);background:color-mix(in srgb,var(--c) 14%,var(--sf));border-radius:8px;padding:4px 8px;color:var(--st);font-size:11px;white-space:nowrap}
+.t .float{position:absolute;background:color-mix(in srgb,var(--sf) 94%,transparent);border:1px solid var(--bd);border-radius:10px;box-shadow:0 12px 28px -16px #030712cc;padding:8px}
+.t .kbd{border:1px solid var(--bd);border-bottom-width:2px;border-radius:4px;padding:0 4px;font:10px "DM Mono",monospace;color:var(--sec)}
+.v{--c:#0b76cc}.a{--c:#b467e8}.tl{--c:#7fe05a}.e{--c:#e8508a}.w{--c:#f97316}
+.lbl{display:flex;gap:8px;align-items:baseline;margin:2px 0 8px}
+</style>
+
+<h2>Landing and result view: pick a direction</h2>
+<p class="subtitle">Dark GGX theme shown (light and auto use the same layout). Everything runs locally. Click one option in each section.</p>
+
+<h3>1. Landing: the first screen</h3>
+<div class="cards">
+
+  <div class="card" data-choice="landing-a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="t">
+        <div class="bar"><span class="logo">tracey</span><span style="flex:1"></span><span>◐</span><span>?</span></div>
+        <div class="hero">
+          <h4>Drop a trace to see<br>what your agent really did.</h4>
+          <div class="drop">Drop a file, or <b>paste</b> <span class="kbd">⌘V</span></div>
+          <div class="row"><span class="btn">Try a sample ▸</span><span class="btn">Find my sessions</span></div>
+          <div class="small">Runs entirely in your browser. Nothing is uploaded.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body"><h3>A. Centered, calm</h3><p>fast.com / excalidraw feel: one headline, one target, two quiet buttons. Nothing else.</p></div>
+  </div>
+
+  <div class="card" data-choice="landing-b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="t">
+        <div class="bar"><span class="logo">tracey</span><span style="flex:1"></span><span>◐</span><span>?</span></div>
+        <div class="hero" style="position:relative;border-top:0">
+          <div style="position:absolute;inset:0;opacity:.35;padding:26px 30px;pointer-events:none">
+            <div class="gantt">
+              <div class="g a"><i style="left:0;width:96%">agent</i></div>
+              <div class="g v"><i style="left:4%;width:18%">llm</i></div>
+              <div class="g tl"><i style="left:22%;width:12%">tool</i></div>
+              <div class="g v"><i style="left:34%;width:22%">llm</i></div>
+              <div class="g e"><i style="left:56%;width:9%">tool ✕</i></div>
+              <div class="g v"><i style="left:65%;width:28%">llm</i></div>
+            </div>
+          </div>
+          <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:12px">
+            <h4>Drop a trace.<br><span style="color:var(--act)">See what went wrong.</span></h4>
+            <div class="drop" style="background:color-mix(in srgb,var(--bg) 85%,transparent)">Drop a file, or <b>paste</b> <span class="kbd">⌘V</span></div>
+            <div class="row"><span class="btn p">Try a sample</span><span class="btn">Find my sessions</span></div>
+            <div class="small">100% local · OpenInference · OTel · Claude Code · more</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body"><h3>B. Ghosted preview</h3><p>Same single action, but a faded timeline behind it shows what you will get. More impact, slightly busier.</p></div>
+  </div>
+
+</div>
+
+<h3 style="margin-top:28px">2. Result view: after the drop</h3>
+<p class="subtitle">Same sample run in three layouts. The failing tool call and the retry loop should be obvious in seconds.</p>
+<div class="options" style="display:block">
+
+  <div class="option" data-choice="result-a" onclick="toggleSelect(this)" style="display:block;margin-bottom:14px">
+    <div class="lbl"><div class="letter">A</div><h3 style="margin:0">Three panes: findings | timeline | inspector</h3><span class="small">the classic debugger layout; collapses to tabs on phones</span></div>
+    <div class="t">
+      <div class="bar"><span class="logo">tracey</span><span class="chip"><span class="dot" style="background:var(--ok)"></span>OpenInference</span><span class="mono">142 spans · 38s · 12.4k tok · $0.21</span><span style="flex:1"></span><span class="chip" style="border-color:var(--er);color:var(--er)">1 error</span><span class="chip" style="border-color:var(--wa);color:var(--wa)">2 warnings</span></div>
+      <div style="display:grid;grid-template-columns:200px 1fr 210px;height:250px">
+        <div class="pane"><div class="h">Findings</div>
+          <div class="find" style="--c:var(--er)">✕ search_docs failed<small>429 rate limit · 14:02:11</small></div>
+          <div class="find" style="--c:var(--wa)">↻ web_search called 5× with same input<small>possible loop</small></div>
+          <div class="find" style="--c:var(--wa)">⏱ llm call took 14.2s<small>38% of the run</small></div>
+        </div>
+        <div class="pane"><div class="h">Timeline <span style="float:right;text-transform:none;letter-spacing:0">[graph] [json]</span></div>
+          <div class="gantt">
+            <div class="g a"><i style="left:0;width:98%">research_agent</i></div>
+            <div class="g v"><i style="left:3%;width:14%">llm plan</i></div>
+            <div class="g tl"><i style="left:17%;width:9%">web_search</i></div>
+            <div class="g tl"><i style="left:26%;width:9%">web_search</i></div>
+            <div class="g tl"><i style="left:35%;width:9%">web_search</i></div>
+            <div class="g e sel"><i style="left:44%;width:10%">search_docs ✕</i></div>
+            <div class="g v"><i style="left:54%;width:38%">llm answer (14.2s)</i></div>
+          </div>
+        </div>
+        <div class="pane" style="border-right:0"><div class="h">Inspector</div>
+          <div class="kv mono"><span>name</span><span style="color:var(--st)">search_docs</span><span>status</span><span style="color:var(--er)">error</span><span>time</span><span>3.1s</span></div>
+          <pre>input  {"query":"refund policy",
+        "top_k":50}
+error  429 Too Many Requests</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="result-b" onclick="toggleSelect(this)" style="display:block;margin-bottom:14px">
+    <div class="lbl"><div class="letter">B</div><h3 style="margin:0">Story: verdict first, one column</h3><span class="small">reads top to bottom; inspector slides over; best on phones and narrow panels</span></div>
+    <div class="t">
+      <div class="bar"><span class="logo">tracey</span><span class="chip"><span class="dot" style="background:var(--ok)"></span>OpenInference</span><span style="flex:1"></span><span>◐</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;height:250px">
+        <div class="pane" style="padding:14px">
+          <div style="font-size:19px;color:var(--wh);font-weight:600;letter-spacing:-.3px">This run failed at <span style="color:var(--er)">search_docs</span></div>
+          <div class="small" style="margin:3px 0 10px">142 spans · 38s · 12.4k tokens · $0.21</div>
+          <div class="find" style="--c:var(--er)">✕ Tool failed: 429 rate limit<small>then the agent answered anyway, without the doc</small></div>
+          <div class="find" style="--c:var(--wa)">↻ Possible loop: web_search ×5</div>
+          <div class="find" style="--c:var(--wa)">⏱ Slowest: llm answer 14.2s</div>
+          <div class="small">Next finding <span class="kbd">f</span> · Open step <span class="kbd">↵</span></div>
+        </div>
+        <div class="pane" style="border-right:0"><div class="h">Run</div>
+          <div class="gantt">
+            <div class="g a"><i style="left:0;width:98%">research_agent</i></div>
+            <div class="g v"><i style="left:3%;width:14%">llm</i></div>
+            <div class="g tl"><i style="left:17%;width:27%">web_search ×3</i></div>
+            <div class="g e"><i style="left:44%;width:10%">search_docs ✕</i></div>
+            <div class="g v"><i style="left:54%;width:38%">llm (14.2s)</i></div>
+          </div>
+          <div class="float" style="right:10px;bottom:10px;width:56%"><div class="h">search_docs</div><pre style="margin:0">429 Too Many Requests</pre></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="result-c" onclick="toggleSelect(this)" style="display:block;margin-bottom:14px">
+    <div class="lbl"><div class="letter">C</div><h3 style="margin:0">Canvas first: graph with floating panels</h3><span class="small">netron + excalidraw feel; pan/zoom the run; panels float, timeline is a strip</span></div>
+    <div class="t">
+      <div class="bar"><span class="logo">tracey</span><span class="chip"><span class="dot" style="background:var(--ok)"></span>OpenInference</span><span style="flex:1"></span><span class="chip">graph ▾</span></div>
+      <div style="height:250px;position:relative;background-image:radial-gradient(var(--bd) 1px,transparent 1px);background-size:18px 18px">
+        <div class="node a" style="left:40px;top:18px">research_agent</div>
+        <div class="node v" style="left:40px;top:70px">llm plan</div>
+        <div class="node tl" style="left:150px;top:120px">web_search ×3</div>
+        <div class="node e" style="left:40px;top:170px;box-shadow:0 0 0 2px #7cc4fd55">search_docs ✕</div>
+        <div class="node v" style="left:170px;top:70px">llm answer</div>
+        <svg style="position:absolute;inset:0;pointer-events:none" width="100%" height="100%"><g stroke="#556072" fill="none" stroke-width="1.4"><path d="M90 42V70"/><path d="M90 94 V120 H150"/><path d="M90 94V170"/><path d="M130 82H170"/></g></svg>
+        <div class="float" style="left:310px;top:14px;width:170px"><div class="h">Findings</div><div class="find" style="--c:var(--er);margin:0 0 5px">✕ search_docs failed</div><div class="find" style="--c:var(--wa);margin:0">↻ loop: web_search ×5</div></div>
+        <div class="float" style="right:12px;top:14px;width:190px"><div class="h">search_docs</div><div class="kv mono"><span>status</span><span style="color:var(--er)">error</span><span>time</span><span>3.1s</span></div><pre>429 Too Many Requests</pre></div>
+        <div class="float" style="left:12px;right:12px;bottom:10px;padding:4px 8px"><div class="gantt"><div class="g" style="margin:2px 0"><i style="left:0;width:14%;--c:#0b76cc;background:#0b76cc"></i><i style="left:14%;width:27%;background:#7fe05a"></i><i style="left:41%;width:10%;background:#e8508a"></i><i style="left:51%;width:38%;background:#0b76cc"></i></div></div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<p class="small">Tell me in the terminal: which landing (A/B), which result layout (A/B/C), and anything you'd steal from one into another.</p>
