@@ -1,6 +1,6 @@
 import { Show } from 'solid-js'
 
-export function Landing(props: { error: string | undefined; onFile: (f: File) => void; onSample: () => void }) {
+export function Landing(props: { error: string | undefined; busy: string | undefined; onFile: (f: File) => void; onSample: () => void }) {
   let input!: HTMLInputElement
   const pick = () => input.click()
   return (
@@ -31,6 +31,11 @@ export function Landing(props: { error: string | undefined; onFile: (f: File) =>
       <button class="btn" onClick={props.onSample}>
         Try a sample ▸
       </button>
+      <Show when={props.busy}>
+        <p class="fine" role="status">
+          Reading {props.busy}…
+        </p>
+      </Show>
       <Show when={props.error}>
         <p class="error" role="alert">
           {props.error}

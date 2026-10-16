@@ -1,7 +1,7 @@
 import { Show, createSignal } from 'solid-js'
 import { applyTheme } from '@ggx/trace-theme'
 import type { Theme } from '@ggx/trace-theme'
-import { load } from './load'
+import { loadInWorker } from './loadAsync'
 import type { Loaded } from './load'
 import { SAMPLE_NAME, SAMPLE_TEXT } from './sample'
 import { Landing } from './Landing'
@@ -25,16 +25,21 @@ export function App() {
   const [theme, setTheme] = createSignal<Theme>(savedTheme())
   applyTheme(theme())
 
-  const open = (name: string, text: string) => {
+  const [busy, setBusy] = createSignal<string>()
+
+  const open = async (name: string, source: File | string) => {
+    setBusy(name)
+    setError(undefined)
     try {
-      setLoaded(load(name, text))
-      setError(undefined)
+      setLoaded(await loadInWorker(name, source))
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e))
+    } finally {
+      setBusy(undefined)
     }
   }
 
-  const openFile = async (file: File) => open(file.name, await file.text())
+  const openFile = (file: File) => open(file.name, file)
 
   const cycleTheme = () => {
     const next = THEMES[(THEMES.indexOf(theme()) + 1) % THEMES.length]!
@@ -47,10 +52,17 @@ export function App() {
     }
   }
 
+  const [help, setHelp] = createSignal(false)
+  window.addEventListener('keydown', (e) => {
+    const typing = e.target instanceof HTMLElement && /^(input|textarea|select)$/i.test(e.target.tagName)
+    if (e.key === '?' && !typing) setHelp((h) => !h)
+    else if (e.key === 'Escape') setHelp(false)
+  })
+
   // Paste anywhere, drop anywhere.
   window.addEventListener('paste', (e) => {
     const t = e.clipboardData?.getData('text')
-    if (t && t.trim().length > 1) open('pasted trace', t)
+    if (t && t.trim().length > 1) void open('pasted trace', t)
   })
   window.addEventListener('dragover', (e) => e.preventDefault())
   window.addEventListener('drop', (e) => {
@@ -67,17 +79,51 @@ export function App() {
         </button>
         <Show when={loaded()}>{(l) => <Chips loaded={l()} />}</Show>
         <span class="grow" />
+        <button class="icon-btn" onClick={() => setHelp((h) => !h)} title="Keyboard shortcuts (?)" aria-label="Keyboard shortcuts" aria-expanded={help()}>
+          ?
+        </button>
         <button class="icon-btn" onClick={cycleTheme} title={`Theme: ${theme()}`} aria-label={`Theme: ${theme()}. Click to change`}>
           {ICON[theme()]}
         </button>
       </header>
       <Show
         when={loaded()}
-        fallback={<Landing error={error()} onFile={openFile} onSample={() => open(SAMPLE_NAME, SAMPLE_TEXT)} />}
+        fallback={<Landing error={error()} busy={busy()} onFile={openFile} onSample={() => open(SAMPLE_NAME, SAMPLE_TEXT)} />}
       >
         {(l) => <Result loaded={l()} />}
       </Show>
+      <Show when={help()}>
+        <Shortcuts />
+      </Show>
     </div>
+  )
+}
+
+function Shortcuts() {
+  const rows: [string, string][] = [
+    ['← → ↑ ↓', 'Walk the graph (parent, child, siblings)'],
+    ['F', 'Fit the whole graph'],
+    ['+  −', 'Zoom in and out'],
+    ['Scroll', 'Pan; Ctrl/Cmd + scroll or pinch to zoom'],
+    ['Double-click', 'Zoom to a step'],
+    ['⌘/Ctrl V', 'Paste a trace'],
+    ['?', 'Show or hide this list'],
+    ['Esc', 'Close this list'],
+  ]
+  return (
+    <aside class="help" role="dialog" aria-label="Keyboard shortcuts">
+      <h2>Keyboard shortcuts</h2>
+      <dl>
+        {rows.map(([k, v]) => (
+          <>
+            <dt>
+              <kbd>{k}</kbd>
+            </dt>
+            <dd>{v}</dd>
+          </>
+        ))}
+      </dl>
+    </aside>
   )
 }
 
