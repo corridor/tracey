@@ -135,6 +135,43 @@ test.describe('other formats', () => {
     })
   }
 
+  test('opens an OTLP protobuf file (what Python exporters send)', async ({ page }) => {
+    await uploadFile(page, fixture('otlp-protobuf/sample.pb'))
+    await expect(page.locator('.chips')).toContainText('OpenInference')
+    await expect(page.locator('.chips')).toContainText('5 spans')
+    await expect(page.locator('.verdict')).toContainText('First failure: search_flights')
+  })
+
+  test('nests Claude Code sub-agents when they are dropped with the session', async ({ page }) => {
+    const spanCount = async () => Number(/(\d+) spans/.exec((await page.locator('.chips').textContent()) ?? '')![1])
+    await uploadFile(page, fixture('claude-code/session.jsonl'))
+    await expect(page.locator('.chips')).toContainText('Claude Code')
+    const alone = await spanCount()
+
+    const files = ['claude-code/session.jsonl', 'claude-code/subagents/agent-a1b2c3d4e5f6a7b8c.jsonl', 'claude-code/subagents/agent-a1b2c3d4e5f6a7b8c.meta.json'].map((p) => ({
+      name: p.split('/').pop()!,
+      body: readFileSync(fixture(p)).toString('base64'),
+    }))
+    await page.goto('/')
+    await page.evaluate((fs) => {
+      const dt = new DataTransfer()
+      for (const f of fs) dt.items.add(new File([Uint8Array.from(atob(f.body), (c) => c.charCodeAt(0))], f.name))
+      window.dispatchEvent(new DragEvent('drop', { dataTransfer: dt, bubbles: true, cancelable: true }))
+    }, files)
+    await expect(page.locator('.chips')).toContainText('Claude Code')
+    await expect.poll(spanCount).toBeGreaterThan(alone)
+  })
+
+  test('says what to do when only sub-agent files are dropped', async ({ page }) => {
+    await page.goto('/')
+    await page.evaluate(() => {
+      const dt = new DataTransfer()
+      dt.items.add(new File(['{}'], 'agent-1.jsonl'))
+      window.dispatchEvent(new DragEvent('drop', { dataTransfer: dt, bubbles: true, cancelable: true }))
+    })
+    await expect(page.getByRole('alert')).toContainText('Drop the session file too')
+  })
+
   test('opens a pasted trace', async ({ page }) => {
     await page.goto('/')
     const text = readFileSync(fixture('otel-genai/travel-planner.collector-file.jsonl'), 'utf8')
