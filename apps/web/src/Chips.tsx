@@ -14,8 +14,8 @@ export function Chips(props: { loaded: Loaded }) {
         {s().spans} spans · {duration(s().durationMs)}
         {tokens() ? ` · ${compact(tokens())} tok` : ''}
       </span>
-      {s().errors > 0 && <span class="chip err">{s().errors} {s().errors === 1 ? 'error' : 'errors'}</span>}
-      {s().warnings > 0 && <span class="chip warn">{s().warnings} {s().warnings === 1 ? 'warning' : 'warnings'}</span>}
+      {s().errors > 0 && <span class="chip err"><span aria-hidden="true">✕</span> {s().errors}<span class="lbl"> {s().errors === 1 ? 'error' : 'errors'}</span></span>}
+      {s().warnings > 0 && <span class="chip warn"><span aria-hidden="true">▲</span> {s().warnings}<span class="lbl"> {s().warnings === 1 ? 'warning' : 'warnings'}</span></span>}
     </div>
   )
 }

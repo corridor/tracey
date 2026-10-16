@@ -31,7 +31,7 @@ kbd { border: 1px solid var(--tracey-border); border-bottom-width: 2px; border-r
 .fine { margin: 0; font-size: 12px; color: var(--tracey-text-muted); }
 .error { margin: 0; max-width: 460px; color: var(--tracey-error); font-size: 13px; }
 
-.result-wrap { flex: 1; min-height: 0; container-type: inline-size; }
+.result-wrap { flex: 1; min-height: 0; container-type: inline-size; position: relative; }
 .result { height: 100%; display: grid; grid-template-columns: minmax(220px, 280px) 1fr minmax(260px, 360px); }
 .panel { min-width: 0; min-height: 0; overflow: auto; padding: 12px; border-right: 1px solid var(--tracey-border); }
 .panel:last-child { border-right: 0; }
@@ -80,3 +80,37 @@ kbd { border: 1px solid var(--tracey-border); border-bottom-width: 2px; border-r
 }
 @media (max-width: 600px) { .meta { display: none; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Graph stage: canvas first, floating panels, timeline strip along the bottom. */
+.stage { position: absolute; inset: 0; }
+.gstage { position: absolute; inset: 0; display: grid; grid-template-rows: minmax(0, 1fr) 64px; }
+.graph-canvas { width: 100%; height: 100%; display: block; outline: none; }
+.strip-canvas { width: 100%; height: 100%; display: block; border-top: 1px solid var(--tracey-border); background: var(--tracey-surface); }
+.float { position: absolute; background: color-mix(in srgb, var(--tracey-surface) 94%, transparent); border: 1px solid var(--tracey-border); border-radius: var(--tracey-radius-lg); box-shadow: 0 12px 28px -16px #030712cc; backdrop-filter: blur(6px); display: flex; flex-direction: column; min-height: 0; }
+.findings-float { top: 12px; left: 12px; width: min(320px, calc(100% - 24px)); max-height: calc(100% - 64px - 24px - 40px); }
+.findings-float.collapsed { width: auto; }
+.inspector-float { top: 12px; right: 12px; width: min(360px, calc(100% - 24px)); max-height: calc(100% - 64px - 24px); }
+.float-head { display: flex; align-items: center; gap: 8px; width: 100%; padding: 8px 12px; background: none; border: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--tracey-text-secondary); text-align: left; }
+.float-head .count { border: 1px solid var(--tracey-border); border-radius: 999px; padding: 0 7px; font-size: 11px; letter-spacing: 0; color: var(--tracey-text-strong); }
+.float-head .chev { margin-left: auto; }
+.float-body { padding: 4px 12px 12px; overflow: auto; min-height: 0; }
+.inspector-float .float-body { padding-top: 12px; }
+.close { position: absolute; top: 6px; right: 6px; width: 28px; height: 28px; border: 0; border-radius: 6px; background: none; color: var(--tracey-text-secondary); font-size: 18px; line-height: 1; z-index: 1; }
+.close:hover { background: var(--tracey-hover); }
+.viewswitch { position: absolute; right: 12px; bottom: 76px; display: flex; padding: 2px; border: 1px solid var(--tracey-border); border-radius: 999px; background: color-mix(in srgb, var(--tracey-surface) 94%, transparent); z-index: 2; }
+.viewswitch button { border: 0; background: none; padding: 3px 14px; border-radius: 999px; font-size: 12px; color: var(--tracey-text-secondary); }
+.viewswitch button.on { background: var(--tracey-active); color: var(--tracey-accent-text); font-weight: 600; }
+.result-wrap > .result { position: absolute; inset: 0; }
+
+@container (max-width: 700px) {
+  /* Floating panels become sheets: findings stay a compact chip row, the inspector rises from the bottom. */
+  .findings-float { width: calc(100% - 24px); }
+  .inspector-float { top: auto; right: 12px; left: 12px; bottom: calc(64px + 12px + 36px); width: auto; max-height: 46%; }
+  .viewswitch { bottom: calc(64px + 10px); }
+  .findings-float:not(.collapsed) { max-height: 42%; }
+}
+
+@media (max-width: 600px) {
+  .bar { padding: 0 10px; gap: 8px; }
+  .chip .lbl { display: none; }
+}
