@@ -65,6 +65,17 @@ but a second implementation of parsing/detection/findings). See architecture dec
   WebKitGTK (Linux) from the start, because WebKitGTK is the likely weak spot.
 - Fallback if rendering differences hurt: Electron for consistent Chromium.
 
+## Session discovery on start **(decided)**
+
+When the CLI or desktop app starts with no file argument, it scans the common places traces
+are kept (for example `~/.claude*`, `~/.codex`, `~/.zed`, the VS Code workspace storage, and
+tracey's own recent files), lists what it found newest first, and asks what to look at.
+Rules **(proposal)**: scanning only lists names, times and sizes and reads nothing until the
+user picks; the scan list is a documented, user-editable set of locations; it runs in the
+background so the app opens instantly and results stream in; VS Code and the website use
+the same list via "Find my sessions" where the platform allows (the website needs the user to
+grant a folder through the browser file-system picker).
+
 ## Cross-surface capability matrix
 
 | Capability | Web | VS Code | CLI | Desktop |
