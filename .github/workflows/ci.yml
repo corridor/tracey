@@ -30,6 +30,8 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm build
+      - name: Size budgets
+        run: pnpm check:size
 
       - name: Install Chromium for the browser tests
         run: pnpm --filter @ggx/tracey-web exec playwright install --with-deps chromium
