@@ -76,7 +76,8 @@ Details: [user-flows.md](user-flows.md), [format-detection.md](format-detection.
 
 ## Non-goals
 
-- Not a backend, collector, or storage layer. No ingestion server.
+- Not a backend, collector, or storage layer. No hosted ingestion server. The one exception is
+  `tracey listen`: a local-only, in-memory receiver in the CLI/desktop app for live viewing.
 - Not an SDK for instrumenting agents. (We may publish copy-paste snippets that write a
   trace file; see user flows.)
 - Not an evaluation, prompt-management, or monitoring platform. Fleet dashboards are out of

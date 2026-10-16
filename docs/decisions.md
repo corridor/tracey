@@ -20,6 +20,7 @@ Newest first. **Owner** = decided by the owner. **Mine** = my default, open to c
 | 2026-10-16 | v1 sources accepted as proposed: OpenInference, OTel GenAI, Claude Code transcripts; no-tracing guides for Strands and OpenAI Agents; diff and JSON explorer right after; third-party apps later. | Owner ("go with your sources") |
 | 2026-10-16 | Website with drop-a-file is needed; sample traces bundled. | Owner |
 | 2026-10-16 | Landing: option A (centered, calm drop target). Result view: option C (graph canvas first, floating findings/inspector panels, timeline strip, waterfall as a view switch). See `docs/mockups/`. | Owner |
+| 2026-10-16 | `tracey listen` is in scope: CLI and desktop run a local receiver so an agent's spans appear live, with no collector or file step. | Owner |
 | 2026-10-16 | Licence for all `@ggx/*` packages: Apache-2.0. | Owner |
 | 2026-10-16 | On start, the CLI and desktop app scan the common places traces are kept (`~/.claude*`, `~/.codex`, `~/.zed`, ...) and ask the user what to look at. | Owner |
 
@@ -37,7 +38,7 @@ Newest first. **Owner** = decided by the owner. **Mine** = my default, open to c
 
 ## Still open
 
-- Whether `tracey listen` (local OTLP receiver) is in scope.
+- `tracey listen` details: gRPC support, default retention, wire formats (see surfaces.md).
 - Package names.
 - Local session discovery: permission model per surface.
 - Codex and Salesforce Agentforce formats (not researched).
