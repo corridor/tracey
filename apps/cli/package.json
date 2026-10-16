@@ -1,0 +1,25 @@
+{
+  "name": "@ggx/tracey-cli",
+  "version": "0.0.0",
+  "description": "tracey in the terminal: open a trace file and see what went wrong.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "tracey": "./bin/tracey.js"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "dependencies": {
+    "@ggx/trace-adapters": "workspace:*",
+    "@ggx/trace-insights": "workspace:*",
+    "@ggx/trace-model": "workspace:*"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0"
+  },
+  "scripts": {
+    "build": "esbuild src/main.ts --bundle --platform=node --format=esm --target=node20 --outfile=dist/main.js --minify"
+  }
+}
