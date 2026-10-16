@@ -21,8 +21,8 @@ override.
 | **LangSmith** | Run records | `run_type` (llm, chain, tool, ...), `inputs`, `outputs`, `start_time`, `end_time`, `parent_run_id`/`dotted_order` **(verify)**. |
 | **OpenAI Agents SDK** native traces | trace + span objects | Span data types such as agent, generation, function, handoff, guardrail **(verify)**. |
 | **Vercel AI SDK** telemetry | OTLP spans | `ai.*` attributes such as `ai.operationId` **(verify)**. |
-| **Claude Agent SDK / Claude Code** | OTLP spans or JSONL transcripts | Telemetry route is OTLP; transcripts are a separate JSONL format **(verify both)**. |
-| **Claude Code transcript** | JSONL, one record per line | Records with a `type` and `message.content` blocks (text, tool_use, tool_result) **(verify)**. Format is internal and changes between versions, so detect the version and degrade gracefully. |
+| **Claude Code OTel traces** | OTLP spans | Span names starting `claude_code.` with `claude_code.*` attributes (not `gen_ai.*`). Beta, opt-in; sub-agent nesting untested. See `docs/verification/claude-code.md`. |
+| **Claude Code transcript** | JSONL, one record per line | Verified on 2.1.296 to 2.1.301 (see `docs/verification/claude-code.md`). Over the first ~50 lines: `sessionId`+`uuid`+`parentUuid`+`timestamp`+`version` (semver) on user/assistant records; assistant `message.id` starting `msg_` with `usage`; `tool_result` blocks with `sourceToolAssistantUUID`; types such as `permission-mode`, `last-prompt`, `ai-title`. Do not require the first line to be a user record. One content block per assistant record; count tokens once per `message.id`. Sub-agents are separate files (`<session>/subagents/agent-<id>.jsonl` + `.meta.json`). A lone sub-agent file is reported as such. |
 | **Codex CLI rollout** | JSONL | **(not yet researched)** |
 | **Zed thread** | SQLite DB with zstd JSON payloads | SQLite header + thread table; zstd frames **(verify)** |
 | **VS Code Copilot Chat session** | JSON | Chat session JSON with requests/responses **(verify)**. The Agent Debug Log export is OTLP JSON, so it is detected as OTLP first. |

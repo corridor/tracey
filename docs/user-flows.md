@@ -128,11 +128,11 @@ Overview adds a one-time "what am I looking at" tour: timeline, graph, inspector
 The user is curious, not instrumenting. These tools already keep local session records, so
 the flow is "find the file, open it". tracey builds a trace out of the transcript: each
 model turn is an LLM span, each tool call a tool span, sub-agents nest, timestamps give
-durations, token usage gives cost where recorded.
+durations, token usage is recorded (cost is computed from it; transcripts store no per-message cost).
 
 | Harness | Where the data is (all **(verify)** on current versions) |
 |---|---|
-| **Claude Code** | JSONL transcripts, one file per session, under `~/.claude/projects/<project>/<session-id>.jsonl`. Anthropic's docs say the record format is internal and changes between versions, so the adapter must be tolerant and versioned. Docs also point to `/export`. |
+| **Claude Code** | JSONL transcripts under `<config dir>/projects/<project>/<session-id>.jsonl` (config dir is `~/.claude` unless `CLAUDE_CONFIG_DIR` is set; sub-agents in `<session-id>/subagents/`). Format is undocumented by Anthropic and varies by version; verified on 2.1.296-2.1.301. New sessions can also emit OTel traces (beta). |
 | **Codex CLI** | Session "rollout" JSONL under `~/.codex/sessions/` **(not yet researched)**. |
 | **Zed** | Agent threads in a local SQLite database, payloads reported as zstd-compressed JSON. Needs a zstd decoder and SQLite reader. Older sources said LMDB; likely outdated. |
 | **VS Code Copilot Chat** | Chat sessions exportable as JSON ("Chat: Export Session"); session files under a `chatSessions` folder in workspace storage. Newer VS Code has an **Agent Debug Log** that can be exported as OTLP JSON (setting `github.copilot.chat.agentDebugLog.fileLogging.enabled`). Prefer the OTLP export when available. |
