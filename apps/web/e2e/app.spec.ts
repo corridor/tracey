@@ -211,11 +211,29 @@ test.describe('responsive', () => {
       expect(overflow).toBeLessThanOrEqual(0)
       const box = await page.locator('.graph-canvas').boundingBox()
       expect(box!.width).toBeGreaterThan(width * 0.9)
+      if (width <= 700) {
+        // Phone: the graph is what you see first; findings and the inspector are sheets you open.
+        await expect(page.locator('.inspector-float')).toHaveCount(0)
+        await page.getByRole('button', { name: /^findings/i }).click()
+        await page.locator('.findings-float .finding').first().click()
+      }
       const inspector = await page.locator('.inspector-float').boundingBox()
       expect(inspector!.x).toBeGreaterThanOrEqual(0)
       expect(inspector!.x + inspector!.width).toBeLessThanOrEqual(width + 1)
+      expect(inspector!.y).toBeGreaterThanOrEqual(0)
     })
   }
+
+  test('on a phone the graph is visible on load, with findings collapsed to one row', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 800 })
+    await openSample(page)
+    await page.waitForTimeout(500)
+    await expect(page.locator('.findings-float.collapsed')).toBeVisible()
+    await expect(page.locator('.inspector-float')).toHaveCount(0)
+    expect(await inkOf(page, '.graph-canvas')).toBeGreaterThan(5_000)
+    const box = await page.locator('.findings-float').boundingBox()
+    expect(box!.height).toBeLessThan(60)
+  })
 })
 
 test.describe('large traces', () => {

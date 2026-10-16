@@ -16,8 +16,10 @@ export function Result(props: { loaded: Loaded }) {
   const [selected, setSelected] = createSignal<number>(props.loaded.findings[0]?.spans[0] ?? t().order[0] ?? -1)
   const [view, setView] = createSignal<View>('graph')
   const [highlight, setHighlight] = createSignal<readonly number[]>([])
-  const [inspectorOpen, setInspectorOpen] = createSignal(true)
-  const [findingsOpen, setFindingsOpen] = createSignal(!(typeof matchMedia === 'function' && matchMedia('(max-width: 700px)').matches))
+  // On a phone the inspector is a sheet over the graph: start with the graph visible, open on a tap.
+  const narrow = typeof matchMedia === 'function' && matchMedia('(max-width: 700px)').matches
+  const [inspectorOpen, setInspectorOpen] = createSignal(!narrow)
+  const [findingsOpen, setFindingsOpen] = createSignal(!narrow)
 
   const select = (i: number) => {
     setSelected(i)
