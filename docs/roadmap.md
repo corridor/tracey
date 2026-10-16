@@ -13,16 +13,15 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Next step
 
-> **1.4 Performance spike (throwaway, labelled)**, now that fixtures exist: take the real
-> fixtures, generate 1k / 10k / 100k-span variants, and compare Canvas 2D vs WebGL for the
-> graph and timeline strip, Solid vs Preact for the shell, and JSON.parse vs streaming parse.
-> Report numbers against the budgets in `docs/architecture.md`; settle the open technology
-> decisions in `docs/decisions.md`. Needs owner approval to write spike code (it stays in
-> `spikes/`, is not kept as product code).
+> **3.3b Claude Code transcript adapter** (JSONL, fixtures in `fixtures/claude-code/`, notes in
+> `docs/verification/claude-code.md`), then **4.1 the website shell** using the perf spike's
+> recommendations (`docs/verification/perf-spike.md`, being produced by a background agent;
+> check it first and update `docs/decisions.md` with the technology it settles).
 >
-> In parallel (conversation): finish mockups (picker, diff, JSON explorer, CLI, mobile, light),
-> and get from the owner: package names; real Phoenix/Dynatrace/Datadog/Langfuse/LangSmith
-> exports to finish 1.2.
+> Status 2026-10-16: owner said "just start working, tweak the plan later". Done so far:
+> monorepo, `@ggx/trace-model`, `@ggx/trace-adapters` (OTLP JSON: OpenInference, GenAI,
+> OpenLLMetry detection and mapping), `@ggx/trace-insights` (5 rules), `@ggx/trace-theme`.
+> Package names and the other 1.x leftovers are my calls now (see decisions.md); revisit later.
 
 ## Phase 0: Vision and docs (done)
 
@@ -58,16 +57,16 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Phase 2: Foundation
 
-- [ ] 2.1 Monorepo (pnpm workspaces), TypeScript, lint, test, CI, size and perf budget checks.
-- [ ] 2.2 Design tokens package: GGX light/dark/auto, fonts ([design.md](design.md)).
-- [ ] 2.3 `@ggx/trace-model`: struct-of-arrays model, ids, kinds, usage, tests.
+- [x] 2.1 Monorepo (pnpm workspaces), TypeScript, lint, test, CI, size and perf budget checks.
+- [x] 2.2 Design tokens package (`@ggx/trace-theme`; fonts not bundled yet): GGX light/dark/auto, fonts ([design.md](design.md)).
+- [x] 2.3 `@ggx/trace-model`: struct-of-arrays model, ids, kinds, usage, tests.
 
 ## Phase 3: Ingest
 
 - [ ] 3.1 Streaming parser + worker pipeline (JSON, JSONL), tested on 1k / 10k / 100k fixtures.
-- [ ] 3.2 Format detection ([format-detection.md](format-detection.md)) with evidence output.
-- [ ] 3.3 Adapters for v1 sources (one at a time, each with real fixtures).
-- [ ] 3.4 Findings engine: first rules (errors, retries/loops, slow, cost/token outliers,
+- [~] 3.2 Format detection (OTLP conventions done; other containers pending) ([format-detection.md](format-detection.md)) with evidence output.
+- [~] 3.3 Adapters for v1 sources (OpenInference, GenAI done; Claude Code transcript next) (one at a time, each with real fixtures).
+- [~] 3.4 Findings engine (failed, swallowed, repeated, slow, empty output done; token/cost outliers pending): first rules (errors, retries/loops, slow, cost/token outliers,
       truncated/empty output, swallowed tool error).
 
 ## Phase 4: The website (first shippable)

@@ -37,9 +37,14 @@ Newest first. **Owner** = decided by the owner. **Mine** = my default, open to c
 | 2026-10-16 | CLI in TypeScript single binary (Rust if budgets missed) | Proposed |
 | 2026-10-16 | pnpm monorepo, Vite, Vitest, Playwright | Proposed |
 
+## Calls made when the owner said "just start working" (2026-10-16)
+
+- Package names: `@ggx/trace-model`, `@ggx/trace-adapters`, `@ggx/trace-insights`, `@ggx/trace-theme`, views to follow `@ggx/trace-view-*` per architecture.md.
+- `tracey listen` is scheduled in the CLI/desktop phases as decided; no change.
+- Technology choices stay as proposed until `docs/verification/perf-spike.md` reports.
+
 ## Still open
 
 - `tracey listen` details: gRPC support, default retention, wire formats (see surfaces.md).
-- Package names.
 - Local session discovery: permission model per surface.
 - Codex and Salesforce Agentforce formats (not researched).
