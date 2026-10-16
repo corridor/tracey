@@ -22,8 +22,7 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 > Also pending from 1.3: more mockups (diff, JSON explorer, CLI, session picker, mobile, light).
 > Offer them via the visual companion before Phase 4.
 >
-> Before step 1.5 the owner must still answer the leftovers in 1.1 (`tracey listen`,
-> package names). Raise them when 1.2 is done, or sooner if they block anything.
+> Before step 1.5 the owner must still answer the leftover in 1.1 (package names). Raise them when 1.2 is done, or sooner if they block anything.
 
 ## Phase 0: Vision and docs (done)
 
@@ -40,8 +39,8 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 - [~] **1.1 Confirm scope.** DONE: v1 sources (OpenInference, OTel GenAI, Claude Code
       transcripts, Strands and OpenAI Agents guides), drop-a-file site, responsive UI.
-      LEFT (needed before 1.5): whether `tracey listen` (local OTLP receiver in
-      CLI/desktop) is in scope; package names under `@ggx/`.
+      Licence Apache-2.0. `tracey listen` is in scope (see 6.4 and 8.4).
+      LEFT (needed before 1.5): package names under `@ggx/`.
 - [ ] **1.2 Collect real fixtures and verify the guides.** Run each v1 guide against the real
       tool, save real exported traces as fixtures (scrubbed), correct the guides and the
       detection fingerprints. Includes researching Codex and Salesforce if they're in scope.
@@ -91,6 +90,9 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 - [ ] 6.1b Session scan on start with no args: list found sessions, ask what to open.
 - [ ] 6.2 Terminal explorer (TTY), `diff`.
 - [ ] 6.3 Single-binary distribution.
+- [ ] 6.4 `tracey listen`: local OTLP/HTTP receiver (JSON + protobuf), loopback-only, in-memory,
+      `--save`, live-updating graph, runs by trace id. Test with a real Strands/OpenAI Agents/
+      LangGraph script. Update `docs/guides/no-tracing.md` when it ships.
 
 ## Phase 7: VS Code extension
 
@@ -102,13 +104,13 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 - [ ] 8.1 Tauri shell, file association, recent files.
 - [ ] 8.2 Folder watching; session scan on start (see surfaces.md).
 - [ ] 8.3 Renderer QA on WebKit, WebView2, WebKitGTK; installers for macOS/Windows/Linux.
+- [ ] 8.4 "Listen" toggle in the desktop app (shared receiver), endpoint shown with copy button.
 
 ## Phase 9: More sources
 
 - [ ] 9.1 Datadog, Langfuse, LangSmith, OpenLLMetry.
 - [ ] 9.2 Harness sessions: Claude Code (v1 if chosen), Codex, VS Code Copilot, Zed.
 - [ ] 9.3 Third-party: Vapi, HAR capture; Salesforce after research.
-- [ ] 9.4 `tracey listen` live mode (if approved in 1.1).
 
 ## Phase 10: Open-source release
 
