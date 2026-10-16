@@ -39,6 +39,8 @@ export interface GraphView {
   /** Outline a set of spans (for example the spans behind a finding). */
   highlight(indices: readonly number[]): void
   fit(): void
+  /** Replace the trace (for example a live run that grew) keeping pan, zoom and, if it still exists, the selection. */
+  setTrace(trace: Trace): void
   setPalette(p: Palette): void
   destroy(): void
 }
@@ -46,9 +48,10 @@ export interface GraphView {
 const MIN_SCALE = 0.02
 const MAX_SCALE = 3
 
-export function createGraphView(canvas: HTMLCanvasElement, trace: Trace, opts: GraphViewOptions): GraphView {
+export function createGraphView(canvas: HTMLCanvasElement, initial: Trace, opts: GraphViewOptions): GraphView {
+  let trace = initial
   const ctx = canvas.getContext('2d', { alpha: true })!
-  const L: GraphLayout = layoutTree(trace)
+  let L: GraphLayout = layoutTree(trace)
   const font = opts.fontFamily ?? 'ui-sans-serif, system-ui, sans-serif'
   const mono = opts.monoFamily ?? 'ui-monospace, monospace'
   const fmt = opts.duration ?? ((ms: number) => `${Math.round(ms)}ms`)
@@ -399,6 +402,13 @@ export function createGraphView(canvas: HTMLCanvasElement, trace: Trace, opts: G
     },
     fit() {
       animateTo(...fitTarget())
+    },
+    setTrace(t) {
+      trace = t
+      L = layoutTree(t)
+      if (selected >= t.count) selected = -1
+      marked = new Set([...marked].filter((i) => i < t.count))
+      request()
     },
     setPalette(p) {
       palette = p

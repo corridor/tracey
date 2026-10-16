@@ -1,4 +1,4 @@
-import { createEffect, onCleanup, onMount } from 'solid-js'
+import { createEffect, on, onCleanup, onMount } from 'solid-js'
 import { readPalette, watchTheme } from '@ggx/trace-theme'
 import { createGraphView } from '@ggx/trace-view-graph'
 import type { GraphView } from '@ggx/trace-view-graph'
@@ -54,6 +54,11 @@ export function GraphStage(props: {
     }
   })
 
+  // A live run grows: swap the trace in place so pan, zoom and selection survive.
+  createEffect(on(() => props.trace, (t) => {
+    graph?.setTrace(t)
+    strip?.setTrace(t)
+  }, { defer: true }))
   createEffect(() => {
     const i = props.selected
     if (i >= 0) {

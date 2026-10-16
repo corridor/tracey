@@ -24,13 +24,16 @@ export interface StripView {
   /** Programmatic selection. Does not call onSelect (that is for user input only). */
   select(index: number): void
   highlight(indices: readonly number[]): void
+  /** Replace the trace (a live run that grew), keeping the selection if it still exists. */
+  setTrace(trace: Trace): void
   setPalette(p: StripPalette): void
   destroy(): void
 }
 
-export function createStripView(canvas: HTMLCanvasElement, trace: Trace, opts: StripOptions): StripView {
+export function createStripView(canvas: HTMLCanvasElement, initial: Trace, opts: StripOptions): StripView {
+  let trace = initial
   const ctx = canvas.getContext('2d')!
-  const S = layoutStrip(trace)
+  let S = layoutStrip(trace)
   let palette = opts.palette
   let W = 1
   let H = 1
@@ -141,6 +144,14 @@ export function createStripView(canvas: HTMLCanvasElement, trace: Trace, opts: S
     },
     highlight(indices) {
       marked = new Set(indices)
+      request()
+    },
+    setTrace(t) {
+      trace = t
+      S = layoutStrip(t)
+      if (selected >= t.count) selected = -1
+      marked = new Set([...marked].filter((i) => i < t.count))
+      bars = visibleBars(trace, S, W, isError)
       request()
     },
     setPalette(p) {
