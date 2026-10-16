@@ -43,3 +43,42 @@ describe('parseTraceFile', () => {
     expect(r.traces).toHaveLength(0)
   })
 })
+
+describe('Claude Code transcripts', () => {
+  const session = fixture('claude-code/session.jsonl')
+  const sub = {
+    text: fixture('claude-code/subagents/agent-a1b2c3d4e5f6a7b8c.jsonl'),
+    meta: JSON.parse(fixture('claude-code/subagents/agent-a1b2c3d4e5f6a7b8c.meta.json')),
+  }
+
+  it('detects the transcript and reports its version', () => {
+    const { detection } = parseTraceFile(session)
+    expect(detection.source).toBe('claude-code')
+    expect(detection.container).toBe('jsonl')
+    expect(detection.candidates[0]!.evidence.join(' ')).toMatch(/version 2\.1\./)
+  })
+
+  it('builds turns, llm calls and tool calls, with the failing Bash call as an error', () => {
+    const t = parseTraceFile(session).traces[0]!.trace
+    const tools = t.where((i) => t.kind[i] === SpanKind.Tool).map((i) => t.nameOf(i))
+    expect(tools).toEqual(expect.arrayContaining(['Read', 'Bash', 'Edit']))
+    const failed = t.where(SpanStatus.Error).map((i) => t.nameOf(i))
+    expect(failed).toContain('Bash')
+    expect(t.where((i) => t.isKind(i, SpanKind.Llm)).length).toBe(6)
+  })
+
+  it('counts tokens once per message id', () => {
+    const t = parseTraceFile(session).traces[0]!.trace
+    const llm = t.where((i) => t.isKind(i, SpanKind.Llm))
+    expect(llm).toHaveLength(new Set(llm.map((i) => t.ids[i])).size)
+  })
+
+  it('nests the sub-agent under its Agent tool call when given its files', () => {
+    const without = parseTraceFile(session).traces[0]!.trace
+    const withSub = parseTraceFile(session, { claudeSubagents: [sub] }).traces[0]!.trace
+    expect(withSub.count).toBeGreaterThan(without.count)
+    const agentCall = withSub.where((i) => withSub.nameOf(i) === 'Agent')[0]!
+    expect(withSub.isKind(agentCall, SpanKind.Agent)).toBe(true)
+    expect(withSub.children(agentCall).length).toBeGreaterThan(0)
+  })
+})

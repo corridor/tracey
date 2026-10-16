@@ -1,6 +1,8 @@
 import { TraceBuilder } from '@ggx/trace-model'
 import type { Trace } from '@ggx/trace-model'
-import { detectSpans, unknownDetection } from './detect'
+import { claudeCodeDetection, detectSpans, unknownDetection } from './detect'
+import { claudeCodeSpans, looksLikeClaudeCode } from './claude-code'
+import type { ClaudeSubagent } from './claude-code'
 import type { Detection } from './detect'
 import { looksLikeOtlp, parseOtlp } from './otlp'
 import { mapSpan } from './map'
@@ -9,6 +11,7 @@ export type { Detection, SourceId } from './detect'
 export type { RawSpan } from './otlp'
 export { detectSpans } from './detect'
 export { parseOtlp, looksLikeOtlp } from './otlp'
+export type { ClaudeSubagent } from './claude-code'
 
 export interface ParsedTrace {
   traceId: string
@@ -21,7 +24,13 @@ export interface ParsedFile {
 }
 
 /** Read a trace file's text, detect where it came from, and build one Trace per trace id. */
-export function parseTraceFile(text: string): ParsedFile {
+export function parseTraceFile(text: string, extras: { claudeSubagents?: ClaudeSubagent[] } = {}): ParsedFile {
+  if (looksLikeClaudeCode(text.slice(0, 16384))) {
+    const { spans, version, sessionId } = claudeCodeSpans(text, extras.claudeSubagents)
+    const b = new TraceBuilder()
+    for (const s of spans) b.add(s)
+    return { detection: claudeCodeDetection(version), traces: [{ traceId: sessionId ?? '', trace: b.build() }] }
+  }
   if (!looksLikeOtlp(text.slice(0, 4096))) return { detection: unknownDetection(), traces: [] }
   const raw = parseOtlp(text)
   const detection = detectSpans(raw)

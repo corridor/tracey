@@ -1,9 +1,9 @@
 import type { RawSpan } from './otlp'
 
-export type SourceId = 'openinference' | 'otel-genai' | 'openllmetry' | 'unknown-otlp'
+export type SourceId = 'openinference' | 'otel-genai' | 'openllmetry' | 'claude-code' | 'unknown-otlp'
 
 export interface Detection {
-  container: 'otlp-json' | 'unknown'
+  container: 'otlp-json' | 'jsonl' | 'unknown'
   /** Best first. */
   candidates: { source: SourceId; score: number; evidence: string[] }[]
   source: SourceId
@@ -26,7 +26,7 @@ const indexed = (p: string) => (a: Record<string, unknown>) => {
 }
 
 // Weights follow docs/verification/otel-openinference.md (1.0 is decisive).
-const RULES: Record<Exclude<SourceId, 'unknown-otlp'>, Rule[]> = {
+const RULES: Record<Exclude<SourceId, 'unknown-otlp' | 'claude-code'>, Rule[]> = {
   openinference: [
     { label: 'openinference.span.kind', weight: 1, test: has('openinference.span.kind') },
     { label: 'llm.input_messages.*', weight: 0.5, test: prefix('llm.input_messages.') },
@@ -102,4 +102,15 @@ export function detectSpans(spans: RawSpan[], sampleSize = 64): Detection {
 
 export function unknownDetection(): Detection {
   return { container: 'unknown', candidates: [], source: 'unknown-otlp', confidence: 'low', mixed: false, sampled: 0 }
+}
+
+export function claudeCodeDetection(version: string | undefined): Detection {
+  return {
+    container: 'jsonl',
+    candidates: [{ source: 'claude-code', score: 1, evidence: ['sessionId + uuid + semver version on conversation records', ...(version ? [`version ${version}`] : [])] }],
+    source: 'claude-code',
+    confidence: 'high',
+    mixed: false,
+    sampled: 0,
+  }
 }
