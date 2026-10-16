@@ -24,6 +24,8 @@ pull request and push to `master`.
 | Findings: failed, swallowed, repeated, slow, grouping | `packages/trace-insights/test` |
 | Graph layout (no overlaps, 50k spans) and timeline strip level-of-detail | `packages/trace-view-*/test` |
 | Desktop bridge (asset-protocol read, launch file, later opens): `apps/web/test/desktop.test.ts`; Rust argument parsing: `pnpm --filter @ggx/tracey-desktop test` | automated |
+| Session discovery (config dirs, ordering, titles, limits, sub-agent exclusion) | `packages/trace-discover/test`, with temp folders |
+| Picker state machine, key decoding, rendering, `sessions` and bare `tracey` | `apps/cli/test` |
 | CLI output, `detect`, `check` exit codes, `--json`, bad input | `apps/cli/test` |
 | Offline and install: manifest and icons served, site reopens and loads a sample with the network off (production build on port 4199) | `apps/web/e2e/offline.spec.ts` |
 | Website: landing, sample, every supported format, paste, finding clicks, keyboard walk, list view, close inspector, theme change repaints the canvas, phone/tablet/wide viewports, unrecognised file, 20,000-span trace under 5 s | `apps/web/e2e` |

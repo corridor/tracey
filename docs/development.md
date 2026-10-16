@@ -44,10 +44,14 @@ pnpm tracey fixtures/openinference/travel-planner.collector-file.jsonl
 pnpm tracey detect fixtures/claude-code/session.jsonl
 pnpm tracey check fixtures/otel-genai/travel-planner.collector-file.jsonl --fail-on error
 pnpm tracey fixtures/openinference/travel-planner.collector-file.jsonl --json
+pnpm tracey                    # interactive picker of sessions found on this machine (needs a terminal)
+pnpm tracey sessions [--json]  # the same list, non-interactive
 ```
 
 `pnpm tracey` rebuilds the CLI first, then runs it. To run the built file directly after
 `pnpm build`: `node apps/cli/bin/tracey.js <file>`. Set `NO_COLOR=1` to turn colour off.
+The picker looks in `$CLAUDE_CONFIG_DIR` and every `~/.claude*` folder (for example `~/.claude_work`) for Claude Code
+sessions, lists the newest first, and filters as you type (`↑↓` move, `↵` open, `esc` quit).
 `check` exits 1 when findings reach the chosen severity, so it can gate CI.
 
 Claude Code sessions: sub-agent files next to a session
@@ -90,6 +94,7 @@ packages/trace-model     span model (typed arrays)
 packages/trace-adapters  read + detect OTLP JSON and Claude Code transcripts
 packages/trace-insights  findings (errors, loops, slow steps, ...)
 packages/trace-theme     GGX design tokens (dark / light / auto)
+packages/trace-discover  find sessions already on this machine (Node)
 fixtures/                real and synthetic traces used by tests and the sample
 spikes/perf              throwaway performance spike (own package.json; see its README)
 docs/                    vision, design, flows, roadmap, verification notes

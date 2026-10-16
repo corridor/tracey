@@ -62,7 +62,8 @@ pnpm tracey fixtures/openinference/travel-planner.collector-file.jsonl
 ▲ ChatCompletion took 3.2s  (66% of the run)
 ```
 
-`tracey check <file>` exits non-zero when findings reach a severity, for CI.
+`tracey check <file>` exits non-zero when findings reach a severity, for CI. Run `tracey` with no
+file to pick from the Claude Code sessions already on your machine.
 
 ## What it reads
 
@@ -92,6 +93,7 @@ tracey is a set of small, separately usable packages under the `@ggx/` scope, pl
 | `@ggx/trace-view-graph` | Pan-and-zoom call graph on a 2D canvas |
 | `@ggx/trace-view-timeline` | Compact timeline strip |
 | `@ggx/trace-theme` | GGX design tokens (dark, light, auto) |
+| `@ggx/trace-discover` | Finds sessions already on this machine (Node) |
 | `apps/web` | The website |
 | `apps/cli` | The terminal app |
 | `apps/desktop` | Desktop app (Tauri, about 3 MB) |

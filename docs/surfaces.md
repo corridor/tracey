@@ -97,8 +97,8 @@ but a second implementation of parsing/detection/findings). See architecture dec
 When the CLI or desktop app starts with no file argument, it scans the common places traces
 are kept (for example `~/.claude*`, `~/.codex`, `~/.zed`, the VS Code workspace storage, and
 tracey's own recent files), lists what it found newest first, and asks what to look at.
-Rules **(proposal)**: scanning only lists names, times and sizes and reads nothing until the
-user picks; the scan list is a documented, user-editable set of locations; it runs in the
+Rules **(proposal; built for the CLI)**: scanning lists names, times and sizes, and reads only the first
+32 KB of the newest files to show a title and project path, never the conversation; the scan list is a documented, user-editable set of locations; it runs in the
 background so the app opens instantly and results stream in; VS Code and the website use
 the website and VS Code do **not** scan: they stay as simple as netron/excalidraw, just open
 a file (VS Code opens trace files through its custom editor, the website by drop/paste).

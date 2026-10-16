@@ -13,15 +13,12 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Next step
 
-> **Desktop follow-ups, then CLI.** (1) Verify the desktop app by hand on macOS (see `docs/testing.md`;
-> the native window cannot be driven by the automated tests) and try Linux/Windows builds in CI (8.3).
-> (2) Session scan on start for desktop and CLI, with the picker from `docs/mockups/` (option B) (6.1b, 8.2).
-> (3) `tracey listen` (6.4): OTLP/HTTP receiver with a protobuf decoder, real protobuf fixtures from the Python
-> exporter. (4) Website: Claude Code sub-agent folder drop, tabbed phone layout, perf budgets in CI. (5) Diff.
+> **`tracey listen`** (6.4): OTLP/HTTP receiver in the CLI with a protobuf decoder (real Python
+> exporters send protobuf), loopback only, in memory, `--save`. Generate genuine protobuf fixtures with the
+> Python exporter. Then the desktop session picker (option B, a Rust scan using the same locations as
+> `@ggx/trace-discover`, 8.2), website items (sub-agent folder drop, tabbed phone layout, perf budgets in CI), diff.
 >
-> Done so far: monorepo, trace-model, adapters (OTLP + Claude Code), insights, theme, graph and strip views,
-> CLI, website (worker parsing, offline, installable), desktop shell (builds and launches on macOS),
-> 43 unit tests, 22 browser tests, 2 Rust tests, CI, Pages (live at https://tracey.genguardx.ai).
+> Done so far: see the git log; CLI now has `tracey` (picker), `sessions`, `<file>`, `detect`, `check`.
 
 ## Phase 0: Vision and docs (done)
 
@@ -89,7 +86,7 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 ## Phase 6: CLI
 
 - [ ] 6.1 `tracey <file>`, `detect`, `check`, `--json`; streaming; start-time budget.
-- [ ] 6.1b Session scan on start with no args: list found sessions, ask what to open.
+- [x] 6.1b Session scan on start with no args: picker of found sessions (Claude Code only so far; verified in a pty on real sessions).
 - [ ] 6.2 Terminal explorer (TTY), `diff`.
 - [ ] 6.3 Single-binary distribution.
 - [ ] 6.4 `tracey listen`: local OTLP/HTTP receiver (JSON + protobuf), loopback-only, in-memory,
