@@ -48,6 +48,28 @@ Purpose: be useful without leaving the terminal and be scriptable in CI.
 - Must start fast (budget in architecture doc) and stream large files rather than load
   them whole.
 
+`tracey listen` **(decided: in scope; details are proposals)**: start a local receiver and
+watch an agent live, with no collector and no file step.
+
+- Run `tracey listen`, then point the agent at it: `OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318`.
+  Spans stream into the same canvas as they arrive; the graph grows while the agent runs.
+- Speaks OTLP over HTTP (JSON and protobuf) on port 4318. gRPC (4317) later if needed.
+  Anything that exports OpenTelemetry works: OpenInference, OpenLLMetry, Strands, the OpenAI
+  Agents instrumentor, and so on. Format detection runs per span as usual.
+- **Local only.** Binds to `127.0.0.1` by default. Binding to another interface needs an
+  explicit flag and prints a warning. No authentication on loopback, a token when exposed.
+  Never forwards anything anywhere.
+- **In memory by default**, with `--save traces.json` to keep a file. The UI can export the
+  current run at any time.
+- Groups spans into runs by trace id; a new run shows up as a new entry, and the latest is
+  followed automatically unless the user pins one.
+- Handles a busy or already-used port (clear message, `--port`), batching/late spans, and a
+  trace that never closes (mark as "still running" after a quiet period).
+- Desktop app has the same receiver, started from a "Listen" toggle, with the endpoint shown
+  and a copy button. The website and VS Code webview can't open ports; VS Code can start the
+  receiver through the extension host.
+- Cost: protobuf decoding adds a dependency; keep it lazy-loaded so the normal start stays fast.
+
 Open: implementation language. TypeScript (shares the core exactly, ships as a single
 binary via a bundler/runtime) vs Rust (fastest start, better TUI libraries such as ratatui,
 but a second implementation of parsing/detection/findings). See architecture decisions.
@@ -83,6 +105,7 @@ grant a folder through the browser file-system picker).
 | Open file | drag/drop, picker | custom editor | arg | OS open, drag/drop |
 | Paste | yes | yes | stdin | yes |
 | Watch for new traces | no | workspace watcher | `--watch` | folder watch |
+| Live receiver (`tracey listen`) | no | via extension host | yes | yes (toggle) |
 | Full visual (timeline, graph, diff) | yes | yes | no (TUI subset) | yes |
 | Findings | yes | yes | yes | yes |
 | Offline | PWA | yes | yes | yes |
