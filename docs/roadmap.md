@@ -13,16 +13,16 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Next step
 
-> **1.2 Collect real fixtures and verify the guides** for the v1 sources: OpenInference,
-> OTel GenAI, Claude Code transcripts, Strands, OpenAI Agents. Run each guide in
-> `docs/guides/` against the real tool, save scrubbed exports as fixtures, fix the guides and
-> the fingerprints in `docs/format-detection.md`. Fixtures go in `fixtures/` (data only, no
-> product code, so the gate is not crossed). Ask the owner for access/keys if a tool needs it.
+> **1.4 Performance spike (throwaway, labelled)**, now that fixtures exist: take the real
+> fixtures, generate 1k / 10k / 100k-span variants, and compare Canvas 2D vs WebGL for the
+> graph and timeline strip, Solid vs Preact for the shell, and JSON.parse vs streaming parse.
+> Report numbers against the budgets in `docs/architecture.md`; settle the open technology
+> decisions in `docs/decisions.md`. Needs owner approval to write spike code (it stays in
+> `spikes/`, is not kept as product code).
 >
-> Also pending from 1.3: more mockups (diff, JSON explorer, CLI, session picker, mobile, light).
-> Offer them via the visual companion before Phase 4.
->
-> Before step 1.5 the owner must still answer the leftover in 1.1 (package names). Raise them when 1.2 is done, or sooner if they block anything.
+> In parallel (conversation): finish mockups (picker, diff, JSON explorer, CLI, mobile, light),
+> and get from the owner: package names; real Phoenix/Dynatrace/Datadog/Langfuse/LangSmith
+> exports to finish 1.2.
 
 ## Phase 0: Vision and docs (done)
 
@@ -41,7 +41,10 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
       transcripts, Strands and OpenAI Agents guides), drop-a-file site, responsive UI.
       Licence Apache-2.0. `tracey listen` is in scope (see 6.4 and 8.4).
       LEFT (needed before 1.5): package names under `@ggx/`.
-- [ ] **1.2 Collect real fixtures and verify the guides.** Run each v1 guide against the real
+- [~] **1.2 Collect real fixtures and verify the guides.** DONE for OTel, OpenInference, Claude Code,
+      Strands, OpenAI Agents, LangGraph, DeepAgents, Claude Agent SDK (see `docs/verification/`,
+      `fixtures/`). LEFT: Phoenix/Dynatrace/Datadog/Langfuse/LangSmith export shapes (need real
+      accounts or exports from the owner). Run each v1 guide against the real
       tool, save real exported traces as fixtures (scrubbed), correct the guides and the
       detection fingerprints. Includes researching Codex and Salesforce if they're in scope.
 - [~] **1.3 Visual mockups.** DONE: landing A and result C chosen, saved in `docs/mockups/`.
