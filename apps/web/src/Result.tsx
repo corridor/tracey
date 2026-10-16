@@ -4,6 +4,7 @@ import { SpanKind, SpanStatus, kindLabel } from '@ggx/trace-model'
 import type { Finding } from '@ggx/trace-insights'
 import type { Loaded } from './load'
 import { duration } from './format'
+import { verdictText } from './verdict'
 import { GraphStage } from './GraphStage'
 
 const ROW = 26
@@ -29,7 +30,9 @@ export function Result(props: { loaded: Loaded }) {
   }
 
   const FindingsList = () => (
-    <Show when={findings().length} fallback={<p class="ok-note">✓ No problems found</p>}>
+    <>
+      <Verdict loaded={props.loaded} />
+      <Show when={findings().length} fallback={<p class="ok-note">✓ No problems found</p>}>
       <For each={findings()}>
         {(f) => (
           <FindingCard
@@ -40,7 +43,8 @@ export function Result(props: { loaded: Loaded }) {
           />
         )}
       </For>
-    </Show>
+      </Show>
+    </>
   )
 
   return (
@@ -159,6 +163,11 @@ function ListView(props: {
       </aside>
     </div>
   )
+}
+
+function Verdict(props: { loaded: Loaded }) {
+  const v = () => verdictText(props.loaded)
+  return <p class={`verdict ${v().tone}`}>{v().text}</p>
 }
 
 function FindingCard(props: { f: Finding; t: Loaded['trace']; onPick: () => void; onHover?: (on: boolean) => void }) {

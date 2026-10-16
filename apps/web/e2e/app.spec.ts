@@ -77,6 +77,20 @@ test.describe('sample trace', () => {
     await expect(page.locator('.inspector-float h2')).toHaveText('ChatCompletion')
   })
 
+  test('opens with a plain-language verdict naming the first failure', async ({ page }) => {
+    await openSample(page)
+    await expect(page.locator('.verdict')).toContainText('First failure: search_flights')
+    await expect(page.locator('.verdict')).toContainText('into the run')
+  })
+
+  test('the ? key shows and hides the keyboard shortcuts', async ({ page }) => {
+    await openSample(page)
+    await page.keyboard.press('?')
+    await expect(page.getByRole('dialog', { name: /keyboard shortcuts/i })).toBeVisible()
+    await page.keyboard.press('Escape')
+    await expect(page.getByRole('dialog', { name: /keyboard shortcuts/i })).toHaveCount(0)
+  })
+
   test('arrow keys walk the tree', async ({ page }) => {
     await openSample(page)
     await page.locator('.graph-canvas').focus()

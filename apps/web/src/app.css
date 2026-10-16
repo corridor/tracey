@@ -114,3 +114,15 @@ kbd { border: 1px solid var(--tracey-border); border-bottom-width: 2px; border-r
   .bar { padding: 0 10px; gap: 8px; }
   .chip .lbl { display: none; }
 }
+
+.verdict { margin: 4px 0 10px; font-size: 13px; font-weight: 600; color: var(--tracey-text-strong); }
+.verdict.error { color: var(--tracey-error); }
+.verdict.warning { color: var(--tracey-warning); }
+.verdict.ok { color: var(--tracey-success); }
+.panel .verdict { margin-top: 0; }
+
+.help { position: fixed; inset: auto 16px 80px auto; width: min(340px, calc(100vw - 32px)); z-index: 20; padding: 14px 16px; background: var(--tracey-surface); border: 1px solid var(--tracey-border); border-radius: var(--tracey-radius-lg); box-shadow: 0 12px 28px -16px #030712cc; }
+.help h2 { margin: 0 0 8px; font-size: 13px; color: var(--tracey-text-max); }
+.help dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 0; font-size: 12.5px; }
+.help dt { white-space: nowrap; }
+.help dd { margin: 0; color: var(--tracey-text-secondary); }
