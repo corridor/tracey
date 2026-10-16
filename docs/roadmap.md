@@ -13,17 +13,19 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Next step
 
-> **Publish and polish the website.** (1) The owner finishes GitHub Pages: add a DNS CNAME for
-> `tracey.genguardx.ai` pointing at `corridor.github.io`, then re-check the domain in Settings > Pages
-> (the workflow is `.github/workflows/pages.yml`; it runs on `master` pushes that touch the site).
-> (2) Move parsing into a worker with streaming (3.1), the verdict headline in the header, the
-> Claude Code sub-agent folder drop, a tabbed phone layout, and keyboard shortcuts overlay (`?`).
-> (3) Then 4.6/4.7 (PWA, bundled samples) and Phase 5 (diff).
+> **8.1 Desktop shell** (`apps/desktop`): wrap `apps/web` in a native window with file association
+> and "Open with tracey". Plan says Tauri, which needs the Rust toolchain; **Rust/cargo is not
+> installed on the owner's machine** (checked 2026-10-17), so installing it (rustup) or switching to
+> Electron (npm only, ~80 MB) is the owner's call. Default if no answer: Tauri.
 >
-> Done so far: monorepo, trace-model, adapters (OTLP + Claude Code), insights, theme, graph and
-> strip views, CLI (`tracey <file>`, `detect`, `check`), the website (landing, graph canvas,
-> floating findings and inspector, list view, themes, responsive), 18 browser tests, CI, Pages
-> workflow, README with screenshots, `docs/testing.md`.
+> Other open website items, in order: folder drop for Claude Code sub-agents, tabbed phone layout,
+> perf budgets enforced in CI, then Phase 5 (diff) and `tracey listen` (6.4).
+>
+> Done so far: monorepo, trace-model (worker-transferable), adapters (OTLP + Claude Code),
+> insights, theme, graph and strip views, CLI, the website (landing, graph canvas, findings,
+> verdict line, inspector, list view, shortcuts, themes, responsive, worker parsing, offline and
+> installable), 22 browser tests, 40 unit tests, CI, Pages workflow.
+> The GitHub Pages domain still needs its DNS CNAME (`tracey.genguardx.ai` -> `corridor.github.io`).
 
 ## Phase 0: Vision and docs (done)
 
