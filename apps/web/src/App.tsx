@@ -1,11 +1,16 @@
-import { Show, createSignal } from 'solid-js'
+import { Show, createSignal, onMount } from 'solid-js'
 import { applyTheme } from '@ggx/trace-theme'
 import type { Theme } from '@ggx/trace-theme'
 import { loadInWorker } from './loadAsync'
 import type { Loaded } from './load'
 import { SAMPLE_NAME, SAMPLE_TEXT } from './sample'
 import { Landing } from './Landing'
-import { listenForOpens } from './desktop'
+import { fileFromPath, isDesktop, listenForOpens, listenStart, listenStop, onOtlp, scanSessions } from './desktop'
+import type { SessionRow } from './desktop'
+import { DesktopHome } from './DesktopHome'
+import type { ListenState } from './DesktopHome'
+import { LiveRuns, batchSpans } from './live'
+import type { LiveRun } from './live'
 import { Result } from './Result'
 
 const THEMES: Theme[] = ['dark', 'light', 'auto']
@@ -27,6 +32,63 @@ export function App() {
   applyTheme(theme())
 
   const [busy, setBusy] = createSignal<string>()
+
+  // Desktop only: sessions found on this machine, and runs arriving from the local receiver.
+  const desktop = isDesktop()
+  const [sessions, setSessions] = createSignal<SessionRow[]>()
+  const [liveRuns, setLiveRuns] = createSignal<LiveRun[]>([])
+  const [listen, setListen] = createSignal<ListenState>({ on: false })
+  const [liveId, setLiveId] = createSignal<string>()
+  const live = new LiveRuns()
+  let refresh: ReturnType<typeof setTimeout> | undefined
+  const refreshLive = () => {
+    refresh ??= setTimeout(() => {
+      refresh = undefined
+      setLiveRuns(live.list())
+      const id = liveId()
+      const l = id ? live.loaded(id) : undefined
+      if (l) setLoaded(l)
+    }, 250)
+  }
+  onMount(() => {
+    if (!desktop) return
+    void scanSessions().then(setSessions).catch(() => setSessions([]))
+    onOtlp((b) => {
+      void batchSpans(b)
+        .then((spans) => {
+          live.add(spans)
+          refreshLive()
+        })
+        .catch(() => {})
+    })
+  })
+  const toggleListen = async () => {
+    if (listen().on) {
+      await listenStop()
+      setListen({ on: false })
+      return
+    }
+    try {
+      setListen({ on: true, port: await listenStart(4318) })
+    } catch (e) {
+      setListen({ on: false, error: e instanceof Error ? e.message : String(e) })
+    }
+  }
+  const openSession = async (path: string) => {
+    setBusy(path.split(/[\\/]/).pop())
+    try {
+      await openFile(await fileFromPath(path))
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e))
+    } finally {
+      setBusy(undefined)
+    }
+  }
+  const openLive = (id: string) => {
+    setLiveId(id)
+    const l = live.loaded(id)
+    if (l) setLoaded(l)
+  }
 
   const open = async (name: string, source: File | string) => {
     setBusy(name)
@@ -77,7 +139,15 @@ export function App() {
   return (
     <div class="app">
       <header class="bar">
-        <button class="logo" onClick={() => setLoaded(undefined)} aria-label="tracey home">
+        <button
+          class="logo"
+          onClick={() => {
+            setLoaded(undefined)
+            setLiveId(undefined)
+            if (desktop) void scanSessions().then(setSessions).catch(() => {})
+          }}
+          aria-label="tracey home"
+        >
           tracey
         </button>
         <Show when={loaded()}>{(l) => <Chips loaded={l()} />}</Show>
@@ -91,7 +161,24 @@ export function App() {
       </header>
       <Show
         when={loaded()}
-        fallback={<Landing error={error()} busy={busy()} onFile={openFile} onSample={() => open(SAMPLE_NAME, SAMPLE_TEXT)} />}
+        fallback={
+          desktop ? (
+            <DesktopHome
+              sessions={sessions()}
+              live={liveRuns()}
+              listen={listen()}
+              busy={busy()}
+              error={error()}
+              onOpenSession={openSession}
+              onOpenLive={openLive}
+              onToggleListen={toggleListen}
+              onFile={openFile}
+              onSample={() => open(SAMPLE_NAME, SAMPLE_TEXT)}
+            />
+          ) : (
+            <Landing error={error()} busy={busy()} onFile={openFile} onSample={() => open(SAMPLE_NAME, SAMPLE_TEXT)} />
+          )
+        }
       >
         {(l) => <Result loaded={l()} />}
       </Show>

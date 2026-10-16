@@ -35,3 +35,36 @@ export function listenForOpens(open: (file: File) => void): void {
   void t.core.invoke('take_pending_open').then(handle)
   void t.event.listen('tracey://open', (e) => handle(e.payload))
 }
+
+export interface SessionRow {
+  source: string
+  path: string
+  title?: string
+  project?: string
+  mtimeMs: number
+  size: number
+}
+
+export interface OtlpBatch {
+  contentType: string
+  encoding: string
+  bodyB64: string
+}
+
+/** Sessions already on this machine, found by the native shell. */
+export async function scanSessions(): Promise<SessionRow[]> {
+  return ((await tauri()?.core.invoke('scan_sessions')) as SessionRow[] | undefined) ?? []
+}
+
+/** Start the shell's loopback OTLP receiver. Resolves to the port; rejects with a readable message. */
+export async function listenStart(port: number): Promise<number> {
+  return (await tauri()!.core.invoke('listen_start', { port })) as number
+}
+
+export async function listenStop(): Promise<void> {
+  await tauri()?.core.invoke('listen_stop')
+}
+
+export function onOtlp(cb: (b: OtlpBatch) => void): void {
+  void tauri()?.event.listen('tracey://otlp', (e) => cb(e.payload as OtlpBatch))
+}
