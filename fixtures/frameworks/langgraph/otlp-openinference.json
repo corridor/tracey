@@ -1,0 +1,610 @@
+{
+ "resourceSpans": [
+  {
+   "resource": {
+    "attributes": [
+     {
+      "key": "telemetry.sdk.language",
+      "value": {
+       "stringValue": "python"
+      }
+     },
+     {
+      "key": "telemetry.sdk.name",
+      "value": {
+       "stringValue": "opentelemetry"
+      }
+     },
+     {
+      "key": "telemetry.sdk.version",
+      "value": {
+       "stringValue": "1.45.1"
+      }
+     },
+     {
+      "key": "service.instance.id",
+      "value": {
+       "stringValue": "de0481c1-7b09-484d-9ea7-38aa049c2d5b"
+      }
+     },
+     {
+      "key": "service.name",
+      "value": {
+       "stringValue": "unknown_service:python"
+      }
+     }
+    ]
+   },
+   "scopeSpans": [
+    {
+     "scope": {
+      "name": "openinference.instrumentation.langchain",
+      "version": "0.1.79"
+     },
+     "spans": [
+      {
+       "traceId": "nnXzAuVwMHlH1I30oxQxAQ==",
+       "spanId": "OQHQ3UcFGaU=",
+       "parentSpanId": "Pd9MMOYzPfc=",
+       "name": "Fake",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160289922280960",
+       "endTimeUnixNano": "1792160289922543104",
+       "attributes": [
+        {
+         "key": "input.value",
+         "value": {
+          "stringValue": "{\"messages\": [[{\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"SystemMessage\"], \"kwargs\": {\"content\": \"You add numbers.\", \"type\": \"system\"}}, {\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"HumanMessage\"], \"kwargs\": {\"content\": \"What is 2 + 3?\", \"type\": \"human\", \"id\": \"80ff9420-41f1-488e-994b-e1179470f389\"}}]]}"
+         }
+        },
+        {
+         "key": "input.mime_type",
+         "value": {
+          "stringValue": "application/json"
+         }
+        },
+        {
+         "key": "output.value",
+         "value": {
+          "stringValue": "{\"generations\": [[{\"text\": \"\", \"generation_info\": null, \"type\": \"ChatGeneration\", \"message\": {\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"AIMessage\"], \"kwargs\": {\"content\": \"\", \"type\": \"ai\", \"id\": \"lc_run--01a14513-d482-7f73-b8d1-459fdddd2c56-0\", \"tool_calls\": [{\"name\": \"add\", \"args\": {\"a\": 2, \"b\": 3}, \"id\": \"call_1\", \"type\": \"tool_call\"}], \"invalid_tool_calls\": []}}}]], \"llm_output\": null, \"run\": null, \"type\": \"LLMResult\"}"
+         }
+        },
+        {
+         "key": "output.mime_type",
+         "value": {
+          "stringValue": "application/json"
+         }
+        },
+        {
+         "key": "llm.input_messages.0.message.role",
+         "value": {
+          "stringValue": "system"
+         }
+        },
+        {
+         "key": "llm.input_messages.0.message.content",
+         "value": {
+          "stringValue": "You add numbers."
+         }
+        },
+        {
+         "key": "llm.input_messages.1.message.role",
+         "value": {
+          "stringValue": "user"
+         }
+        },
+        {
+         "key": "llm.input_messages.1.message.content",
+         "value": {
+          "stringValue": "What is 2 + 3?"
+         }
+        },
+        {
+         "key": "llm.output_messages.0.message.role",
+         "value": {
+          "stringValue": "assistant"
+         }
+        },
+        {
+         "key": "llm.output_messages.0.message.tool_calls.0.tool_call.id",
+         "value": {
+          "stringValue": "call_1"
+         }
+        },
+        {
+         "key": "llm.output_messages.0.message.tool_calls.0.tool_call.function.name",
+         "value": {
+          "stringValue": "add"
+         }
+        },
+        {
+         "key": "llm.output_messages.0.message.tool_calls.0.tool_call.function.arguments",
+         "value": {
+          "stringValue": "{\"a\": 2, \"b\": 3}"
+         }
+        },
+        {
+         "key": "llm.invocation_parameters",
+         "value": {
+          "stringValue": "{\"_type\": \"fake-messages-list-chat-model\", \"stop\": null}"
+         }
+        },
+        {
+         "key": "llm.provider",
+         "value": {
+          "stringValue": "fake"
+         }
+        },
+        {
+         "key": "metadata",
+         "value": {
+          "stringValue": "{\"ls_integration\": \"langchain_chat_model\", \"langgraph_step\": 1, \"langgraph_node\": \"model\", \"langgraph_triggers\": [\"branch:to:model\"], \"langgraph_path\": [\"__pregel_pull\", \"model\"], \"langgraph_checkpoint_ns\": \"model:e43dfc47-9004-1f63-ef1e-3123e411fc1f\", \"checkpoint_ns\": \"model:e43dfc47-9004-1f63-ef1e-3123e411fc1f\", \"ls_provider\": \"fake\", \"ls_model_type\": \"chat\", \"lc_versions\": {\"langchain-core\": \"1.6.11\", \"langchain\": \"1.4.6\"}}"
+         }
+        },
+        {
+         "key": "openinference.span.kind",
+         "value": {
+          "stringValue": "LLM"
+         }
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "nnXzAuVwMHlH1I30oxQxAQ==",
+       "spanId": "Pd9MMOYzPfc=",
+       "parentSpanId": "JFGwVKdfzyM=",
+       "name": "model",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160289921865984",
+       "endTimeUnixNano": "1792160289922759936",
+       "attributes": [
+        {
+         "key": "input.value",
+         "value": {
+          "stringValue": "{\"messages\": [{\"type\": \"human\", \"data\": {\"content\": \"What is 2 + 3?\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"human\", \"name\": null, \"id\": \"80ff9420-41f1-488e-994b-e1179470f389\"}}]}"
+         }
+        },
+        {
+         "key": "input.mime_type",
+         "value": {
+          "stringValue": "application/json"
+         }
+        },
+        {
+         "key": "output.value",
+         "value": {
+          "stringValue": "[{\"graph\": null, \"update\": {\"messages\": [{\"type\": \"ai\", \"data\": {\"content\": \"\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"ai\", \"name\": null, \"id\": \"lc_run--01a14513-d482-7f73-b8d1-459fdddd2c56-0\", \"tool_calls\": [{\"name\": \"add\", \"args\": {\"a\": 2, \"b\": 3}, \"id\": \"call_1\", \"type\": \"tool_call\"}], \"invalid_tool_calls\": [], \"usage_metadata\": null}}]}, \"resume\": null, \"goto\": []}]"
+         }
+        },
+        {
+         "key": "output.mime_type",
+         "value": {
+          "stringValue": "application/json"
+         }
+        },
+        {
+         "key": "llm.input_messages.0.message.role",
+         "value": {
+          "stringValue": "user"
+         }
+        },
+        {
+         "key": "llm.input_messages.0.message.content",
+         "value": {
+          "stringValue": "What is 2 + 3?"
+         }
+        },
+        {
+         "key": "metadata",
+         "value": {
+          "stringValue": "{\"ls_integration\": \"langchain_create_agent\", \"langgraph_step\": 1, \"langgraph_node\": \"model\", \"langgraph_triggers\": [\"branch:to:model\"], \"langgraph_path\": [\"__pregel_pull\", \"model\"], \"langgraph_checkpoint_ns\": \"model:e43dfc47-9004-1f63-ef1e-3123e411fc1f\"}"
+         }
+        },
+        {
+         "key": "openinference.span.kind",
+         "value": {
+          "stringValue": "CHAIN"
+         }
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "nnXzAuVwMHlH1I30oxQxAQ==",
+       "spanId": "cvoqy+N22mU=",
+       "parentSpanId": "ECQhZqi06Eo=",
+       "name": "add",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160289923151872",
+       "endTimeUnixNano": "1792160289923307776",
+       "attributes": [
+        {
+         "key": "input.value",
+         "value": {
+          "stringValue": "{\"a\": 2, \"b\": 3}"
+         }
+        },
+        {
+         "key": "input.mime_type",
+         "value": {
+          "stringValue": "application/json"
+         }
+        },
+        {
+         "key": "output.value",
+         "value": {
+          "stringValue": "{\"type\": \"tool\", \"data\": {\"content\": \"5\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"tool\", \"name\": \"add\", \"id\": null, \"tool_call_id\": \"call_1\", \"artifact\": null, \"status\": \"success\"}}"
+         }
+        },
+        {
+         "key": "output.mime_type",
+         "value": {
+          "stringValue": "application/json"
+         }
+        },
+        {
+         "key": "tool.name",
+         "value": {
+          "stringValue": "add"
+         }
+        },
+        {
+         "key": "tool.description",
+         "value": {
+          "stringValue": "Add two numbers."
+         }
+        },
+        {
+         "key": "metadata",
+         "value": {
+          "stringValue": "{\"ls_integration\": \"langchain_create_agent\", \"langgraph_step\": 2, \"langgraph_node\": \"tools\", \"langgraph_triggers\": [\"__pregel_push\"], \"langgraph_path\": [\"__pregel_push\", 0, false], \"langgraph_checkpoint_ns\": \"tools:d50cae01-5701-6d3c-4cbd-3ac058c2de75\", \"checkpoint_ns\": \"tools:d50cae01-5701-6d3c-4cbd-3ac058c2de75\"}"
+         }
+        },
+        {
+         "key": "openinference.span.kind",
+         "value": {
+          "stringValue": "TOOL"
+         }
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "nnXzAuVwMHlH1I30oxQxAQ==",
+       "spanId": "ECQhZqi06Eo=",
+       "parentSpanId": "JFGwVKdfzyM=",
+       "name": "tools",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160289922956032",
+       "endTimeUnixNano": "1792160289923478016",
+       "attributes": [
+        {
+         "key": "input.value",
+         "value": {
+          "stringValue": "[{\"name\": \"add\", \"args\": {\"a\": 2, \"b\": 3}, \"id\": \"call_1\", \"type\": \"tool_call\"}]"
+         }
+        },
+        {
+         "key": "input.mime_type",
+         "value": {
+          "stringValue": "application/json"
+         }
+        },
+        {
+         "key": "output.value",
+         "value": {
+          "stringValue": "{\"messages\": [{\"type\": \"tool\", \"data\": {\"content\": \"5\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"tool\", \"name\": \"add\", \"id\": \"5afb2c55-36b8-426b-8088-900cf32676de\", \"tool_call_id\": \"call_1\", \"artifact\": null, \"status\": \"success\"}}]}"
+         }
+        },
+        {
+         "key": "output.mime_type",
+         "value": {
+          "stringValue": "application/json"
+         }
+        },
+        {
+         "key": "metadata",
+         "value": {
+          "stringValue": "{\"ls_integration\": \"langchain_create_agent\", \"langgraph_step\": 2, \"langgraph_node\": \"tools\", \"langgraph_triggers\": [\"__pregel_push\"], \"langgraph_path\": [\"__pregel_push\", 0, false], \"langgraph_checkpoint_ns\": \"tools:d50cae01-5701-6d3c-4cbd-3ac058c2de75\"}"
+         }
+        },
+        {
+         "key": "openinference.span.kind",
+         "value": {
+          "stringValue": "CHAIN"
+         }
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "nnXzAuVwMHlH1I30oxQxAQ==",
+       "spanId": "j851OyDXG8M=",
+       "parentSpanId": "FhmDX+6rXpk=",
+       "name": "Fake",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160289923774976",
+       "endTimeUnixNano": "1792160289923922944",
+       "attributes": [
+        {
+         "key": "input.value",
+         "value": {
+          "stringValue": "{\"messages\": [[{\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"SystemMessage\"], \"kwargs\": {\"content\": \"You add numbers.\", \"type\": \"system\"}}, {\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"HumanMessage\"], \"kwargs\": {\"content\": \"What is 2 + 3?\", \"type\": \"human\", \"id\": \"80ff9420-41f1-488e-994b-e1179470f389\"}}, {\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"AIMessage\"], \"kwargs\": {\"content\": \"\", \"type\": \"ai\", \"id\": \"lc_run--01a14513-d482-7f73-b8d1-459fdddd2c56-0\", \"tool_calls\": [{\"name\": \"add\", \"args\": {\"a\": 2, \"b\": 3}, \"id\": \"call_1\", \"type\": \"tool_call\"}], \"invalid_tool_calls\": []}}, {\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"ToolMessage\"], \"kwargs\": {\"content\": \"5\", \"type\": \"tool\", \"name\": \"add\", \"id\": \"5afb2c55-36b8-426b-8088-900cf32676de\", \"tool_call_id\": \"call_1\", \"status\": \"success\"}}]]}"
+         }
+        },
+        {
+         "key": "input.mime_type",
+         "value": {
+          "stringValue": "application/json"
+         }
+        },
+        {
+         "key": "output.value",
+         "value": {
+          "stringValue": "{\"generations\": [[{\"text\": \"2 + 3 = 5\", \"generation_info\": null, \"type\": \"ChatGeneration\", \"message\": {\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"AIMessage\"], \"kwargs\": {\"content\": \"2 + 3 = 5\", \"type\": \"ai\", \"id\": \"lc_run--01a14513-d483-71a2-bad3-d8569352ad40-0\", \"tool_calls\": [], \"invalid_tool_calls\": []}}}]], \"llm_output\": null, \"run\": null, \"type\": \"LLMResult\"}"
+         }
+        },
+        {
+         "key": "output.mime_type",
+         "value": {
+          "stringValue": "application/json"
+         }
+        },
+        {
+         "key": "llm.input_messages.0.message.role",
+         "value": {
+          "stringValue": "system"
+         }
+        },
+        {
+         "key": "llm.input_messages.0.message.content",
+         "value": {
+          "stringValue": "You add numbers."
+         }
+        },
+        {
+         "key": "llm.input_messages.1.message.role",
+         "value": {
+          "stringValue": "user"
+         }
+        },
+        {
+         "key": "llm.input_messages.1.message.content",
+         "value": {
+          "stringValue": "What is 2 + 3?"
+         }
+        },
+        {
+         "key": "llm.input_messages.2.message.role",
+         "value": {
+          "stringValue": "assistant"
+         }
+        },
+        {
+         "key": "llm.input_messages.2.message.tool_calls.0.tool_call.id",
+         "value": {
+          "stringValue": "call_1"
+         }
+        },
+        {
+         "key": "llm.input_messages.2.message.tool_calls.0.tool_call.function.name",
+         "value": {
+          "stringValue": "add"
+         }
+        },
+        {
+         "key": "llm.input_messages.2.message.tool_calls.0.tool_call.function.arguments",
+         "value": {
+          "stringValue": "{\"a\": 2, \"b\": 3}"
+         }
+        },
+        {
+         "key": "llm.input_messages.3.message.role",
+         "value": {
+          "stringValue": "tool"
+         }
+        },
+        {
+         "key": "llm.input_messages.3.message.content",
+         "value": {
+          "stringValue": "5"
+         }
+        },
+        {
+         "key": "llm.input_messages.3.message.tool_call_id",
+         "value": {
+          "stringValue": "call_1"
+         }
+        },
+        {
+         "key": "llm.input_messages.3.message.name",
+         "value": {
+          "stringValue": "add"
+         }
+        },
+        {
+         "key": "llm.output_messages.0.message.role",
+         "value": {
+          "stringValue": "assistant"
+         }
+        },
+        {
+         "key": "llm.output_messages.0.message.content",
+         "value": {
+          "stringValue": "2 + 3 = 5"
+         }
+        },
+        {
+         "key": "llm.invocation_parameters",
+         "value": {
+          "stringValue": "{\"_type\": \"fake-messages-list-chat-model\", \"stop\": null}"
+         }
+        },
+        {
+         "key": "llm.provider",
+         "value": {
+          "stringValue": "fake"
+         }
+        },
+        {
+         "key": "metadata",
+         "value": {
+          "stringValue": "{\"ls_integration\": \"langchain_chat_model\", \"langgraph_step\": 3, \"langgraph_node\": \"model\", \"langgraph_triggers\": [\"branch:to:model\"], \"langgraph_path\": [\"__pregel_pull\", \"model\"], \"langgraph_checkpoint_ns\": \"model:1b0b187d-7174-afbd-d4b4-e8a75b8fc0e1\", \"checkpoint_ns\": \"model:1b0b187d-7174-afbd-d4b4-e8a75b8fc0e1\", \"ls_provider\": \"fake\", \"ls_model_type\": \"chat\", \"lc_versions\": {\"langchain-core\": \"1.6.11\", \"langchain\": \"1.4.6\"}}"
+         }
+        },
+        {
+         "key": "openinference.span.kind",
+         "value": {
+          "stringValue": "LLM"
+         }
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "nnXzAuVwMHlH1I30oxQxAQ==",
+       "spanId": "FhmDX+6rXpk=",
+       "parentSpanId": "JFGwVKdfzyM=",
+       "name": "model",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160289923654144",
+       "endTimeUnixNano": "1792160289924072960",
+       "attributes": [
+        {
+         "key": "input.value",
+         "value": {
+          "stringValue": "{\"messages\": [{\"type\": \"human\", \"data\": {\"content\": \"What is 2 + 3?\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"human\", \"name\": null, \"id\": \"80ff9420-41f1-488e-994b-e1179470f389\"}}, {\"type\": \"ai\", \"data\": {\"content\": \"\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"ai\", \"name\": null, \"id\": \"lc_run--01a14513-d482-7f73-b8d1-459fdddd2c56-0\", \"tool_calls\": [{\"name\": \"add\", \"args\": {\"a\": 2, \"b\": 3}, \"id\": \"call_1\", \"type\": \"tool_call\"}], \"invalid_tool_calls\": [], \"usage_metadata\": null}}, {\"type\": \"tool\", \"data\": {\"content\": \"5\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"tool\", \"name\": \"add\", \"id\": \"5afb2c55-36b8-426b-8088-900cf32676de\", \"tool_call_id\": \"call_1\", \"artifact\": null, \"status\": \"success\"}}]}"
+         }
+        },
+        {
+         "key": "input.mime_type",
+         "value": {
+          "stringValue": "application/json"
+         }
+        },
+        {
+         "key": "output.value",
+         "value": {
+          "stringValue": "[{\"graph\": null, \"update\": {\"messages\": [{\"type\": \"ai\", \"data\": {\"content\": \"2 + 3 = 5\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"ai\", \"name\": null, \"id\": \"lc_run--01a14513-d483-71a2-bad3-d8569352ad40-0\", \"tool_calls\": [], \"invalid_tool_calls\": [], \"usage_metadata\": null}}]}, \"resume\": null, \"goto\": []}]"
+         }
+        },
+        {
+         "key": "output.mime_type",
+         "value": {
+          "stringValue": "application/json"
+         }
+        },
+        {
+         "key": "llm.input_messages.0.message.role",
+         "value": {
+          "stringValue": "user"
+         }
+        },
+        {
+         "key": "llm.input_messages.0.message.content",
+         "value": {
+          "stringValue": "What is 2 + 3?"
+         }
+        },
+        {
+         "key": "metadata",
+         "value": {
+          "stringValue": "{\"ls_integration\": \"langchain_create_agent\", \"langgraph_step\": 3, \"langgraph_node\": \"model\", \"langgraph_triggers\": [\"branch:to:model\"], \"langgraph_path\": [\"__pregel_pull\", \"model\"], \"langgraph_checkpoint_ns\": \"model:1b0b187d-7174-afbd-d4b4-e8a75b8fc0e1\"}"
+         }
+        },
+        {
+         "key": "openinference.span.kind",
+         "value": {
+          "stringValue": "CHAIN"
+         }
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "nnXzAuVwMHlH1I30oxQxAQ==",
+       "spanId": "JFGwVKdfzyM=",
+       "name": "LangGraph",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160289921246976",
+       "endTimeUnixNano": "1792160289924199936",
+       "attributes": [
+        {
+         "key": "input.value",
+         "value": {
+          "stringValue": "{\"messages\": [[\"user\", \"What is 2 + 3?\"]]}"
+         }
+        },
+        {
+         "key": "input.mime_type",
+         "value": {
+          "stringValue": "application/json"
+         }
+        },
+        {
+         "key": "output.value",
+         "value": {
+          "stringValue": "{\"messages\": [{\"type\": \"human\", \"data\": {\"content\": \"What is 2 + 3?\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"human\", \"name\": null, \"id\": \"80ff9420-41f1-488e-994b-e1179470f389\"}}, {\"type\": \"ai\", \"data\": {\"content\": \"\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"ai\", \"name\": null, \"id\": \"lc_run--01a14513-d482-7f73-b8d1-459fdddd2c56-0\", \"tool_calls\": [{\"name\": \"add\", \"args\": {\"a\": 2, \"b\": 3}, \"id\": \"call_1\", \"type\": \"tool_call\"}], \"invalid_tool_calls\": [], \"usage_metadata\": null}}, {\"type\": \"tool\", \"data\": {\"content\": \"5\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"tool\", \"name\": \"add\", \"id\": \"5afb2c55-36b8-426b-8088-900cf32676de\", \"tool_call_id\": \"call_1\", \"artifact\": null, \"status\": \"success\"}}, {\"type\": \"ai\", \"data\": {\"content\": \"2 + 3 = 5\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"ai\", \"name\": null, \"id\": \"lc_run--01a14513-d483-71a2-bad3-d8569352ad40-0\", \"tool_calls\": [], \"invalid_tool_calls\": [], \"usage_metadata\": null}}]}"
+         }
+        },
+        {
+         "key": "output.mime_type",
+         "value": {
+          "stringValue": "application/json"
+         }
+        },
+        {
+         "key": "llm.input_messages.0.message.role",
+         "value": {
+          "stringValue": "user"
+         }
+        },
+        {
+         "key": "llm.input_messages.0.message.content",
+         "value": {
+          "stringValue": "What is 2 + 3?"
+         }
+        },
+        {
+         "key": "metadata",
+         "value": {
+          "stringValue": "{\"ls_integration\": \"langchain_create_agent\"}"
+         }
+        },
+        {
+         "key": "openinference.span.kind",
+         "value": {
+          "stringValue": "CHAIN"
+         }
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

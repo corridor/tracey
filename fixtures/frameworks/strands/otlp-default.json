@@ -1,0 +1,744 @@
+{
+ "resourceSpans": [
+  {
+   "resource": {
+    "attributes": [
+     {
+      "key": "telemetry.sdk.language",
+      "value": {
+       "stringValue": "python"
+      }
+     },
+     {
+      "key": "telemetry.sdk.name",
+      "value": {
+       "stringValue": "opentelemetry"
+      }
+     },
+     {
+      "key": "telemetry.sdk.version",
+      "value": {
+       "stringValue": "1.45.1"
+      }
+     },
+     {
+      "key": "service.instance.id",
+      "value": {
+       "stringValue": "1dd56070-f65e-49c3-a711-29289caa2c35"
+      }
+     },
+     {
+      "key": "service.name",
+      "value": {
+       "stringValue": "strands-agents"
+      }
+     },
+     {
+      "key": "service.version",
+      "value": {
+       "stringValue": "1.61.1"
+      }
+     }
+    ]
+   },
+   "scopeSpans": [
+    {
+     "scope": {
+      "name": "strands.telemetry.tracer"
+     },
+     "spans": [
+      {
+       "traceId": "1jjfqyfYJE/NkenoBbNO2g==",
+       "spanId": "gFP2oO8Yhbs=",
+       "parentSpanId": "kZrVKAoUeko=",
+       "name": "chat",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160223765106000",
+       "endTimeUnixNano": "1792160223765214000",
+       "attributes": [
+        {
+         "key": "gen_ai.event.start_time",
+         "value": {
+          "stringValue": "2026-10-16T14:17:03.765107+00:00"
+         }
+        },
+        {
+         "key": "gen_ai.operation.name",
+         "value": {
+          "stringValue": "chat"
+         }
+        },
+        {
+         "key": "gen_ai.system",
+         "value": {
+          "stringValue": "strands-agents"
+         }
+        },
+        {
+         "key": "gen_ai.event.end_time",
+         "value": {
+          "stringValue": "2026-10-16T14:17:03.765205+00:00"
+         }
+        },
+        {
+         "key": "gen_ai.usage.prompt_tokens",
+         "value": {
+          "intValue": "10"
+         }
+        },
+        {
+         "key": "gen_ai.usage.input_tokens",
+         "value": {
+          "intValue": "10"
+         }
+        },
+        {
+         "key": "gen_ai.usage.completion_tokens",
+         "value": {
+          "intValue": "5"
+         }
+        },
+        {
+         "key": "gen_ai.usage.output_tokens",
+         "value": {
+          "intValue": "5"
+         }
+        },
+        {
+         "key": "gen_ai.usage.total_tokens",
+         "value": {
+          "intValue": "15"
+         }
+        },
+        {
+         "key": "gen_ai.server.request.duration",
+         "value": {
+          "intValue": "1"
+         }
+        }
+       ],
+       "events": [
+        {
+         "timeUnixNano": "1792160223765117000",
+         "name": "gen_ai.system.message",
+         "attributes": [
+          {
+           "key": "content",
+           "value": {
+            "stringValue": "[{\"text\": \"You add numbers.\"}]"
+           }
+          }
+         ]
+        },
+        {
+         "timeUnixNano": "1792160223765123000",
+         "name": "gen_ai.user.message",
+         "attributes": [
+          {
+           "key": "content",
+           "value": {
+            "stringValue": "[{\"text\": \"What is 2 + 3?\"}]"
+           }
+          }
+         ]
+        },
+        {
+         "timeUnixNano": "1792160223765204000",
+         "name": "gen_ai.choice",
+         "attributes": [
+          {
+           "key": "finish_reason",
+           "value": {
+            "stringValue": "tool_use"
+           }
+          },
+          {
+           "key": "message",
+           "value": {
+            "stringValue": "[{\"toolUse\": {\"toolUseId\": \"t1\", \"name\": \"add\", \"input\": {\"a\": 2, \"b\": 3}}}]"
+           }
+          }
+         ]
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "1jjfqyfYJE/NkenoBbNO2g==",
+       "spanId": "kogMlh1pbII=",
+       "parentSpanId": "kZrVKAoUeko=",
+       "name": "execute_tool add",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160223765369000",
+       "endTimeUnixNano": "1792160223765724000",
+       "attributes": [
+        {
+         "key": "gen_ai.event.start_time",
+         "value": {
+          "stringValue": "2026-10-16T14:17:03.765370+00:00"
+         }
+        },
+        {
+         "key": "gen_ai.operation.name",
+         "value": {
+          "stringValue": "execute_tool"
+         }
+        },
+        {
+         "key": "gen_ai.system",
+         "value": {
+          "stringValue": "strands-agents"
+         }
+        },
+        {
+         "key": "gen_ai.tool.name",
+         "value": {
+          "stringValue": "add"
+         }
+        },
+        {
+         "key": "gen_ai.tool.call.id",
+         "value": {
+          "stringValue": "t1"
+         }
+        },
+        {
+         "key": "gen_ai.tool.description",
+         "value": {
+          "stringValue": "Add two numbers."
+         }
+        },
+        {
+         "key": "gen_ai.tool.json_schema",
+         "value": {
+          "stringValue": "{\"properties\": {\"a\": {\"description\": \"Parameter a\", \"type\": \"integer\"}, \"b\": {\"description\": \"Parameter b\", \"type\": \"integer\"}}, \"required\": [\"a\", \"b\"], \"type\": \"object\"}"
+         }
+        },
+        {
+         "key": "gen_ai.event.end_time",
+         "value": {
+          "stringValue": "2026-10-16T14:17:03.765717+00:00"
+         }
+        },
+        {
+         "key": "gen_ai.tool.status",
+         "value": {
+          "stringValue": "success"
+         }
+        }
+       ],
+       "events": [
+        {
+         "timeUnixNano": "1792160223765384000",
+         "name": "gen_ai.tool.message",
+         "attributes": [
+          {
+           "key": "role",
+           "value": {
+            "stringValue": "tool"
+           }
+          },
+          {
+           "key": "content",
+           "value": {
+            "stringValue": "{\"a\": 2, \"b\": 3}"
+           }
+          },
+          {
+           "key": "id",
+           "value": {
+            "stringValue": "t1"
+           }
+          }
+         ]
+        },
+        {
+         "timeUnixNano": "1792160223765715000",
+         "name": "gen_ai.choice",
+         "attributes": [
+          {
+           "key": "message",
+           "value": {
+            "stringValue": "[{\"text\": \"5\"}]"
+           }
+          },
+          {
+           "key": "id",
+           "value": {
+            "stringValue": "t1"
+           }
+          }
+         ]
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "1jjfqyfYJE/NkenoBbNO2g==",
+       "spanId": "kZrVKAoUeko=",
+       "parentSpanId": "/LWtbWzjzaY=",
+       "name": "execute_event_loop_cycle",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160223765002000",
+       "endTimeUnixNano": "1792160223765797000",
+       "attributes": [
+        {
+         "key": "gen_ai.event.start_time",
+         "value": {
+          "stringValue": "2026-10-16T14:17:03.765004+00:00"
+         }
+        },
+        {
+         "key": "gen_ai.operation.name",
+         "value": {
+          "stringValue": "execute_event_loop_cycle"
+         }
+        },
+        {
+         "key": "gen_ai.system",
+         "value": {
+          "stringValue": "strands-agents"
+         }
+        },
+        {
+         "key": "event_loop.cycle_id",
+         "value": {
+          "stringValue": "7c8550b6-7f5f-4659-ab83-770d2ac33fce"
+         }
+        },
+        {
+         "key": "gen_ai.event.end_time",
+         "value": {
+          "stringValue": "2026-10-16T14:17:03.765794+00:00"
+         }
+        }
+       ],
+       "events": [
+        {
+         "timeUnixNano": "1792160223765017000",
+         "name": "gen_ai.user.message",
+         "attributes": [
+          {
+           "key": "content",
+           "value": {
+            "stringValue": "[{\"text\": \"What is 2 + 3?\"}]"
+           }
+          }
+         ]
+        },
+        {
+         "timeUnixNano": "1792160223765793000",
+         "name": "gen_ai.choice",
+         "attributes": [
+          {
+           "key": "message",
+           "value": {
+            "stringValue": "[{\"toolUse\": {\"toolUseId\": \"t1\", \"name\": \"add\", \"input\": {\"a\": 2, \"b\": 3}}}]"
+           }
+          },
+          {
+           "key": "tool.result",
+           "value": {
+            "stringValue": "[{\"toolResult\": {\"toolUseId\": \"t1\", \"status\": \"success\", \"content\": [{\"text\": \"5\"}]}}]"
+           }
+          }
+         ]
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "1jjfqyfYJE/NkenoBbNO2g==",
+       "spanId": "lMLNSj4AZNk=",
+       "parentSpanId": "onI13ZLwh5k=",
+       "name": "chat",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160223765929000",
+       "endTimeUnixNano": "1792160223766023000",
+       "attributes": [
+        {
+         "key": "gen_ai.event.start_time",
+         "value": {
+          "stringValue": "2026-10-16T14:17:03.765929+00:00"
+         }
+        },
+        {
+         "key": "gen_ai.operation.name",
+         "value": {
+          "stringValue": "chat"
+         }
+        },
+        {
+         "key": "gen_ai.system",
+         "value": {
+          "stringValue": "strands-agents"
+         }
+        },
+        {
+         "key": "gen_ai.event.end_time",
+         "value": {
+          "stringValue": "2026-10-16T14:17:03.766018+00:00"
+         }
+        },
+        {
+         "key": "gen_ai.usage.prompt_tokens",
+         "value": {
+          "intValue": "10"
+         }
+        },
+        {
+         "key": "gen_ai.usage.input_tokens",
+         "value": {
+          "intValue": "10"
+         }
+        },
+        {
+         "key": "gen_ai.usage.completion_tokens",
+         "value": {
+          "intValue": "5"
+         }
+        },
+        {
+         "key": "gen_ai.usage.output_tokens",
+         "value": {
+          "intValue": "5"
+         }
+        },
+        {
+         "key": "gen_ai.usage.total_tokens",
+         "value": {
+          "intValue": "15"
+         }
+        },
+        {
+         "key": "gen_ai.server.request.duration",
+         "value": {
+          "intValue": "1"
+         }
+        }
+       ],
+       "events": [
+        {
+         "timeUnixNano": "1792160223765938000",
+         "name": "gen_ai.system.message",
+         "attributes": [
+          {
+           "key": "content",
+           "value": {
+            "stringValue": "[{\"text\": \"You add numbers.\"}]"
+           }
+          }
+         ]
+        },
+        {
+         "timeUnixNano": "1792160223765942000",
+         "name": "gen_ai.user.message",
+         "attributes": [
+          {
+           "key": "content",
+           "value": {
+            "stringValue": "[{\"text\": \"What is 2 + 3?\"}]"
+           }
+          }
+         ]
+        },
+        {
+         "timeUnixNano": "1792160223765949000",
+         "name": "gen_ai.assistant.message",
+         "attributes": [
+          {
+           "key": "content",
+           "value": {
+            "stringValue": "[{\"toolUse\": {\"toolUseId\": \"t1\", \"name\": \"add\", \"input\": {\"a\": 2, \"b\": 3}}}]"
+           }
+          }
+         ]
+        },
+        {
+         "timeUnixNano": "1792160223765954000",
+         "name": "gen_ai.tool.message",
+         "attributes": [
+          {
+           "key": "content",
+           "value": {
+            "stringValue": "[{\"toolResult\": {\"toolUseId\": \"t1\", \"status\": \"success\", \"content\": [{\"text\": \"5\"}]}}]"
+           }
+          }
+         ]
+        },
+        {
+         "timeUnixNano": "1792160223766017000",
+         "name": "gen_ai.choice",
+         "attributes": [
+          {
+           "key": "finish_reason",
+           "value": {
+            "stringValue": "end_turn"
+           }
+          },
+          {
+           "key": "message",
+           "value": {
+            "stringValue": "[{\"text\": \"2 + 3 = 5\"}]"
+           }
+          }
+         ]
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "1jjfqyfYJE/NkenoBbNO2g==",
+       "spanId": "onI13ZLwh5k=",
+       "parentSpanId": "/LWtbWzjzaY=",
+       "name": "execute_event_loop_cycle",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160223765836000",
+       "endTimeUnixNano": "1792160223766057000",
+       "attributes": [
+        {
+         "key": "gen_ai.event.start_time",
+         "value": {
+          "stringValue": "2026-10-16T14:17:03.765837+00:00"
+         }
+        },
+        {
+         "key": "gen_ai.operation.name",
+         "value": {
+          "stringValue": "execute_event_loop_cycle"
+         }
+        },
+        {
+         "key": "gen_ai.system",
+         "value": {
+          "stringValue": "strands-agents"
+         }
+        },
+        {
+         "key": "event_loop.cycle_id",
+         "value": {
+          "stringValue": "d4168441-ec4d-415e-8013-95394a4ca541"
+         }
+        },
+        {
+         "key": "event_loop.parent_cycle_id",
+         "value": {
+          "stringValue": "7c8550b6-7f5f-4659-ab83-770d2ac33fce"
+         }
+        },
+        {
+         "key": "gen_ai.event.end_time",
+         "value": {
+          "stringValue": "2026-10-16T14:17:03.766054+00:00"
+         }
+        }
+       ],
+       "events": [
+        {
+         "timeUnixNano": "1792160223765848000",
+         "name": "gen_ai.user.message",
+         "attributes": [
+          {
+           "key": "content",
+           "value": {
+            "stringValue": "[{\"text\": \"What is 2 + 3?\"}]"
+           }
+          }
+         ]
+        },
+        {
+         "timeUnixNano": "1792160223765855000",
+         "name": "gen_ai.assistant.message",
+         "attributes": [
+          {
+           "key": "content",
+           "value": {
+            "stringValue": "[{\"toolUse\": {\"toolUseId\": \"t1\", \"name\": \"add\", \"input\": {\"a\": 2, \"b\": 3}}}]"
+           }
+          }
+         ]
+        },
+        {
+         "timeUnixNano": "1792160223765861000",
+         "name": "gen_ai.tool.message",
+         "attributes": [
+          {
+           "key": "content",
+           "value": {
+            "stringValue": "[{\"toolResult\": {\"toolUseId\": \"t1\", \"status\": \"success\", \"content\": [{\"text\": \"5\"}]}}]"
+           }
+          }
+         ]
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "1jjfqyfYJE/NkenoBbNO2g==",
+       "spanId": "/LWtbWzjzaY=",
+       "name": "invoke_agent adder",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160223764669000",
+       "endTimeUnixNano": "1792160223766109000",
+       "attributes": [
+        {
+         "key": "gen_ai.event.start_time",
+         "value": {
+          "stringValue": "2026-10-16T14:17:03.764672+00:00"
+         }
+        },
+        {
+         "key": "gen_ai.operation.name",
+         "value": {
+          "stringValue": "invoke_agent"
+         }
+        },
+        {
+         "key": "gen_ai.system",
+         "value": {
+          "stringValue": "strands-agents"
+         }
+        },
+        {
+         "key": "gen_ai.agent.name",
+         "value": {
+          "stringValue": "adder"
+         }
+        },
+        {
+         "key": "gen_ai.agent.tools",
+         "value": {
+          "stringValue": "[\"add\"]"
+         }
+        },
+        {
+         "key": "gen_ai.event.end_time",
+         "value": {
+          "stringValue": "2026-10-16T14:17:03.766103+00:00"
+         }
+        },
+        {
+         "key": "gen_ai.usage.prompt_tokens",
+         "value": {
+          "intValue": "20"
+         }
+        },
+        {
+         "key": "gen_ai.usage.completion_tokens",
+         "value": {
+          "intValue": "10"
+         }
+        },
+        {
+         "key": "gen_ai.usage.input_tokens",
+         "value": {
+          "intValue": "20"
+         }
+        },
+        {
+         "key": "gen_ai.usage.output_tokens",
+         "value": {
+          "intValue": "10"
+         }
+        },
+        {
+         "key": "gen_ai.usage.total_tokens",
+         "value": {
+          "intValue": "30"
+         }
+        },
+        {
+         "key": "gen_ai.usage.cache_read.input_tokens",
+         "value": {
+          "intValue": "0"
+         }
+        },
+        {
+         "key": "gen_ai.usage.cache_creation.input_tokens",
+         "value": {
+          "intValue": "0"
+         }
+        },
+        {
+         "key": "gen_ai.usage.cache_read_input_tokens",
+         "value": {
+          "intValue": "0"
+         }
+        },
+        {
+         "key": "gen_ai.usage.cache_write_input_tokens",
+         "value": {
+          "intValue": "0"
+         }
+        }
+       ],
+       "events": [
+        {
+         "timeUnixNano": "1792160223764864000",
+         "name": "gen_ai.system.message",
+         "attributes": [
+          {
+           "key": "content",
+           "value": {
+            "stringValue": "[{\"text\": \"You add numbers.\"}]"
+           }
+          }
+         ]
+        },
+        {
+         "timeUnixNano": "1792160223764875000",
+         "name": "gen_ai.user.message",
+         "attributes": [
+          {
+           "key": "content",
+           "value": {
+            "stringValue": "[{\"text\": \"What is 2 + 3?\"}]"
+           }
+          }
+         ]
+        },
+        {
+         "timeUnixNano": "1792160223766096000",
+         "name": "gen_ai.choice",
+         "attributes": [
+          {
+           "key": "message",
+           "value": {
+            "stringValue": "2 + 3 = 5\n"
+           }
+          },
+          {
+           "key": "finish_reason",
+           "value": {
+            "stringValue": "end_turn"
+           }
+          }
+         ]
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

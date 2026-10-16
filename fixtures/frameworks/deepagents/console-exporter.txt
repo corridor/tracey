@@ -1,0 +1,312 @@
+2 + 3 = 5
+{
+    "name": "PatchToolCallsMiddleware.before_agent",
+    "context": {
+        "trace_id": "0xcdab20fdcf36b5aeeb6c8fd0a059da19",
+        "span_id": "0xee64766cfb0fa9a2",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x79b22f6c52e2b026",
+    "start_time": "2026-10-16T14:18:49.416090Z",
+    "end_time": "2026-10-16T14:18:49.416202Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "output.value": "null",
+        "metadata": "{\"ls_integration\": \"deepagents\", \"lc_versions\": {\"deepagents\": \"0.7.26\"}, \"lc_agent_name\": null, \"langgraph_step\": 1, \"langgraph_node\": \"PatchToolCallsMiddleware.before_agent\", \"langgraph_triggers\": [\"branch:to:PatchToolCallsMiddleware.before_agent\"], \"langgraph_path\": [\"__pregel_pull\", \"PatchToolCallsMiddleware.before_agent\"], \"langgraph_checkpoint_ns\": \"PatchToolCallsMiddleware.before_agent:481eff8d-dc53-cd09-8597-ef264d0d3ba3\"}",
+        "openinference.span.kind": "AGENT"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "657966e9-ecbb-408f-a81d-cb3823ebbad2",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "Fake",
+    "context": {
+        "trace_id": "0xcdab20fdcf36b5aeeb6c8fd0a059da19",
+        "span_id": "0xbc870ca4868c383d",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xfc82b823237f0a5e",
+    "start_time": "2026-10-16T14:18:49.420006Z",
+    "end_time": "2026-10-16T14:18:49.420261Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "input.value": "{\"messages\": [[{\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"SystemMessage\"], \"kwargs\": {\"content\": \"You add numbers.\", \"type\": \"system\"}}, {\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"HumanMessage\"], \"kwargs\": {\"content\": \"What is 2 + 3?\", \"type\": \"human\"}}]]}",
+        "input.mime_type": "application/json",
+        "output.value": "{\"generations\": [[{\"text\": \"\", \"generation_info\": null, \"type\": \"ChatGeneration\", \"message\": {\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"AIMessage\"], \"kwargs\": {\"content\": \"\", \"type\": \"ai\", \"id\": \"lc_run--01a14514-6ecb-7152-bcdc-2e6ce6153d23-0\", \"tool_calls\": [{\"name\": \"add\", \"args\": {\"a\": 2, \"b\": 3}, \"id\": \"call_1\", \"type\": \"tool_call\"}], \"invalid_tool_calls\": []}}}]], \"llm_output\": null, \"run\": null, \"type\": \"LLMResult\"}",
+        "output.mime_type": "application/json",
+        "llm.input_messages.0.message.role": "system",
+        "llm.input_messages.0.message.content": "You add numbers.",
+        "llm.input_messages.1.message.role": "user",
+        "llm.input_messages.1.message.content": "What is 2 + 3?",
+        "llm.output_messages.0.message.role": "assistant",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.id": "call_1",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.name": "add",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.arguments": "{\"a\": 2, \"b\": 3}",
+        "llm.invocation_parameters": "{\"_type\": \"fake-messages-list-chat-model\", \"stop\": null}",
+        "llm.provider": "fake",
+        "metadata": "{\"ls_integration\": \"langchain_chat_model\", \"lc_versions\": {\"deepagents\": \"0.7.26\", \"langchain-core\": \"1.6.11\", \"langchain\": \"1.4.6\"}, \"lc_agent_name\": null, \"langgraph_step\": 2, \"langgraph_node\": \"model\", \"langgraph_triggers\": [\"branch:to:model\"], \"langgraph_path\": [\"__pregel_pull\", \"model\"], \"langgraph_checkpoint_ns\": \"model:58e9dda0-e3fb-685d-9ab2-e7a149842ab9\", \"checkpoint_ns\": \"model:58e9dda0-e3fb-685d-9ab2-e7a149842ab9\", \"ls_provider\": \"fake\", \"ls_model_type\": \"chat\"}",
+        "openinference.span.kind": "LLM"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "657966e9-ecbb-408f-a81d-cb3823ebbad2",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "model",
+    "context": {
+        "trace_id": "0xcdab20fdcf36b5aeeb6c8fd0a059da19",
+        "span_id": "0xfc82b823237f0a5e",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x79b22f6c52e2b026",
+    "start_time": "2026-10-16T14:18:49.416383Z",
+    "end_time": "2026-10-16T14:18:49.420727Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "input.value": "{\"messages\": [{\"type\": \"human\", \"data\": {\"content\": \"What is 2 + 3?\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"human\", \"name\": null, \"id\": null}}], \"files\": {}}",
+        "input.mime_type": "application/json",
+        "output.value": "[{\"graph\": null, \"update\": {\"messages\": [{\"type\": \"ai\", \"data\": {\"content\": \"\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"ai\", \"name\": null, \"id\": \"lc_run--01a14514-6ecb-7152-bcdc-2e6ce6153d23-0\", \"tool_calls\": [{\"name\": \"add\", \"args\": {\"a\": 2, \"b\": 3}, \"id\": \"call_1\", \"type\": \"tool_call\"}], \"invalid_tool_calls\": [], \"usage_metadata\": null}}]}, \"resume\": null, \"goto\": []}]",
+        "output.mime_type": "application/json",
+        "llm.input_messages.0.message.role": "user",
+        "llm.input_messages.0.message.content": "What is 2 + 3?",
+        "metadata": "{\"ls_integration\": \"deepagents\", \"lc_versions\": {\"deepagents\": \"0.7.26\"}, \"lc_agent_name\": null, \"langgraph_step\": 2, \"langgraph_node\": \"model\", \"langgraph_triggers\": [\"branch:to:model\"], \"langgraph_path\": [\"__pregel_pull\", \"model\"], \"langgraph_checkpoint_ns\": \"model:58e9dda0-e3fb-685d-9ab2-e7a149842ab9\"}",
+        "openinference.span.kind": "CHAIN"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "657966e9-ecbb-408f-a81d-cb3823ebbad2",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "add",
+    "context": {
+        "trace_id": "0xcdab20fdcf36b5aeeb6c8fd0a059da19",
+        "span_id": "0xfe73908a6e7e630f",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x2b5fa42f72d929f9",
+    "start_time": "2026-10-16T14:18:49.421294Z",
+    "end_time": "2026-10-16T14:18:49.421523Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "input.value": "{\"a\": 2, \"b\": 3}",
+        "input.mime_type": "application/json",
+        "output.value": "{\"type\": \"tool\", \"data\": {\"content\": \"5\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"tool\", \"name\": \"add\", \"id\": null, \"tool_call_id\": \"call_1\", \"artifact\": null, \"status\": \"success\"}}",
+        "output.mime_type": "application/json",
+        "tool.name": "add",
+        "tool.description": "Add two numbers.",
+        "metadata": "{\"ls_integration\": \"deepagents\", \"lc_versions\": {\"deepagents\": \"0.7.26\"}, \"lc_agent_name\": null, \"langgraph_step\": 3, \"langgraph_node\": \"tools\", \"langgraph_triggers\": [\"__pregel_push\"], \"langgraph_path\": [\"__pregel_push\", 0, false], \"langgraph_checkpoint_ns\": \"tools:2aa3d68f-f49e-9264-1206-ccbe0c908211\", \"checkpoint_ns\": \"tools:2aa3d68f-f49e-9264-1206-ccbe0c908211\"}",
+        "openinference.span.kind": "TOOL"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "657966e9-ecbb-408f-a81d-cb3823ebbad2",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "tools",
+    "context": {
+        "trace_id": "0xcdab20fdcf36b5aeeb6c8fd0a059da19",
+        "span_id": "0x2b5fa42f72d929f9",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x79b22f6c52e2b026",
+    "start_time": "2026-10-16T14:18:49.420992Z",
+    "end_time": "2026-10-16T14:18:49.421732Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "input.value": "[{\"name\": \"add\", \"args\": {\"a\": 2, \"b\": 3}, \"id\": \"call_1\", \"type\": \"tool_call\"}]",
+        "input.mime_type": "application/json",
+        "output.value": "{\"messages\": [{\"type\": \"tool\", \"data\": {\"content\": \"5\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"tool\", \"name\": \"add\", \"id\": null, \"tool_call_id\": \"call_1\", \"artifact\": null, \"status\": \"success\"}}]}",
+        "output.mime_type": "application/json",
+        "metadata": "{\"ls_integration\": \"deepagents\", \"lc_versions\": {\"deepagents\": \"0.7.26\"}, \"lc_agent_name\": null, \"langgraph_step\": 3, \"langgraph_node\": \"tools\", \"langgraph_triggers\": [\"__pregel_push\"], \"langgraph_path\": [\"__pregel_push\", 0, false], \"langgraph_checkpoint_ns\": \"tools:2aa3d68f-f49e-9264-1206-ccbe0c908211\"}",
+        "openinference.span.kind": "CHAIN"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "657966e9-ecbb-408f-a81d-cb3823ebbad2",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "Fake",
+    "context": {
+        "trace_id": "0xcdab20fdcf36b5aeeb6c8fd0a059da19",
+        "span_id": "0x0263f6a09fd0fc44",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xf1ec761b1c2db6f6",
+    "start_time": "2026-10-16T14:18:49.422808Z",
+    "end_time": "2026-10-16T14:18:49.422974Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "input.value": "{\"messages\": [[{\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"SystemMessage\"], \"kwargs\": {\"content\": \"You add numbers.\", \"type\": \"system\"}}, {\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"HumanMessage\"], \"kwargs\": {\"content\": \"What is 2 + 3?\", \"type\": \"human\"}}, {\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"AIMessage\"], \"kwargs\": {\"content\": \"\", \"type\": \"ai\", \"id\": \"lc_run--01a14514-6ecb-7152-bcdc-2e6ce6153d23-0\", \"tool_calls\": [{\"name\": \"add\", \"args\": {\"a\": 2, \"b\": 3}, \"id\": \"call_1\", \"type\": \"tool_call\"}], \"invalid_tool_calls\": []}}, {\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"ToolMessage\"], \"kwargs\": {\"content\": \"5\", \"type\": \"tool\", \"name\": \"add\", \"id\": \"6356af84-f9af-4b7c-a734-e9e9662815b6\", \"tool_call_id\": \"call_1\", \"status\": \"success\"}}]]}",
+        "input.mime_type": "application/json",
+        "output.value": "{\"generations\": [[{\"text\": \"2 + 3 = 5\", \"generation_info\": null, \"type\": \"ChatGeneration\", \"message\": {\"lc\": 1, \"type\": \"constructor\", \"id\": [\"langchain\", \"schema\", \"messages\", \"AIMessage\"], \"kwargs\": {\"content\": \"2 + 3 = 5\", \"type\": \"ai\", \"id\": \"lc_run--01a14514-6ece-74e0-adb5-ac53c308ac8c-0\", \"tool_calls\": [], \"invalid_tool_calls\": []}}}]], \"llm_output\": null, \"run\": null, \"type\": \"LLMResult\"}",
+        "output.mime_type": "application/json",
+        "llm.input_messages.0.message.role": "system",
+        "llm.input_messages.0.message.content": "You add numbers.",
+        "llm.input_messages.1.message.role": "user",
+        "llm.input_messages.1.message.content": "What is 2 + 3?",
+        "llm.input_messages.2.message.role": "assistant",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.id": "call_1",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.name": "add",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.arguments": "{\"a\": 2, \"b\": 3}",
+        "llm.input_messages.3.message.role": "tool",
+        "llm.input_messages.3.message.content": "5",
+        "llm.input_messages.3.message.tool_call_id": "call_1",
+        "llm.input_messages.3.message.name": "add",
+        "llm.output_messages.0.message.role": "assistant",
+        "llm.output_messages.0.message.content": "2 + 3 = 5",
+        "llm.invocation_parameters": "{\"_type\": \"fake-messages-list-chat-model\", \"stop\": null}",
+        "llm.provider": "fake",
+        "metadata": "{\"ls_integration\": \"langchain_chat_model\", \"lc_versions\": {\"deepagents\": \"0.7.26\", \"langchain-core\": \"1.6.11\", \"langchain\": \"1.4.6\"}, \"lc_agent_name\": null, \"langgraph_step\": 4, \"langgraph_node\": \"model\", \"langgraph_triggers\": [\"branch:to:model\"], \"langgraph_path\": [\"__pregel_pull\", \"model\"], \"langgraph_checkpoint_ns\": \"model:8e79a8d8-e843-b9c8-f8f2-3bf8db66ce82\", \"checkpoint_ns\": \"model:8e79a8d8-e843-b9c8-f8f2-3bf8db66ce82\", \"ls_provider\": \"fake\", \"ls_model_type\": \"chat\"}",
+        "openinference.span.kind": "LLM"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "657966e9-ecbb-408f-a81d-cb3823ebbad2",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "model",
+    "context": {
+        "trace_id": "0xcdab20fdcf36b5aeeb6c8fd0a059da19",
+        "span_id": "0xf1ec761b1c2db6f6",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x79b22f6c52e2b026",
+    "start_time": "2026-10-16T14:18:49.421917Z",
+    "end_time": "2026-10-16T14:18:49.423156Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "input.value": "{\"messages\": [{\"type\": \"human\", \"data\": {\"content\": \"What is 2 + 3?\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"human\", \"name\": null, \"id\": null}}, {\"type\": \"ai\", \"data\": {\"content\": \"\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"ai\", \"name\": null, \"id\": \"lc_run--01a14514-6ecb-7152-bcdc-2e6ce6153d23-0\", \"tool_calls\": [{\"name\": \"add\", \"args\": {\"a\": 2, \"b\": 3}, \"id\": \"call_1\", \"type\": \"tool_call\"}], \"invalid_tool_calls\": [], \"usage_metadata\": null}}, {\"type\": \"tool\", \"data\": {\"content\": \"5\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"tool\", \"name\": \"add\", \"id\": \"6356af84-f9af-4b7c-a734-e9e9662815b6\", \"tool_call_id\": \"call_1\", \"artifact\": null, \"status\": \"success\"}}], \"files\": {}}",
+        "input.mime_type": "application/json",
+        "output.value": "[{\"graph\": null, \"update\": {\"messages\": [{\"type\": \"ai\", \"data\": {\"content\": \"2 + 3 = 5\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"ai\", \"name\": null, \"id\": \"lc_run--01a14514-6ece-74e0-adb5-ac53c308ac8c-0\", \"tool_calls\": [], \"invalid_tool_calls\": [], \"usage_metadata\": null}}]}, \"resume\": null, \"goto\": []}]",
+        "output.mime_type": "application/json",
+        "llm.input_messages.0.message.role": "user",
+        "llm.input_messages.0.message.content": "What is 2 + 3?",
+        "metadata": "{\"ls_integration\": \"deepagents\", \"lc_versions\": {\"deepagents\": \"0.7.26\"}, \"lc_agent_name\": null, \"langgraph_step\": 4, \"langgraph_node\": \"model\", \"langgraph_triggers\": [\"branch:to:model\"], \"langgraph_path\": [\"__pregel_pull\", \"model\"], \"langgraph_checkpoint_ns\": \"model:8e79a8d8-e843-b9c8-f8f2-3bf8db66ce82\"}",
+        "openinference.span.kind": "CHAIN"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "657966e9-ecbb-408f-a81d-cb3823ebbad2",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "LangGraph",
+    "context": {
+        "trace_id": "0xcdab20fdcf36b5aeeb6c8fd0a059da19",
+        "span_id": "0x79b22f6c52e2b026",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": null,
+    "start_time": "2026-10-16T14:18:49.415276Z",
+    "end_time": "2026-10-16T14:18:49.423305Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "input.value": "{\"messages\": [[\"user\", \"What is 2 + 3?\"]]}",
+        "input.mime_type": "application/json",
+        "output.value": "{\"messages\": [{\"type\": \"human\", \"data\": {\"content\": \"What is 2 + 3?\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"human\", \"name\": null, \"id\": null}}, {\"type\": \"ai\", \"data\": {\"content\": \"\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"ai\", \"name\": null, \"id\": \"lc_run--01a14514-6ecb-7152-bcdc-2e6ce6153d23-0\", \"tool_calls\": [{\"name\": \"add\", \"args\": {\"a\": 2, \"b\": 3}, \"id\": \"call_1\", \"type\": \"tool_call\"}], \"invalid_tool_calls\": [], \"usage_metadata\": null}}, {\"type\": \"tool\", \"data\": {\"content\": \"5\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"tool\", \"name\": \"add\", \"id\": \"6356af84-f9af-4b7c-a734-e9e9662815b6\", \"tool_call_id\": \"call_1\", \"artifact\": null, \"status\": \"success\"}}, {\"type\": \"ai\", \"data\": {\"content\": \"2 + 3 = 5\", \"additional_kwargs\": {}, \"response_metadata\": {}, \"type\": \"ai\", \"name\": null, \"id\": \"lc_run--01a14514-6ece-74e0-adb5-ac53c308ac8c-0\", \"tool_calls\": [], \"invalid_tool_calls\": [], \"usage_metadata\": null}}], \"files\": {}}",
+        "output.mime_type": "application/json",
+        "llm.input_messages.0.message.role": "user",
+        "llm.input_messages.0.message.content": "What is 2 + 3?",
+        "metadata": "{\"ls_integration\": \"deepagents\", \"lc_versions\": {\"deepagents\": \"0.7.26\"}, \"lc_agent_name\": null}",
+        "openinference.span.kind": "CHAIN"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "657966e9-ecbb-408f-a81d-cb3823ebbad2",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}

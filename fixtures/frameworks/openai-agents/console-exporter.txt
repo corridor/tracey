@@ -1,0 +1,288 @@
+{
+    "name": "generation",
+    "context": {
+        "trace_id": "0xe816387935c27e2de3300bb5effce28b",
+        "span_id": "0xa7b3b11f89a207eb",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x32ad4bfe16e57670",
+    "start_time": "2026-10-16T14:17:31.344774Z",
+    "end_time": "2026-10-16T14:17:31.457710Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "llm.system": "openai",
+        "llm.model_name": "gpt-4o-mini",
+        "llm.invocation_parameters": "{\"base_url\": \"http://127.0.0.1:9911/v1/\"}",
+        "input.value": "[{\"content\": \"You add numbers.\", \"role\": \"system\"}, {\"role\": \"user\", \"content\": \"What is 2 + 3?\"}]",
+        "input.mime_type": "application/json",
+        "llm.input_messages.0.message.role": "system",
+        "llm.input_messages.0.message.content": "You add numbers.",
+        "llm.input_messages.1.message.role": "user",
+        "llm.input_messages.1.message.content": "What is 2 + 3?",
+        "output.value": "[{\"content\": null, \"refusal\": null, \"role\": \"assistant\", \"annotations\": null, \"audio\": null, \"function_call\": null, \"tool_calls\": [{\"id\": \"call_1\", \"function\": {\"arguments\": \"{\\\"a\\\": 2, \\\"b\\\": 3}\", \"name\": \"add\"}, \"type\": \"function\"}]}]",
+        "output.mime_type": "application/json",
+        "llm.output_messages.0.message.role": "assistant",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.id": "call_1",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.name": "add",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.arguments": "{\"a\": 2, \"b\": 3}",
+        "llm.token_count.prompt": 10,
+        "llm.token_count.completion": 5,
+        "openinference.span.kind": "LLM"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "1cf99713-4846-47c2-a9db-3a46dbb0f54d",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "add",
+    "context": {
+        "trace_id": "0xe816387935c27e2de3300bb5effce28b",
+        "span_id": "0xbe50d5f6ad6aa26b",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x32ad4bfe16e57670",
+    "start_time": "2026-10-16T14:17:31.458796Z",
+    "end_time": "2026-10-16T14:17:31.459605Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "tool.name": "add",
+        "input.value": "{\"a\": 2, \"b\": 3}",
+        "input.mime_type": "application/json",
+        "output.value": 5,
+        "tool.description": "Add two numbers.",
+        "tool.parameters": "{\"properties\": {\"a\": {\"title\": \"A\", \"type\": \"integer\"}, \"b\": {\"title\": \"B\", \"type\": \"integer\"}}, \"required\": [\"a\", \"b\"], \"title\": \"add_args\", \"type\": \"object\", \"additionalProperties\": false}",
+        "openinference.span.kind": "TOOL"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "1cf99713-4846-47c2-a9db-3a46dbb0f54d",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "turn",
+    "context": {
+        "trace_id": "0xe816387935c27e2de3300bb5effce28b",
+        "span_id": "0x32ad4bfe16e57670",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x7b9e9f316c90dcfb",
+    "start_time": "2026-10-16T14:17:31.344195Z",
+    "end_time": "2026-10-16T14:17:31.459937Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "openinference.span.kind": "CHAIN"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "1cf99713-4846-47c2-a9db-3a46dbb0f54d",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "generation",
+    "context": {
+        "trace_id": "0xe816387935c27e2de3300bb5effce28b",
+        "span_id": "0x6b010ff4f40c692f",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x2ede8d9f979a987a",
+    "start_time": "2026-10-16T14:17:31.460641Z",
+    "end_time": "2026-10-16T14:17:31.462534Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "llm.system": "openai",
+        "llm.model_name": "gpt-4o-mini",
+        "llm.invocation_parameters": "{\"base_url\": \"http://127.0.0.1:9911/v1/\"}",
+        "input.value": "[{\"content\": \"You add numbers.\", \"role\": \"system\"}, {\"role\": \"user\", \"content\": \"What is 2 + 3?\"}, {\"role\": \"assistant\", \"content\": null, \"tool_calls\": [{\"id\": \"call_1\", \"type\": \"function\", \"function\": {\"name\": \"add\", \"arguments\": \"{\\\"a\\\": 2, \\\"b\\\": 3}\"}}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_1\", \"content\": \"5\"}]",
+        "input.mime_type": "application/json",
+        "llm.input_messages.0.message.role": "system",
+        "llm.input_messages.0.message.content": "You add numbers.",
+        "llm.input_messages.1.message.role": "user",
+        "llm.input_messages.1.message.content": "What is 2 + 3?",
+        "llm.input_messages.2.message.role": "assistant",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.id": "call_1",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.name": "add",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.arguments": "{\"a\": 2, \"b\": 3}",
+        "llm.input_messages.3.message.role": "tool",
+        "llm.input_messages.3.message.content": "5",
+        "llm.input_messages.3.message.tool_call_id": "call_1",
+        "output.value": "[{\"content\": \"2 + 3 = 5\", \"refusal\": null, \"role\": \"assistant\", \"annotations\": null, \"audio\": null, \"function_call\": null, \"tool_calls\": null}]",
+        "output.mime_type": "application/json",
+        "llm.output_messages.0.message.role": "assistant",
+        "llm.output_messages.0.message.content": "2 + 3 = 5",
+        "llm.token_count.prompt": 10,
+        "llm.token_count.completion": 5,
+        "openinference.span.kind": "LLM"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "1cf99713-4846-47c2-a9db-3a46dbb0f54d",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "turn",
+    "context": {
+        "trace_id": "0xe816387935c27e2de3300bb5effce28b",
+        "span_id": "0x2ede8d9f979a987a",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x7b9e9f316c90dcfb",
+    "start_time": "2026-10-16T14:17:31.460121Z",
+    "end_time": "2026-10-16T14:17:31.463146Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "openinference.span.kind": "CHAIN"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "1cf99713-4846-47c2-a9db-3a46dbb0f54d",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "adder",
+    "context": {
+        "trace_id": "0xe816387935c27e2de3300bb5effce28b",
+        "span_id": "0x7b9e9f316c90dcfb",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x9b1552f2930e034b",
+    "start_time": "2026-10-16T14:17:31.344133Z",
+    "end_time": "2026-10-16T14:17:31.463311Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "graph.node.id": "adder",
+        "agent.name": "adder",
+        "openinference.span.kind": "AGENT"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "1cf99713-4846-47c2-a9db-3a46dbb0f54d",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "Agent workflow",
+    "context": {
+        "trace_id": "0xe816387935c27e2de3300bb5effce28b",
+        "span_id": "0x9b1552f2930e034b",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xbdffe73646dbe327",
+    "start_time": "2026-10-16T14:17:31.343734Z",
+    "end_time": "2026-10-16T14:17:31.463378Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "openinference.span.kind": "CHAIN"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "1cf99713-4846-47c2-a9db-3a46dbb0f54d",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "Agent workflow",
+    "context": {
+        "trace_id": "0xe816387935c27e2de3300bb5effce28b",
+        "span_id": "0xbdffe73646dbe327",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": null,
+    "start_time": "2026-10-16T14:17:31.343683Z",
+    "end_time": "2026-10-16T14:17:31.463428Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "openinference.span.kind": "AGENT"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "1cf99713-4846-47c2-a9db-3a46dbb0f54d",
+            "service.name": "unknown_service:python"
+        },
+        "schema_url": ""
+    }
+}
+2 + 3 = 5

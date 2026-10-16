@@ -1,0 +1,861 @@
+{
+ "resourceSpans": [
+  {
+   "resource": {
+    "attributes": [
+     {
+      "key": "service.name",
+      "value": {
+       "stringValue": "langsmith"
+      }
+     },
+     {
+      "key": "langsmith.internal_provider",
+      "value": {
+       "boolValue": true
+      }
+     }
+    ]
+   },
+   "scopeSpans": [
+    {
+     "scope": {
+      "name": "langsmith"
+     },
+     "spans": [
+      {
+       "traceId": "5OkbnUCjUWGU6fJU46bbVA==",
+       "spanId": "6lDsaRDHmJI=",
+       "name": "LangGraph",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160306077459200",
+       "endTimeUnixNano": "1792160306104834048",
+       "attributes": [
+        {
+         "key": "langsmith.span.kind",
+         "value": {
+          "stringValue": "chain"
+         }
+        },
+        {
+         "key": "langsmith.trace.name",
+         "value": {
+          "stringValue": "LangGraph"
+         }
+        },
+        {
+         "key": "langsmith.trace.session_name",
+         "value": {
+          "stringValue": "default"
+         }
+        },
+        {
+         "key": "gen_ai.operation.name",
+         "value": {
+          "stringValue": "chain"
+         }
+        },
+        {
+         "key": "gen_ai.system",
+         "value": {
+          "stringValue": "langchain"
+         }
+        },
+        {
+         "key": "langsmith.metadata.ls_integration",
+         "value": {
+          "stringValue": "langchain_create_agent"
+         }
+        },
+        {
+         "key": "langsmith.metadata.LANGSMITH_TRACING",
+         "value": {
+          "stringValue": "true"
+         }
+        },
+        {
+         "key": "langsmith.metadata.LANGSMITH_TRACING_MODE",
+         "value": {
+          "stringValue": "otel"
+         }
+        },
+        {
+         "key": "gen_ai.prompt",
+         "value": {
+          "stringValue": "{\"messages\":[[\"user\",\"What is 2 + 3?\"]]}"
+         }
+        },
+        {
+         "key": "gen_ai.completion",
+         "value": {
+          "stringValue": "{\"messages\":[{\"content\":\"What is 2 + 3?\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"human\",\"id\":\"1113a66b-5f3f-4b1f-82aa-4fb1c82aedab\"},{\"content\":\"\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"ai\",\"id\":\"lc_run--01a14514-13b6-73a0-8a74-0e9ea639f1d2-0\",\"tool_calls\":[{\"name\":\"add\",\"args\":{\"a\":2,\"b\":3},\"id\":\"call_1\",\"type\":\"tool_call\"}],\"invalid_tool_calls\":[]},{\"content\":\"5\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"add\",\"id\":\"306f7515-a5bb-409b-b20f-7213c4a66bad\",\"tool_call_id\":\"call_1\",\"status\":\"success\"},{\"content\":\"2 + 3 = 5\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"ai\",\"id\":\"lc_run--01a14514-13b8-7cb0-ab1f-fbb2c382d46e-0\",\"tool_calls\":[],\"invalid_tool_calls\":[]}]}"
+         }
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "5OkbnUCjUWGU6fJU46bbVA==",
+       "spanId": "SWeqPJ2/Xf8=",
+       "parentSpanId": "6lDsaRDHmJI=",
+       "name": "model",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160306101069824",
+       "endTimeUnixNano": "1792160306103058176",
+       "attributes": [
+        {
+         "key": "langsmith.span.kind",
+         "value": {
+          "stringValue": "chain"
+         }
+        },
+        {
+         "key": "langsmith.trace.name",
+         "value": {
+          "stringValue": "model"
+         }
+        },
+        {
+         "key": "langsmith.trace.session_name",
+         "value": {
+          "stringValue": "default"
+         }
+        },
+        {
+         "key": "gen_ai.operation.name",
+         "value": {
+          "stringValue": "chain"
+         }
+        },
+        {
+         "key": "gen_ai.system",
+         "value": {
+          "stringValue": "langchain"
+         }
+        },
+        {
+         "key": "langsmith.metadata.ls_integration",
+         "value": {
+          "stringValue": "langchain_create_agent"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_step",
+         "value": {
+          "intValue": "1"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_node",
+         "value": {
+          "stringValue": "model"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_triggers",
+         "value": {
+          "stringValue": "[\"branch:to:model\"]"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_path",
+         "value": {
+          "stringValue": "[\"__pregel_pull\",\"model\"]"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_checkpoint_ns",
+         "value": {
+          "stringValue": "model:0a722204-fe4f-4d7a-b6c6-0be34f688c08"
+         }
+        },
+        {
+         "key": "langsmith.metadata.LANGSMITH_TRACING",
+         "value": {
+          "stringValue": "true"
+         }
+        },
+        {
+         "key": "langsmith.metadata.LANGSMITH_TRACING_MODE",
+         "value": {
+          "stringValue": "otel"
+         }
+        },
+        {
+         "key": "langsmith.span.tags",
+         "value": {
+          "stringValue": "graph:step:1"
+         }
+        },
+        {
+         "key": "gen_ai.prompt",
+         "value": {
+          "stringValue": "{\"messages\":[{\"content\":\"What is 2 + 3?\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"human\",\"id\":\"1113a66b-5f3f-4b1f-82aa-4fb1c82aedab\"}]}"
+         }
+        },
+        {
+         "key": "gen_ai.completion",
+         "value": {
+          "stringValue": "{\"output\":[{\"graph\":null,\"update\":{\"messages\":[{\"content\":\"\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"ai\",\"id\":\"lc_run--01a14514-13b6-73a0-8a74-0e9ea639f1d2-0\",\"tool_calls\":[{\"name\":\"add\",\"args\":{\"a\":2,\"b\":3},\"id\":\"call_1\",\"type\":\"tool_call\"}],\"invalid_tool_calls\":[]}]},\"resume\":null,\"goto\":[]}]}"
+         }
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "5OkbnUCjUWGU6fJU46bbVA==",
+       "spanId": "v1yG5OE1Yi0=",
+       "parentSpanId": "SWeqPJ2/Xf8=",
+       "name": "Fake",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160306102215936",
+       "endTimeUnixNano": "1792160306102874112",
+       "attributes": [
+        {
+         "key": "langsmith.span.kind",
+         "value": {
+          "stringValue": "llm"
+         }
+        },
+        {
+         "key": "langsmith.trace.name",
+         "value": {
+          "stringValue": "Fake"
+         }
+        },
+        {
+         "key": "langsmith.trace.session_name",
+         "value": {
+          "stringValue": "default"
+         }
+        },
+        {
+         "key": "gen_ai.operation.name",
+         "value": {
+          "stringValue": "chat"
+         }
+        },
+        {
+         "key": "gen_ai.system",
+         "value": {
+          "stringValue": "langchain"
+         }
+        },
+        {
+         "key": "langsmith.metadata.ls_integration",
+         "value": {
+          "stringValue": "langchain_chat_model"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_step",
+         "value": {
+          "intValue": "1"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_node",
+         "value": {
+          "stringValue": "model"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_triggers",
+         "value": {
+          "stringValue": "[\"branch:to:model\"]"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_path",
+         "value": {
+          "stringValue": "[\"__pregel_pull\",\"model\"]"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_checkpoint_ns",
+         "value": {
+          "stringValue": "model:0a722204-fe4f-4d7a-b6c6-0be34f688c08"
+         }
+        },
+        {
+         "key": "langsmith.metadata.checkpoint_ns",
+         "value": {
+          "stringValue": "model:0a722204-fe4f-4d7a-b6c6-0be34f688c08"
+         }
+        },
+        {
+         "key": "langsmith.metadata.ls_provider",
+         "value": {
+          "stringValue": "fake"
+         }
+        },
+        {
+         "key": "langsmith.metadata.ls_model_type",
+         "value": {
+          "stringValue": "chat"
+         }
+        },
+        {
+         "key": "langsmith.metadata.lc_versions",
+         "value": {
+          "stringValue": "{\"langchain-core\":\"1.6.11\",\"langchain\":\"1.4.6\"}"
+         }
+        },
+        {
+         "key": "langsmith.metadata._type",
+         "value": {
+          "stringValue": "fake-messages-list-chat-model"
+         }
+        },
+        {
+         "key": "langsmith.metadata.LANGSMITH_TRACING",
+         "value": {
+          "stringValue": "true"
+         }
+        },
+        {
+         "key": "langsmith.metadata.LANGSMITH_TRACING_MODE",
+         "value": {
+          "stringValue": "otel"
+         }
+        },
+        {
+         "key": "langsmith.span.tags",
+         "value": {
+          "stringValue": "seq:step:1"
+         }
+        },
+        {
+         "key": "gen_ai.serialized.name",
+         "value": {
+          "stringValue": "Fake"
+         }
+        },
+        {
+         "key": "gen_ai.prompt",
+         "value": {
+          "stringValue": "{\"messages\":[[{\"lc\":1,\"type\":\"constructor\",\"id\":[\"langchain\",\"schema\",\"messages\",\"SystemMessage\"],\"kwargs\":{\"content\":\"You add numbers.\",\"type\":\"system\"}},{\"lc\":1,\"type\":\"constructor\",\"id\":[\"langchain\",\"schema\",\"messages\",\"HumanMessage\"],\"kwargs\":{\"content\":\"What is 2 + 3?\",\"type\":\"human\",\"id\":\"1113a66b-5f3f-4b1f-82aa-4fb1c82aedab\"}}]]}"
+         }
+        },
+        {
+         "key": "gen_ai.completion",
+         "value": {
+          "stringValue": "{\"generations\":[[{\"text\":\"\",\"generation_info\":null,\"type\":\"ChatGeneration\",\"message\":{\"lc\":1,\"type\":\"constructor\",\"id\":[\"langchain\",\"schema\",\"messages\",\"AIMessage\"],\"kwargs\":{\"content\":\"\",\"type\":\"ai\",\"id\":\"lc_run--01a14514-13b6-73a0-8a74-0e9ea639f1d2-0\",\"tool_calls\":[{\"name\":\"add\",\"args\":{\"a\":2,\"b\":3},\"id\":\"call_1\",\"type\":\"tool_call\"}],\"invalid_tool_calls\":[]}}}]],\"llm_output\":null,\"run\":null,\"type\":\"LLMResult\"}"
+         }
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "5OkbnUCjUWGU6fJU46bbVA==",
+       "spanId": "/Jfv4GQNH7M=",
+       "parentSpanId": "6lDsaRDHmJI=",
+       "name": "tools",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160306103264000",
+       "endTimeUnixNano": "1792160306104114944",
+       "attributes": [
+        {
+         "key": "langsmith.span.kind",
+         "value": {
+          "stringValue": "chain"
+         }
+        },
+        {
+         "key": "langsmith.trace.name",
+         "value": {
+          "stringValue": "tools"
+         }
+        },
+        {
+         "key": "langsmith.trace.session_name",
+         "value": {
+          "stringValue": "default"
+         }
+        },
+        {
+         "key": "gen_ai.operation.name",
+         "value": {
+          "stringValue": "chain"
+         }
+        },
+        {
+         "key": "gen_ai.system",
+         "value": {
+          "stringValue": "langchain"
+         }
+        },
+        {
+         "key": "langsmith.metadata.ls_integration",
+         "value": {
+          "stringValue": "langchain_create_agent"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_step",
+         "value": {
+          "intValue": "2"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_node",
+         "value": {
+          "stringValue": "tools"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_triggers",
+         "value": {
+          "stringValue": "[\"__pregel_push\"]"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_path",
+         "value": {
+          "stringValue": "[\"__pregel_push\",0,false]"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_checkpoint_ns",
+         "value": {
+          "stringValue": "tools:06ede2f0-330d-e115-defc-420dae264b42"
+         }
+        },
+        {
+         "key": "langsmith.metadata.LANGSMITH_TRACING",
+         "value": {
+          "stringValue": "true"
+         }
+        },
+        {
+         "key": "langsmith.metadata.LANGSMITH_TRACING_MODE",
+         "value": {
+          "stringValue": "otel"
+         }
+        },
+        {
+         "key": "langsmith.span.tags",
+         "value": {
+          "stringValue": "graph:step:2"
+         }
+        },
+        {
+         "key": "gen_ai.prompt",
+         "value": {
+          "stringValue": "{\"input\":[{\"name\":\"add\",\"args\":{\"a\":2,\"b\":3},\"id\":\"call_1\",\"type\":\"tool_call\"}]}"
+         }
+        },
+        {
+         "key": "gen_ai.completion",
+         "value": {
+          "stringValue": "{\"messages\":[{\"content\":\"5\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"add\",\"id\":\"306f7515-a5bb-409b-b20f-7213c4a66bad\",\"tool_call_id\":\"call_1\",\"status\":\"success\"}]}"
+         }
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "5OkbnUCjUWGU6fJU46bbVA==",
+       "spanId": "qweON1fPQxs=",
+       "parentSpanId": "/Jfv4GQNH7M=",
+       "name": "add",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160306103622912",
+       "endTimeUnixNano": "1792160306103895040",
+       "attributes": [
+        {
+         "key": "langsmith.span.kind",
+         "value": {
+          "stringValue": "tool"
+         }
+        },
+        {
+         "key": "langsmith.trace.name",
+         "value": {
+          "stringValue": "add"
+         }
+        },
+        {
+         "key": "langsmith.trace.session_name",
+         "value": {
+          "stringValue": "default"
+         }
+        },
+        {
+         "key": "gen_ai.operation.name",
+         "value": {
+          "stringValue": "execute_tool"
+         }
+        },
+        {
+         "key": "gen_ai.system",
+         "value": {
+          "stringValue": "langchain"
+         }
+        },
+        {
+         "key": "gen_ai.tool.name",
+         "value": {
+          "stringValue": "add"
+         }
+        },
+        {
+         "key": "gen_ai.tool.call.id",
+         "value": {
+          "stringValue": "call_1"
+         }
+        },
+        {
+         "key": "langsmith.metadata.ls_integration",
+         "value": {
+          "stringValue": "langchain_create_agent"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_step",
+         "value": {
+          "intValue": "2"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_node",
+         "value": {
+          "stringValue": "tools"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_triggers",
+         "value": {
+          "stringValue": "[\"__pregel_push\"]"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_path",
+         "value": {
+          "stringValue": "[\"__pregel_push\",0,false]"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_checkpoint_ns",
+         "value": {
+          "stringValue": "tools:06ede2f0-330d-e115-defc-420dae264b42"
+         }
+        },
+        {
+         "key": "langsmith.metadata.checkpoint_ns",
+         "value": {
+          "stringValue": "tools:06ede2f0-330d-e115-defc-420dae264b42"
+         }
+        },
+        {
+         "key": "langsmith.metadata.LANGSMITH_TRACING",
+         "value": {
+          "stringValue": "true"
+         }
+        },
+        {
+         "key": "langsmith.metadata.LANGSMITH_TRACING_MODE",
+         "value": {
+          "stringValue": "otel"
+         }
+        },
+        {
+         "key": "langsmith.span.tags",
+         "value": {
+          "stringValue": "seq:step:1"
+         }
+        },
+        {
+         "key": "gen_ai.prompt",
+         "value": {
+          "stringValue": "{\"a\":2,\"b\":3}"
+         }
+        },
+        {
+         "key": "gen_ai.completion",
+         "value": {
+          "stringValue": "{\"output\":{\"content\":\"5\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"add\",\"tool_call_id\":\"call_1\",\"status\":\"success\"}}"
+         }
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "5OkbnUCjUWGU6fJU46bbVA==",
+       "spanId": "ghAtmE1gyb8=",
+       "parentSpanId": "6lDsaRDHmJI=",
+       "name": "model",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160306104256000",
+       "endTimeUnixNano": "1792160306104747008",
+       "attributes": [
+        {
+         "key": "langsmith.span.kind",
+         "value": {
+          "stringValue": "chain"
+         }
+        },
+        {
+         "key": "langsmith.trace.name",
+         "value": {
+          "stringValue": "model"
+         }
+        },
+        {
+         "key": "langsmith.trace.session_name",
+         "value": {
+          "stringValue": "default"
+         }
+        },
+        {
+         "key": "gen_ai.operation.name",
+         "value": {
+          "stringValue": "chain"
+         }
+        },
+        {
+         "key": "gen_ai.system",
+         "value": {
+          "stringValue": "langchain"
+         }
+        },
+        {
+         "key": "langsmith.metadata.ls_integration",
+         "value": {
+          "stringValue": "langchain_create_agent"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_step",
+         "value": {
+          "intValue": "3"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_node",
+         "value": {
+          "stringValue": "model"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_triggers",
+         "value": {
+          "stringValue": "[\"branch:to:model\"]"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_path",
+         "value": {
+          "stringValue": "[\"__pregel_pull\",\"model\"]"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_checkpoint_ns",
+         "value": {
+          "stringValue": "model:bbf4d6cd-aa1a-494b-9e4b-f7ec30a6bf3f"
+         }
+        },
+        {
+         "key": "langsmith.metadata.LANGSMITH_TRACING",
+         "value": {
+          "stringValue": "true"
+         }
+        },
+        {
+         "key": "langsmith.metadata.LANGSMITH_TRACING_MODE",
+         "value": {
+          "stringValue": "otel"
+         }
+        },
+        {
+         "key": "langsmith.span.tags",
+         "value": {
+          "stringValue": "graph:step:3"
+         }
+        },
+        {
+         "key": "gen_ai.prompt",
+         "value": {
+          "stringValue": "{\"messages\":[{\"content\":\"What is 2 + 3?\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"human\",\"id\":\"1113a66b-5f3f-4b1f-82aa-4fb1c82aedab\"},{\"content\":\"\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"ai\",\"id\":\"lc_run--01a14514-13b6-73a0-8a74-0e9ea639f1d2-0\",\"tool_calls\":[{\"name\":\"add\",\"args\":{\"a\":2,\"b\":3},\"id\":\"call_1\",\"type\":\"tool_call\"}],\"invalid_tool_calls\":[]},{\"content\":\"5\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"add\",\"id\":\"306f7515-a5bb-409b-b20f-7213c4a66bad\",\"tool_call_id\":\"call_1\",\"status\":\"success\"}]}"
+         }
+        },
+        {
+         "key": "gen_ai.completion",
+         "value": {
+          "stringValue": "{\"output\":[{\"graph\":null,\"update\":{\"messages\":[{\"content\":\"2 + 3 = 5\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"ai\",\"id\":\"lc_run--01a14514-13b8-7cb0-ab1f-fbb2c382d46e-0\",\"tool_calls\":[],\"invalid_tool_calls\":[]}]},\"resume\":null,\"goto\":[]}]}"
+         }
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      },
+      {
+       "traceId": "5OkbnUCjUWGU6fJU46bbVA==",
+       "spanId": "xbpWmP0o/ug=",
+       "parentSpanId": "ghAtmE1gyb8=",
+       "name": "Fake",
+       "kind": "SPAN_KIND_INTERNAL",
+       "startTimeUnixNano": "1792160306104406016",
+       "endTimeUnixNano": "1792160306104673024",
+       "attributes": [
+        {
+         "key": "langsmith.span.kind",
+         "value": {
+          "stringValue": "llm"
+         }
+        },
+        {
+         "key": "langsmith.trace.name",
+         "value": {
+          "stringValue": "Fake"
+         }
+        },
+        {
+         "key": "langsmith.trace.session_name",
+         "value": {
+          "stringValue": "default"
+         }
+        },
+        {
+         "key": "gen_ai.operation.name",
+         "value": {
+          "stringValue": "chat"
+         }
+        },
+        {
+         "key": "gen_ai.system",
+         "value": {
+          "stringValue": "langchain"
+         }
+        },
+        {
+         "key": "langsmith.metadata.ls_integration",
+         "value": {
+          "stringValue": "langchain_chat_model"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_step",
+         "value": {
+          "intValue": "3"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_node",
+         "value": {
+          "stringValue": "model"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_triggers",
+         "value": {
+          "stringValue": "[\"branch:to:model\"]"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_path",
+         "value": {
+          "stringValue": "[\"__pregel_pull\",\"model\"]"
+         }
+        },
+        {
+         "key": "langsmith.metadata.langgraph_checkpoint_ns",
+         "value": {
+          "stringValue": "model:bbf4d6cd-aa1a-494b-9e4b-f7ec30a6bf3f"
+         }
+        },
+        {
+         "key": "langsmith.metadata.checkpoint_ns",
+         "value": {
+          "stringValue": "model:bbf4d6cd-aa1a-494b-9e4b-f7ec30a6bf3f"
+         }
+        },
+        {
+         "key": "langsmith.metadata.ls_provider",
+         "value": {
+          "stringValue": "fake"
+         }
+        },
+        {
+         "key": "langsmith.metadata.ls_model_type",
+         "value": {
+          "stringValue": "chat"
+         }
+        },
+        {
+         "key": "langsmith.metadata.lc_versions",
+         "value": {
+          "stringValue": "{\"langchain-core\":\"1.6.11\",\"langchain\":\"1.4.6\"}"
+         }
+        },
+        {
+         "key": "langsmith.metadata._type",
+         "value": {
+          "stringValue": "fake-messages-list-chat-model"
+         }
+        },
+        {
+         "key": "langsmith.metadata.LANGSMITH_TRACING",
+         "value": {
+          "stringValue": "true"
+         }
+        },
+        {
+         "key": "langsmith.metadata.LANGSMITH_TRACING_MODE",
+         "value": {
+          "stringValue": "otel"
+         }
+        },
+        {
+         "key": "langsmith.span.tags",
+         "value": {
+          "stringValue": "seq:step:1"
+         }
+        },
+        {
+         "key": "gen_ai.serialized.name",
+         "value": {
+          "stringValue": "Fake"
+         }
+        },
+        {
+         "key": "gen_ai.prompt",
+         "value": {
+          "stringValue": "{\"messages\":[[{\"lc\":1,\"type\":\"constructor\",\"id\":[\"langchain\",\"schema\",\"messages\",\"SystemMessage\"],\"kwargs\":{\"content\":\"You add numbers.\",\"type\":\"system\"}},{\"lc\":1,\"type\":\"constructor\",\"id\":[\"langchain\",\"schema\",\"messages\",\"HumanMessage\"],\"kwargs\":{\"content\":\"What is 2 + 3?\",\"type\":\"human\",\"id\":\"1113a66b-5f3f-4b1f-82aa-4fb1c82aedab\"}},{\"lc\":1,\"type\":\"constructor\",\"id\":[\"langchain\",\"schema\",\"messages\",\"AIMessage\"],\"kwargs\":{\"content\":\"\",\"type\":\"ai\",\"id\":\"lc_run--01a14514-13b6-73a0-8a74-0e9ea639f1d2-0\",\"tool_calls\":[{\"name\":\"add\",\"args\":{\"a\":2,\"b\":3},\"id\":\"call_1\",\"type\":\"tool_call\"}],\"invalid_tool_calls\":[]}},{\"lc\":1,\"type\":\"constructor\",\"id\":[\"langchain\",\"schema\",\"messages\",\"ToolMessage\"],\"kwargs\":{\"content\":\"5\",\"type\":\"tool\",\"name\":\"add\",\"id\":\"306f7515-a5bb-409b-b20f-7213c4a66bad\",\"tool_call_id\":\"call_1\",\"status\":\"success\"}}]]}"
+         }
+        },
+        {
+         "key": "gen_ai.completion",
+         "value": {
+          "stringValue": "{\"generations\":[[{\"text\":\"2 + 3 = 5\",\"generation_info\":null,\"type\":\"ChatGeneration\",\"message\":{\"lc\":1,\"type\":\"constructor\",\"id\":[\"langchain\",\"schema\",\"messages\",\"AIMessage\"],\"kwargs\":{\"content\":\"2 + 3 = 5\",\"type\":\"ai\",\"id\":\"lc_run--01a14514-13b8-7cb0-ab1f-fbb2c382d46e-0\",\"tool_calls\":[],\"invalid_tool_calls\":[]}}}]],\"llm_output\":null,\"run\":null,\"type\":\"LLMResult\"}"
+         }
+        }
+       ],
+       "status": {
+        "code": "STATUS_CODE_OK"
+       },
+       "flags": 256
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
