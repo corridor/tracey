@@ -1,0 +1,854 @@
+{
+    "name": "ChatCompletion",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0xabdd1ec8043dbae4",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xe3bea7f27fc8dbae",
+    "start_time": "2026-10-16T14:19:54.023562Z",
+    "end_time": "2026-10-16T14:19:54.046582Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "llm.system": "openai",
+        "input.value": "{\"model\": \"gpt-4o-mini\", \"messages\": [{\"role\": \"system\", \"content\": \"You are the planner agent. Plan trips using tools.\"}, {\"role\": \"user\", \"content\": \"Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.\"}], \"tools\": [{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}]}",
+        "input.mime_type": "application/json",
+        "output.value": "{\"id\":\"chatcmpl-mock94038\",\"choices\":[{\"finish_reason\":\"tool_calls\",\"index\":0,\"message\":{\"content\":null,\"role\":\"assistant\",\"tool_calls\":[{\"id\":\"call_p1\",\"function\":{\"arguments\":\"{\\\"city\\\": \\\"Paris\\\"}\",\"name\":\"get_weather\"},\"type\":\"function\"}]}}],\"created\":1792160394,\"model\":\"gpt-4o-mini-2024-07-18\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":22,\"prompt_tokens\":62,\"total_tokens\":84}}",
+        "output.mime_type": "application/json",
+        "llm.tools.0.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}",
+        "llm.tools.1.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}",
+        "llm.tools.2.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}",
+        "llm.tools.3.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}",
+        "llm.invocation_parameters": "{\"model\": \"gpt-4o-mini\"}",
+        "llm.input_messages.0.message.role": "system",
+        "llm.input_messages.0.message.content": "You are the planner agent. Plan trips using tools.",
+        "llm.input_messages.1.message.role": "user",
+        "llm.input_messages.1.message.content": "Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.",
+        "llm.model_name": "gpt-4o-mini-2024-07-18",
+        "llm.token_count.total": 84,
+        "llm.token_count.prompt": 62,
+        "llm.token_count.completion": 22,
+        "llm.output_messages.0.message.role": "assistant",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.id": "call_p1",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.name": "get_weather",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.arguments": "{\"city\": \"Paris\"}",
+        "llm.finish_reason": "tool_calls",
+        "openinference.span.kind": "LLM"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "get_weather",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0xddd7d17679cb67e3",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xe3bea7f27fc8dbae",
+    "start_time": "2026-10-16T14:19:54.047263Z",
+    "end_time": "2026-10-16T14:19:54.172403Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "tool.name": "get_weather",
+        "tool.parameters": "{\"city\": \"Paris\"}",
+        "tool.description": "Get the weather forecast for a city",
+        "input.value": "{\"city\": \"Paris\"}",
+        "input.mime_type": "application/json",
+        "output.value": "{\"city\": \"Paris\", \"forecast\": \"rain\", \"temp_c\": 14}",
+        "output.mime_type": "text/plain",
+        "openinference.span.kind": "TOOL"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "ChatCompletion",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0xf211d1dfe21d7a22",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xe3bea7f27fc8dbae",
+    "start_time": "2026-10-16T14:19:54.173433Z",
+    "end_time": "2026-10-16T14:19:54.174866Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "llm.system": "openai",
+        "input.value": "{\"model\": \"gpt-4o-mini\", \"messages\": [{\"role\": \"system\", \"content\": \"You are the planner agent. Plan trips using tools.\"}, {\"role\": \"user\", \"content\": \"Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p1\", \"function\": {\"arguments\": \"{\\\"city\\\": \\\"Paris\\\"}\", \"name\": \"get_weather\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p1\", \"content\": \"{\\\"city\\\": \\\"Paris\\\", \\\"forecast\\\": \\\"rain\\\", \\\"temp_c\\\": 14}\"}], \"tools\": [{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}]}",
+        "input.mime_type": "application/json",
+        "output.value": "{\"id\":\"chatcmpl-mock94174\",\"choices\":[{\"finish_reason\":\"tool_calls\",\"index\":0,\"message\":{\"content\":null,\"role\":\"assistant\",\"tool_calls\":[{\"id\":\"call_p2\",\"function\":{\"arguments\":\"{\\\"origin\\\": \\\"JFK\\\", \\\"destination\\\": \\\"CDG\\\", \\\"date\\\": \\\"2026-05-12\\\"}\",\"name\":\"search_flights\"},\"type\":\"function\"}]}}],\"created\":1792160394,\"model\":\"gpt-4o-mini-2024-07-18\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":22,\"prompt_tokens\":74,\"total_tokens\":96}}",
+        "output.mime_type": "application/json",
+        "llm.tools.0.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}",
+        "llm.tools.1.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}",
+        "llm.tools.2.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}",
+        "llm.tools.3.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}",
+        "llm.invocation_parameters": "{\"model\": \"gpt-4o-mini\"}",
+        "llm.input_messages.0.message.role": "system",
+        "llm.input_messages.0.message.content": "You are the planner agent. Plan trips using tools.",
+        "llm.input_messages.1.message.role": "user",
+        "llm.input_messages.1.message.content": "Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.",
+        "llm.input_messages.2.message.role": "assistant",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.id": "call_p1",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.name": "get_weather",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.arguments": "{\"city\": \"Paris\"}",
+        "llm.input_messages.3.message.role": "tool",
+        "llm.input_messages.3.message.tool_call_id": "call_p1",
+        "llm.input_messages.3.message.content": "{\"city\": \"Paris\", \"forecast\": \"rain\", \"temp_c\": 14}",
+        "llm.model_name": "gpt-4o-mini-2024-07-18",
+        "llm.token_count.total": 96,
+        "llm.token_count.prompt": 74,
+        "llm.token_count.completion": 22,
+        "llm.output_messages.0.message.role": "assistant",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.id": "call_p2",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.name": "search_flights",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "llm.finish_reason": "tool_calls",
+        "openinference.span.kind": "LLM"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "search_flights",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0x1bdf814a578cd21a",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xe3bea7f27fc8dbae",
+    "start_time": "2026-10-16T14:19:54.175075Z",
+    "end_time": "2026-10-16T14:19:54.578235Z",
+    "status": {
+        "status_code": "ERROR",
+        "description": "flight API timed out after 400ms"
+    },
+    "attributes": {
+        "tool.name": "search_flights",
+        "tool.parameters": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "tool.description": "Search flights between airports",
+        "input.value": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "input.mime_type": "application/json",
+        "openinference.span.kind": "TOOL"
+    },
+    "events": [
+        {
+            "name": "exception",
+            "timestamp": "2026-10-16T14:19:54.578064Z",
+            "attributes": {
+                "exception.type": "TimeoutError",
+                "exception.message": "flight API timed out after 400ms",
+                "exception.stacktrace": "Traceback (most recent call last):\n  File \"/app/agent.py\", line 60, in call_tool\n    out = tool_impl(name, args)\n          ^^^^^^^^^^^^^^^^^^^^^\n  File \"/app/agent.py\", line 41, in tool_impl\n    if name == \"search_flights\": time.sleep(0.4); raise TimeoutError(\"flight API timed out after 400ms\")\n                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTimeoutError: flight API timed out after 400ms\n",
+                "exception.escaped": "False"
+            }
+        }
+    ],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "ChatCompletion",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0xd6ed8f8bc2c50e84",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xe3bea7f27fc8dbae",
+    "start_time": "2026-10-16T14:19:54.579921Z",
+    "end_time": "2026-10-16T14:19:54.581544Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "llm.system": "openai",
+        "input.value": "{\"model\": \"gpt-4o-mini\", \"messages\": [{\"role\": \"system\", \"content\": \"You are the planner agent. Plan trips using tools.\"}, {\"role\": \"user\", \"content\": \"Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p1\", \"function\": {\"arguments\": \"{\\\"city\\\": \\\"Paris\\\"}\", \"name\": \"get_weather\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p1\", \"content\": \"{\\\"city\\\": \\\"Paris\\\", \\\"forecast\\\": \\\"rain\\\", \\\"temp_c\\\": 14}\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p2\", \"function\": {\"arguments\": \"{\\\"origin\\\": \\\"JFK\\\", \\\"destination\\\": \\\"CDG\\\", \\\"date\\\": \\\"2026-05-12\\\"}\", \"name\": \"search_flights\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p2\", \"content\": \"Error: flight API timed out after 400ms\"}], \"tools\": [{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}]}",
+        "input.mime_type": "application/json",
+        "output.value": "{\"id\":\"chatcmpl-mock94580\",\"choices\":[{\"finish_reason\":\"tool_calls\",\"index\":0,\"message\":{\"content\":null,\"role\":\"assistant\",\"tool_calls\":[{\"id\":\"call_p3\",\"function\":{\"arguments\":\"{\\\"origin\\\": \\\"JFK\\\", \\\"destination\\\": \\\"CDG\\\", \\\"date\\\": \\\"2026-05-12\\\"}\",\"name\":\"search_flights\"},\"type\":\"function\"}]}}],\"created\":1792160394,\"model\":\"gpt-4o-mini-2024-07-18\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":22,\"prompt_tokens\":84,\"total_tokens\":106}}",
+        "output.mime_type": "application/json",
+        "llm.tools.0.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}",
+        "llm.tools.1.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}",
+        "llm.tools.2.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}",
+        "llm.tools.3.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}",
+        "llm.invocation_parameters": "{\"model\": \"gpt-4o-mini\"}",
+        "llm.input_messages.0.message.role": "system",
+        "llm.input_messages.0.message.content": "You are the planner agent. Plan trips using tools.",
+        "llm.input_messages.1.message.role": "user",
+        "llm.input_messages.1.message.content": "Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.",
+        "llm.input_messages.2.message.role": "assistant",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.id": "call_p1",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.name": "get_weather",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.arguments": "{\"city\": \"Paris\"}",
+        "llm.input_messages.3.message.role": "tool",
+        "llm.input_messages.3.message.tool_call_id": "call_p1",
+        "llm.input_messages.3.message.content": "{\"city\": \"Paris\", \"forecast\": \"rain\", \"temp_c\": 14}",
+        "llm.input_messages.4.message.role": "assistant",
+        "llm.input_messages.4.message.tool_calls.0.tool_call.id": "call_p2",
+        "llm.input_messages.4.message.tool_calls.0.tool_call.function.name": "search_flights",
+        "llm.input_messages.4.message.tool_calls.0.tool_call.function.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "llm.input_messages.5.message.role": "tool",
+        "llm.input_messages.5.message.tool_call_id": "call_p2",
+        "llm.input_messages.5.message.content": "Error: flight API timed out after 400ms",
+        "llm.model_name": "gpt-4o-mini-2024-07-18",
+        "llm.token_count.total": 106,
+        "llm.token_count.prompt": 84,
+        "llm.token_count.completion": 22,
+        "llm.output_messages.0.message.role": "assistant",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.id": "call_p3",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.name": "search_flights",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "llm.finish_reason": "tool_calls",
+        "openinference.span.kind": "LLM"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "search_flights",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0xab363884de70dcc7",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xe3bea7f27fc8dbae",
+    "start_time": "2026-10-16T14:19:54.581727Z",
+    "end_time": "2026-10-16T14:19:54.983229Z",
+    "status": {
+        "status_code": "ERROR",
+        "description": "flight API timed out after 400ms"
+    },
+    "attributes": {
+        "tool.name": "search_flights",
+        "tool.parameters": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "tool.description": "Search flights between airports",
+        "input.value": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "input.mime_type": "application/json",
+        "openinference.span.kind": "TOOL"
+    },
+    "events": [
+        {
+            "name": "exception",
+            "timestamp": "2026-10-16T14:19:54.983201Z",
+            "attributes": {
+                "exception.type": "TimeoutError",
+                "exception.message": "flight API timed out after 400ms",
+                "exception.stacktrace": "Traceback (most recent call last):\n  File \"/app/agent.py\", line 60, in call_tool\n    out = tool_impl(name, args)\n          ^^^^^^^^^^^^^^^^^^^^^\n  File \"/app/agent.py\", line 41, in tool_impl\n    if name == \"search_flights\": time.sleep(0.4); raise TimeoutError(\"flight API timed out after 400ms\")\n                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTimeoutError: flight API timed out after 400ms\n",
+                "exception.escaped": "False"
+            }
+        }
+    ],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "ChatCompletion",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0xc5ecbec7e6375bda",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xe3bea7f27fc8dbae",
+    "start_time": "2026-10-16T14:19:54.986241Z",
+    "end_time": "2026-10-16T14:19:54.988713Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "llm.system": "openai",
+        "input.value": "{\"model\": \"gpt-4o-mini\", \"messages\": [{\"role\": \"system\", \"content\": \"You are the planner agent. Plan trips using tools.\"}, {\"role\": \"user\", \"content\": \"Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p1\", \"function\": {\"arguments\": \"{\\\"city\\\": \\\"Paris\\\"}\", \"name\": \"get_weather\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p1\", \"content\": \"{\\\"city\\\": \\\"Paris\\\", \\\"forecast\\\": \\\"rain\\\", \\\"temp_c\\\": 14}\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p2\", \"function\": {\"arguments\": \"{\\\"origin\\\": \\\"JFK\\\", \\\"destination\\\": \\\"CDG\\\", \\\"date\\\": \\\"2026-05-12\\\"}\", \"name\": \"search_flights\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p2\", \"content\": \"Error: flight API timed out after 400ms\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p3\", \"function\": {\"arguments\": \"{\\\"origin\\\": \\\"JFK\\\", \\\"destination\\\": \\\"CDG\\\", \\\"date\\\": \\\"2026-05-12\\\"}\", \"name\": \"search_flights\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p3\", \"content\": \"Error: flight API timed out after 400ms\"}], \"tools\": [{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}]}",
+        "input.mime_type": "application/json",
+        "output.value": "{\"id\":\"chatcmpl-mock94987\",\"choices\":[{\"finish_reason\":\"tool_calls\",\"index\":0,\"message\":{\"content\":null,\"role\":\"assistant\",\"tool_calls\":[{\"id\":\"call_p4\",\"function\":{\"arguments\":\"{\\\"origin\\\": \\\"JFK\\\", \\\"destination\\\": \\\"CDG\\\", \\\"date\\\": \\\"2026-05-12\\\"}\",\"name\":\"search_flights\"},\"type\":\"function\"}]}}],\"created\":1792160394,\"model\":\"gpt-4o-mini-2024-07-18\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":22,\"prompt_tokens\":94,\"total_tokens\":116}}",
+        "output.mime_type": "application/json",
+        "llm.tools.0.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}",
+        "llm.tools.1.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}",
+        "llm.tools.2.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}",
+        "llm.tools.3.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}",
+        "llm.invocation_parameters": "{\"model\": \"gpt-4o-mini\"}",
+        "llm.input_messages.0.message.role": "system",
+        "llm.input_messages.0.message.content": "You are the planner agent. Plan trips using tools.",
+        "llm.input_messages.1.message.role": "user",
+        "llm.input_messages.1.message.content": "Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.",
+        "llm.input_messages.2.message.role": "assistant",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.id": "call_p1",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.name": "get_weather",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.arguments": "{\"city\": \"Paris\"}",
+        "llm.input_messages.3.message.role": "tool",
+        "llm.input_messages.3.message.tool_call_id": "call_p1",
+        "llm.input_messages.3.message.content": "{\"city\": \"Paris\", \"forecast\": \"rain\", \"temp_c\": 14}",
+        "llm.input_messages.4.message.role": "assistant",
+        "llm.input_messages.4.message.tool_calls.0.tool_call.id": "call_p2",
+        "llm.input_messages.4.message.tool_calls.0.tool_call.function.name": "search_flights",
+        "llm.input_messages.4.message.tool_calls.0.tool_call.function.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "llm.input_messages.5.message.role": "tool",
+        "llm.input_messages.5.message.tool_call_id": "call_p2",
+        "llm.input_messages.5.message.content": "Error: flight API timed out after 400ms",
+        "llm.input_messages.6.message.role": "assistant",
+        "llm.input_messages.6.message.tool_calls.0.tool_call.id": "call_p3",
+        "llm.input_messages.6.message.tool_calls.0.tool_call.function.name": "search_flights",
+        "llm.input_messages.6.message.tool_calls.0.tool_call.function.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "llm.input_messages.7.message.role": "tool",
+        "llm.input_messages.7.message.tool_call_id": "call_p3",
+        "llm.input_messages.7.message.content": "Error: flight API timed out after 400ms",
+        "llm.model_name": "gpt-4o-mini-2024-07-18",
+        "llm.token_count.total": 116,
+        "llm.token_count.prompt": 94,
+        "llm.token_count.completion": 22,
+        "llm.output_messages.0.message.role": "assistant",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.id": "call_p4",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.name": "search_flights",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "llm.finish_reason": "tool_calls",
+        "openinference.span.kind": "LLM"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "search_flights",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0x225fd2a132d0099b",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xe3bea7f27fc8dbae",
+    "start_time": "2026-10-16T14:19:54.991247Z",
+    "end_time": "2026-10-16T14:19:55.395093Z",
+    "status": {
+        "status_code": "ERROR",
+        "description": "flight API timed out after 400ms"
+    },
+    "attributes": {
+        "tool.name": "search_flights",
+        "tool.parameters": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "tool.description": "Search flights between airports",
+        "input.value": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "input.mime_type": "application/json",
+        "openinference.span.kind": "TOOL"
+    },
+    "events": [
+        {
+            "name": "exception",
+            "timestamp": "2026-10-16T14:19:55.395043Z",
+            "attributes": {
+                "exception.type": "TimeoutError",
+                "exception.message": "flight API timed out after 400ms",
+                "exception.stacktrace": "Traceback (most recent call last):\n  File \"/app/agent.py\", line 60, in call_tool\n    out = tool_impl(name, args)\n          ^^^^^^^^^^^^^^^^^^^^^\n  File \"/app/agent.py\", line 41, in tool_impl\n    if name == \"search_flights\": time.sleep(0.4); raise TimeoutError(\"flight API timed out after 400ms\")\n                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTimeoutError: flight API timed out after 400ms\n",
+                "exception.escaped": "False"
+            }
+        }
+    ],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "ChatCompletion",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0xfe681e2911c07d5b",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xe3bea7f27fc8dbae",
+    "start_time": "2026-10-16T14:19:55.396614Z",
+    "end_time": "2026-10-16T14:19:58.610066Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "llm.system": "openai",
+        "input.value": "{\"model\": \"gpt-4o-mini\", \"messages\": [{\"role\": \"system\", \"content\": \"You are the planner agent. Plan trips using tools.\"}, {\"role\": \"user\", \"content\": \"Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p1\", \"function\": {\"arguments\": \"{\\\"city\\\": \\\"Paris\\\"}\", \"name\": \"get_weather\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p1\", \"content\": \"{\\\"city\\\": \\\"Paris\\\", \\\"forecast\\\": \\\"rain\\\", \\\"temp_c\\\": 14}\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p2\", \"function\": {\"arguments\": \"{\\\"origin\\\": \\\"JFK\\\", \\\"destination\\\": \\\"CDG\\\", \\\"date\\\": \\\"2026-05-12\\\"}\", \"name\": \"search_flights\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p2\", \"content\": \"Error: flight API timed out after 400ms\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p3\", \"function\": {\"arguments\": \"{\\\"origin\\\": \\\"JFK\\\", \\\"destination\\\": \\\"CDG\\\", \\\"date\\\": \\\"2026-05-12\\\"}\", \"name\": \"search_flights\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p3\", \"content\": \"Error: flight API timed out after 400ms\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p4\", \"function\": {\"arguments\": \"{\\\"origin\\\": \\\"JFK\\\", \\\"destination\\\": \\\"CDG\\\", \\\"date\\\": \\\"2026-05-12\\\"}\", \"name\": \"search_flights\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p4\", \"content\": \"Error: flight API timed out after 400ms\"}], \"tools\": [{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}]}",
+        "input.mime_type": "application/json",
+        "output.value": "{\"id\":\"chatcmpl-mock98602\",\"choices\":[{\"finish_reason\":\"tool_calls\",\"index\":0,\"message\":{\"content\":null,\"role\":\"assistant\",\"tool_calls\":[{\"id\":\"call_p5\",\"function\":{\"arguments\":\"{\\\"topic\\\": \\\"hotels in Paris\\\"}\",\"name\":\"delegate_research\"},\"type\":\"function\"}]}}],\"created\":1792160398,\"model\":\"gpt-4o-mini-2024-07-18\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":22,\"prompt_tokens\":104,\"total_tokens\":126}}",
+        "output.mime_type": "application/json",
+        "llm.tools.0.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}",
+        "llm.tools.1.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}",
+        "llm.tools.2.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}",
+        "llm.tools.3.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}",
+        "llm.invocation_parameters": "{\"model\": \"gpt-4o-mini\"}",
+        "llm.input_messages.0.message.role": "system",
+        "llm.input_messages.0.message.content": "You are the planner agent. Plan trips using tools.",
+        "llm.input_messages.1.message.role": "user",
+        "llm.input_messages.1.message.content": "Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.",
+        "llm.input_messages.2.message.role": "assistant",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.id": "call_p1",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.name": "get_weather",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.arguments": "{\"city\": \"Paris\"}",
+        "llm.input_messages.3.message.role": "tool",
+        "llm.input_messages.3.message.tool_call_id": "call_p1",
+        "llm.input_messages.3.message.content": "{\"city\": \"Paris\", \"forecast\": \"rain\", \"temp_c\": 14}",
+        "llm.input_messages.4.message.role": "assistant",
+        "llm.input_messages.4.message.tool_calls.0.tool_call.id": "call_p2",
+        "llm.input_messages.4.message.tool_calls.0.tool_call.function.name": "search_flights",
+        "llm.input_messages.4.message.tool_calls.0.tool_call.function.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "llm.input_messages.5.message.role": "tool",
+        "llm.input_messages.5.message.tool_call_id": "call_p2",
+        "llm.input_messages.5.message.content": "Error: flight API timed out after 400ms",
+        "llm.input_messages.6.message.role": "assistant",
+        "llm.input_messages.6.message.tool_calls.0.tool_call.id": "call_p3",
+        "llm.input_messages.6.message.tool_calls.0.tool_call.function.name": "search_flights",
+        "llm.input_messages.6.message.tool_calls.0.tool_call.function.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "llm.input_messages.7.message.role": "tool",
+        "llm.input_messages.7.message.tool_call_id": "call_p3",
+        "llm.input_messages.7.message.content": "Error: flight API timed out after 400ms",
+        "llm.input_messages.8.message.role": "assistant",
+        "llm.input_messages.8.message.tool_calls.0.tool_call.id": "call_p4",
+        "llm.input_messages.8.message.tool_calls.0.tool_call.function.name": "search_flights",
+        "llm.input_messages.8.message.tool_calls.0.tool_call.function.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "llm.input_messages.9.message.role": "tool",
+        "llm.input_messages.9.message.tool_call_id": "call_p4",
+        "llm.input_messages.9.message.content": "Error: flight API timed out after 400ms",
+        "llm.model_name": "gpt-4o-mini-2024-07-18",
+        "llm.token_count.total": 126,
+        "llm.token_count.prompt": 104,
+        "llm.token_count.completion": 22,
+        "llm.output_messages.0.message.role": "assistant",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.id": "call_p5",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.name": "delegate_research",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.arguments": "{\"topic\": \"hotels in Paris\"}",
+        "llm.finish_reason": "tool_calls",
+        "openinference.span.kind": "LLM"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "ChatCompletion",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0x59b7457f9d1ff726",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xeffafbc8df312735",
+    "start_time": "2026-10-16T14:19:58.612874Z",
+    "end_time": "2026-10-16T14:19:58.615405Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "llm.system": "openai",
+        "input.value": "{\"model\": \"gpt-4o-mini\", \"messages\": [{\"role\": \"system\", \"content\": \"You are the researcher agent. Find hotels near the Louvre\"}, {\"role\": \"user\", \"content\": \"hotels in Paris\"}], \"tools\": [{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}]}",
+        "input.mime_type": "application/json",
+        "output.value": "{\"id\":\"chatcmpl-mock98614\",\"choices\":[{\"finish_reason\":\"tool_calls\",\"index\":0,\"message\":{\"content\":null,\"role\":\"assistant\",\"tool_calls\":[{\"id\":\"call_r1\",\"function\":{\"arguments\":\"{\\\"query\\\": \\\"Paris hotels near Louvre\\\"}\",\"name\":\"web_search\"},\"type\":\"function\"}]}}],\"created\":1792160398,\"model\":\"gpt-4o-mini-2024-07-18\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":22,\"prompt_tokens\":48,\"total_tokens\":70}}",
+        "output.mime_type": "application/json",
+        "llm.tools.0.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}",
+        "llm.tools.1.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}",
+        "llm.tools.2.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}",
+        "llm.tools.3.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}",
+        "llm.invocation_parameters": "{\"model\": \"gpt-4o-mini\"}",
+        "llm.input_messages.0.message.role": "system",
+        "llm.input_messages.0.message.content": "You are the researcher agent. Find hotels near the Louvre",
+        "llm.input_messages.1.message.role": "user",
+        "llm.input_messages.1.message.content": "hotels in Paris",
+        "llm.model_name": "gpt-4o-mini-2024-07-18",
+        "llm.token_count.total": 70,
+        "llm.token_count.prompt": 48,
+        "llm.token_count.completion": 22,
+        "llm.output_messages.0.message.role": "assistant",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.id": "call_r1",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.name": "web_search",
+        "llm.output_messages.0.message.tool_calls.0.tool_call.function.arguments": "{\"query\": \"Paris hotels near Louvre\"}",
+        "llm.finish_reason": "tool_calls",
+        "openinference.span.kind": "LLM"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "web_search",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0xed19d072c4dcd8d9",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xeffafbc8df312735",
+    "start_time": "2026-10-16T14:19:58.615624Z",
+    "end_time": "2026-10-16T14:19:58.920951Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "tool.name": "web_search",
+        "tool.parameters": "{\"query\": \"Paris hotels near Louvre\"}",
+        "tool.description": "Search the web",
+        "input.value": "{\"query\": \"Paris hotels near Louvre\"}",
+        "input.mime_type": "application/json",
+        "output.value": "{\"results\": [\"Hotel Le Marais 180 EUR/night\", \"Hotel Louvre Vivienne 210 EUR/night\"]}",
+        "output.mime_type": "text/plain",
+        "openinference.span.kind": "TOOL"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "ChatCompletion",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0x2dd1fcaabec98491",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xeffafbc8df312735",
+    "start_time": "2026-10-16T14:19:58.923072Z",
+    "end_time": "2026-10-16T14:19:58.925751Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "llm.system": "openai",
+        "input.value": "{\"model\": \"gpt-4o-mini\", \"messages\": [{\"role\": \"system\", \"content\": \"You are the researcher agent. Find hotels near the Louvre\"}, {\"role\": \"user\", \"content\": \"hotels in Paris\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_r1\", \"function\": {\"arguments\": \"{\\\"query\\\": \\\"Paris hotels near Louvre\\\"}\", \"name\": \"web_search\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_r1\", \"content\": \"{\\\"results\\\": [\\\"Hotel Le Marais 180 EUR/night\\\", \\\"Hotel Louvre Vivienne 210 EUR/night\\\"]}\"}], \"tools\": [{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}]}",
+        "input.mime_type": "application/json",
+        "output.value": "{\"id\":\"chatcmpl-mock98924\",\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"content\":\"Hotel Le Marais is 180 EUR per night and close to the Louvre.\",\"role\":\"assistant\"}}],\"created\":1792160398,\"model\":\"gpt-4o-mini-2024-07-18\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":41,\"prompt_tokens\":69,\"total_tokens\":110}}",
+        "output.mime_type": "application/json",
+        "llm.tools.0.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}",
+        "llm.tools.1.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}",
+        "llm.tools.2.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}",
+        "llm.tools.3.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}",
+        "llm.invocation_parameters": "{\"model\": \"gpt-4o-mini\"}",
+        "llm.input_messages.0.message.role": "system",
+        "llm.input_messages.0.message.content": "You are the researcher agent. Find hotels near the Louvre",
+        "llm.input_messages.1.message.role": "user",
+        "llm.input_messages.1.message.content": "hotels in Paris",
+        "llm.input_messages.2.message.role": "assistant",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.id": "call_r1",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.name": "web_search",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.arguments": "{\"query\": \"Paris hotels near Louvre\"}",
+        "llm.input_messages.3.message.role": "tool",
+        "llm.input_messages.3.message.tool_call_id": "call_r1",
+        "llm.input_messages.3.message.content": "{\"results\": [\"Hotel Le Marais 180 EUR/night\", \"Hotel Louvre Vivienne 210 EUR/night\"]}",
+        "llm.model_name": "gpt-4o-mini-2024-07-18",
+        "llm.token_count.total": 110,
+        "llm.token_count.prompt": 69,
+        "llm.token_count.completion": 41,
+        "llm.output_messages.0.message.role": "assistant",
+        "llm.output_messages.0.message.content": "Hotel Le Marais is 180 EUR per night and close to the Louvre.",
+        "llm.finish_reason": "stop",
+        "openinference.span.kind": "LLM"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "researcher",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0xeffafbc8df312735",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xb6128ad29aaabd53",
+    "start_time": "2026-10-16T14:19:58.611788Z",
+    "end_time": "2026-10-16T14:19:58.926019Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "input.value": "hotels in Paris",
+        "input.mime_type": "text/plain",
+        "agent.name": "researcher",
+        "output.value": "Hotel Le Marais is 180 EUR per night and close to the Louvre.",
+        "output.mime_type": "text/plain",
+        "openinference.span.kind": "AGENT"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "delegate_research",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0xb6128ad29aaabd53",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xe3bea7f27fc8dbae",
+    "start_time": "2026-10-16T14:19:58.611632Z",
+    "end_time": "2026-10-16T14:19:58.926128Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "tool.name": "delegate_research",
+        "tool.parameters": "{\"topic\": \"hotels in Paris\"}",
+        "tool.description": "Ask the researcher sub-agent about a topic",
+        "input.value": "{\"topic\": \"hotels in Paris\"}",
+        "input.mime_type": "application/json",
+        "output.value": "Hotel Le Marais is 180 EUR per night and close to the Louvre.",
+        "output.mime_type": "text/plain",
+        "openinference.span.kind": "TOOL"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "ChatCompletion",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0x90d5773e5d8cd6e5",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xe3bea7f27fc8dbae",
+    "start_time": "2026-10-16T14:19:58.928097Z",
+    "end_time": "2026-10-16T14:19:58.929607Z",
+    "status": {
+        "status_code": "OK"
+    },
+    "attributes": {
+        "llm.system": "openai",
+        "input.value": "{\"model\": \"gpt-4o-mini\", \"messages\": [{\"role\": \"system\", \"content\": \"You are the planner agent. Plan trips using tools.\"}, {\"role\": \"user\", \"content\": \"Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p1\", \"function\": {\"arguments\": \"{\\\"city\\\": \\\"Paris\\\"}\", \"name\": \"get_weather\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p1\", \"content\": \"{\\\"city\\\": \\\"Paris\\\", \\\"forecast\\\": \\\"rain\\\", \\\"temp_c\\\": 14}\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p2\", \"function\": {\"arguments\": \"{\\\"origin\\\": \\\"JFK\\\", \\\"destination\\\": \\\"CDG\\\", \\\"date\\\": \\\"2026-05-12\\\"}\", \"name\": \"search_flights\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p2\", \"content\": \"Error: flight API timed out after 400ms\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p3\", \"function\": {\"arguments\": \"{\\\"origin\\\": \\\"JFK\\\", \\\"destination\\\": \\\"CDG\\\", \\\"date\\\": \\\"2026-05-12\\\"}\", \"name\": \"search_flights\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p3\", \"content\": \"Error: flight API timed out after 400ms\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p4\", \"function\": {\"arguments\": \"{\\\"origin\\\": \\\"JFK\\\", \\\"destination\\\": \\\"CDG\\\", \\\"date\\\": \\\"2026-05-12\\\"}\", \"name\": \"search_flights\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p4\", \"content\": \"Error: flight API timed out after 400ms\"}, {\"role\": \"assistant\", \"tool_calls\": [{\"id\": \"call_p5\", \"function\": {\"arguments\": \"{\\\"topic\\\": \\\"hotels in Paris\\\"}\", \"name\": \"delegate_research\"}, \"type\": \"function\"}]}, {\"role\": \"tool\", \"tool_call_id\": \"call_p5\", \"content\": \"Hotel Le Marais is 180 EUR per night and close to the Louvre.\"}], \"tools\": [{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}, {\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}]}",
+        "input.mime_type": "application/json",
+        "output.value": "{\"id\":\"chatcmpl-mock98929\",\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"content\":\"Paris will be mild and rainy. Flight search was unavailable after 3 attempts, but a hotel near the Louvre costs about 180 EUR per night.\",\"role\":\"assistant\"}}],\"created\":1792160398,\"model\":\"gpt-4o-mini-2024-07-18\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":41,\"prompt_tokens\":119,\"total_tokens\":160}}",
+        "output.mime_type": "application/json",
+        "llm.tools.0.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get the weather forecast for a city\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}, \"required\": [\"city\"]}}}",
+        "llm.tools.1.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"search_flights\", \"description\": \"Search flights between airports\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"date\"]}}}",
+        "llm.tools.2.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"delegate_research\", \"description\": \"Ask the researcher sub-agent about a topic\", \"parameters\": {\"type\": \"object\", \"properties\": {\"topic\": {\"type\": \"string\"}}, \"required\": [\"topic\"]}}}",
+        "llm.tools.3.tool.json_schema": "{\"type\": \"function\", \"function\": {\"name\": \"web_search\", \"description\": \"Search the web\", \"parameters\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}}, \"required\": [\"query\"]}}}",
+        "llm.invocation_parameters": "{\"model\": \"gpt-4o-mini\"}",
+        "llm.input_messages.0.message.role": "system",
+        "llm.input_messages.0.message.content": "You are the planner agent. Plan trips using tools.",
+        "llm.input_messages.1.message.role": "user",
+        "llm.input_messages.1.message.content": "Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.",
+        "llm.input_messages.2.message.role": "assistant",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.id": "call_p1",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.name": "get_weather",
+        "llm.input_messages.2.message.tool_calls.0.tool_call.function.arguments": "{\"city\": \"Paris\"}",
+        "llm.input_messages.3.message.role": "tool",
+        "llm.input_messages.3.message.tool_call_id": "call_p1",
+        "llm.input_messages.3.message.content": "{\"city\": \"Paris\", \"forecast\": \"rain\", \"temp_c\": 14}",
+        "llm.input_messages.4.message.role": "assistant",
+        "llm.input_messages.4.message.tool_calls.0.tool_call.id": "call_p2",
+        "llm.input_messages.4.message.tool_calls.0.tool_call.function.name": "search_flights",
+        "llm.input_messages.4.message.tool_calls.0.tool_call.function.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "llm.input_messages.5.message.role": "tool",
+        "llm.input_messages.5.message.tool_call_id": "call_p2",
+        "llm.input_messages.5.message.content": "Error: flight API timed out after 400ms",
+        "llm.input_messages.6.message.role": "assistant",
+        "llm.input_messages.6.message.tool_calls.0.tool_call.id": "call_p3",
+        "llm.input_messages.6.message.tool_calls.0.tool_call.function.name": "search_flights",
+        "llm.input_messages.6.message.tool_calls.0.tool_call.function.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "llm.input_messages.7.message.role": "tool",
+        "llm.input_messages.7.message.tool_call_id": "call_p3",
+        "llm.input_messages.7.message.content": "Error: flight API timed out after 400ms",
+        "llm.input_messages.8.message.role": "assistant",
+        "llm.input_messages.8.message.tool_calls.0.tool_call.id": "call_p4",
+        "llm.input_messages.8.message.tool_calls.0.tool_call.function.name": "search_flights",
+        "llm.input_messages.8.message.tool_calls.0.tool_call.function.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "llm.input_messages.9.message.role": "tool",
+        "llm.input_messages.9.message.tool_call_id": "call_p4",
+        "llm.input_messages.9.message.content": "Error: flight API timed out after 400ms",
+        "llm.input_messages.10.message.role": "assistant",
+        "llm.input_messages.10.message.tool_calls.0.tool_call.id": "call_p5",
+        "llm.input_messages.10.message.tool_calls.0.tool_call.function.name": "delegate_research",
+        "llm.input_messages.10.message.tool_calls.0.tool_call.function.arguments": "{\"topic\": \"hotels in Paris\"}",
+        "llm.input_messages.11.message.role": "tool",
+        "llm.input_messages.11.message.tool_call_id": "call_p5",
+        "llm.input_messages.11.message.content": "Hotel Le Marais is 180 EUR per night and close to the Louvre.",
+        "llm.model_name": "gpt-4o-mini-2024-07-18",
+        "llm.token_count.total": 160,
+        "llm.token_count.prompt": 119,
+        "llm.token_count.completion": 41,
+        "llm.output_messages.0.message.role": "assistant",
+        "llm.output_messages.0.message.content": "Paris will be mild and rainy. Flight search was unavailable after 3 attempts, but a hotel near the Louvre costs about 180 EUR per night.",
+        "llm.finish_reason": "stop",
+        "openinference.span.kind": "LLM"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "planner",
+    "context": {
+        "trace_id": "0xecefebcefd635e355652bf02ae584d88",
+        "span_id": "0xe3bea7f27fc8dbae",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": null,
+    "start_time": "2026-10-16T14:19:53.913872Z",
+    "end_time": "2026-10-16T14:19:58.929789Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "input.value": "Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.",
+        "input.mime_type": "text/plain",
+        "agent.name": "planner",
+        "output.value": "Paris will be mild and rainy. Flight search was unavailable after 3 attempts, but a hotel near the Louvre costs about 180 EUR per night.",
+        "output.mime_type": "text/plain",
+        "openinference.span.kind": "AGENT"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "22a50919-3bc9-460b-8935-b1e6b9cb49a3",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}

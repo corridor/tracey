@@ -1,0 +1,644 @@
+{
+    "name": "chat gpt-4o-mini",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0x4c66e12c95c799ea",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.CLIENT",
+    "parent_id": "0x9215e5eb352aab76",
+    "start_time": "2026-10-16T14:21:34.822573Z",
+    "end_time": "2026-10-16T14:21:34.833013Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "chat",
+        "gen_ai.request.model": "gpt-4o-mini",
+        "gen_ai.provider.name": "openai",
+        "gen_ai.response.finish_reasons": [
+            "tool_calls"
+        ],
+        "gen_ai.response.model": "gpt-4o-mini-2024-07-18",
+        "gen_ai.response.id": "chatcmpl-mock94830",
+        "gen_ai.usage.input_tokens": 62,
+        "gen_ai.usage.output_tokens": 22,
+        "gen_ai.input.messages": "[{\"role\":\"system\",\"parts\":[{\"content\":\"You are the planner agent. Plan trips using tools.\",\"type\":\"text\"}]},{\"role\":\"user\",\"parts\":[{\"content\":\"Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.\",\"type\":\"text\"}]}]",
+        "gen_ai.output.messages": "[{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"city\":\"Paris\"},\"name\":\"get_weather\",\"id\":\"call_p1\",\"type\":\"tool_call\"}],\"finish_reason\":\"tool_calls\"}]"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "execute_tool get_weather",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0x717bb1098b4928e3",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x9215e5eb352aab76",
+    "start_time": "2026-10-16T14:21:34.833364Z",
+    "end_time": "2026-10-16T14:21:34.958435Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "execute_tool",
+        "gen_ai.tool.name": "get_weather",
+        "gen_ai.tool.type": "function",
+        "gen_ai.tool.call.id": "call_p1",
+        "gen_ai.tool.call.arguments": "{\"city\": \"Paris\"}",
+        "gen_ai.tool.call.result": "{\"city\": \"Paris\", \"forecast\": \"rain\", \"temp_c\": 14}"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "chat gpt-4o-mini",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0xfba75c21cf987459",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.CLIENT",
+    "parent_id": "0x9215e5eb352aab76",
+    "start_time": "2026-10-16T14:21:34.958625Z",
+    "end_time": "2026-10-16T14:21:34.960169Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "chat",
+        "gen_ai.request.model": "gpt-4o-mini",
+        "gen_ai.provider.name": "openai",
+        "gen_ai.response.finish_reasons": [
+            "tool_calls"
+        ],
+        "gen_ai.response.model": "gpt-4o-mini-2024-07-18",
+        "gen_ai.response.id": "chatcmpl-mock94959",
+        "gen_ai.usage.input_tokens": 74,
+        "gen_ai.usage.output_tokens": 22,
+        "gen_ai.input.messages": "[{\"role\":\"system\",\"parts\":[{\"content\":\"You are the planner agent. Plan trips using tools.\",\"type\":\"text\"}]},{\"role\":\"user\",\"parts\":[{\"content\":\"Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.\",\"type\":\"text\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"city\":\"Paris\"},\"name\":\"get_weather\",\"id\":\"call_p1\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"{\\\"city\\\": \\\"Paris\\\", \\\"forecast\\\": \\\"rain\\\", \\\"temp_c\\\": 14}\",\"id\":\"call_p1\",\"type\":\"tool_call_response\"}]}]",
+        "gen_ai.output.messages": "[{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"origin\":\"JFK\",\"destination\":\"CDG\",\"date\":\"2026-05-12\"},\"name\":\"search_flights\",\"id\":\"call_p2\",\"type\":\"tool_call\"}],\"finish_reason\":\"tool_calls\"}]"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "execute_tool search_flights",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0xc09d203d0fd85b42",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x9215e5eb352aab76",
+    "start_time": "2026-10-16T14:21:34.960294Z",
+    "end_time": "2026-10-16T14:21:35.361864Z",
+    "status": {
+        "status_code": "ERROR",
+        "description": "flight API timed out after 400ms"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "execute_tool",
+        "gen_ai.tool.name": "search_flights",
+        "gen_ai.tool.type": "function",
+        "gen_ai.tool.call.id": "call_p2",
+        "gen_ai.tool.call.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "error.type": "TimeoutError"
+    },
+    "events": [
+        {
+            "name": "exception",
+            "timestamp": "2026-10-16T14:21:35.361801Z",
+            "attributes": {
+                "exception.type": "TimeoutError",
+                "exception.message": "flight API timed out after 400ms",
+                "exception.stacktrace": "Traceback (most recent call last):\n  File \"/app/agent.py\", line 60, in call_tool\n    out = tool_impl(name, args)\n          ^^^^^^^^^^^^^^^^^^^^^\n  File \"/app/agent.py\", line 41, in tool_impl\n    if name == \"search_flights\": time.sleep(0.4); raise TimeoutError(\"flight API timed out after 400ms\")\n                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTimeoutError: flight API timed out after 400ms\n",
+                "exception.escaped": "False"
+            }
+        }
+    ],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "chat gpt-4o-mini",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0xec2bc368d65a99ff",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.CLIENT",
+    "parent_id": "0x9215e5eb352aab76",
+    "start_time": "2026-10-16T14:21:35.362525Z",
+    "end_time": "2026-10-16T14:21:35.366516Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "chat",
+        "gen_ai.request.model": "gpt-4o-mini",
+        "gen_ai.provider.name": "openai",
+        "gen_ai.response.finish_reasons": [
+            "tool_calls"
+        ],
+        "gen_ai.response.model": "gpt-4o-mini-2024-07-18",
+        "gen_ai.response.id": "chatcmpl-mock95365",
+        "gen_ai.usage.input_tokens": 84,
+        "gen_ai.usage.output_tokens": 22,
+        "gen_ai.input.messages": "[{\"role\":\"system\",\"parts\":[{\"content\":\"You are the planner agent. Plan trips using tools.\",\"type\":\"text\"}]},{\"role\":\"user\",\"parts\":[{\"content\":\"Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.\",\"type\":\"text\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"city\":\"Paris\"},\"name\":\"get_weather\",\"id\":\"call_p1\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"{\\\"city\\\": \\\"Paris\\\", \\\"forecast\\\": \\\"rain\\\", \\\"temp_c\\\": 14}\",\"id\":\"call_p1\",\"type\":\"tool_call_response\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"origin\":\"JFK\",\"destination\":\"CDG\",\"date\":\"2026-05-12\"},\"name\":\"search_flights\",\"id\":\"call_p2\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"Error: flight API timed out after 400ms\",\"id\":\"call_p2\",\"type\":\"tool_call_response\"}]}]",
+        "gen_ai.output.messages": "[{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"origin\":\"JFK\",\"destination\":\"CDG\",\"date\":\"2026-05-12\"},\"name\":\"search_flights\",\"id\":\"call_p3\",\"type\":\"tool_call\"}],\"finish_reason\":\"tool_calls\"}]"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "execute_tool search_flights",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0x81c3e71cbda80942",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x9215e5eb352aab76",
+    "start_time": "2026-10-16T14:21:35.367114Z",
+    "end_time": "2026-10-16T14:21:35.773194Z",
+    "status": {
+        "status_code": "ERROR",
+        "description": "flight API timed out after 400ms"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "execute_tool",
+        "gen_ai.tool.name": "search_flights",
+        "gen_ai.tool.type": "function",
+        "gen_ai.tool.call.id": "call_p3",
+        "gen_ai.tool.call.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "error.type": "TimeoutError"
+    },
+    "events": [
+        {
+            "name": "exception",
+            "timestamp": "2026-10-16T14:21:35.773126Z",
+            "attributes": {
+                "exception.type": "TimeoutError",
+                "exception.message": "flight API timed out after 400ms",
+                "exception.stacktrace": "Traceback (most recent call last):\n  File \"/app/agent.py\", line 60, in call_tool\n    out = tool_impl(name, args)\n          ^^^^^^^^^^^^^^^^^^^^^\n  File \"/app/agent.py\", line 41, in tool_impl\n    if name == \"search_flights\": time.sleep(0.4); raise TimeoutError(\"flight API timed out after 400ms\")\n                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTimeoutError: flight API timed out after 400ms\n",
+                "exception.escaped": "False"
+            }
+        }
+    ],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "chat gpt-4o-mini",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0x2db462500bd43366",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.CLIENT",
+    "parent_id": "0x9215e5eb352aab76",
+    "start_time": "2026-10-16T14:21:35.774119Z",
+    "end_time": "2026-10-16T14:21:35.778266Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "chat",
+        "gen_ai.request.model": "gpt-4o-mini",
+        "gen_ai.provider.name": "openai",
+        "gen_ai.response.finish_reasons": [
+            "tool_calls"
+        ],
+        "gen_ai.response.model": "gpt-4o-mini-2024-07-18",
+        "gen_ai.response.id": "chatcmpl-mock95777",
+        "gen_ai.usage.input_tokens": 94,
+        "gen_ai.usage.output_tokens": 22,
+        "gen_ai.input.messages": "[{\"role\":\"system\",\"parts\":[{\"content\":\"You are the planner agent. Plan trips using tools.\",\"type\":\"text\"}]},{\"role\":\"user\",\"parts\":[{\"content\":\"Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.\",\"type\":\"text\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"city\":\"Paris\"},\"name\":\"get_weather\",\"id\":\"call_p1\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"{\\\"city\\\": \\\"Paris\\\", \\\"forecast\\\": \\\"rain\\\", \\\"temp_c\\\": 14}\",\"id\":\"call_p1\",\"type\":\"tool_call_response\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"origin\":\"JFK\",\"destination\":\"CDG\",\"date\":\"2026-05-12\"},\"name\":\"search_flights\",\"id\":\"call_p2\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"Error: flight API timed out after 400ms\",\"id\":\"call_p2\",\"type\":\"tool_call_response\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"origin\":\"JFK\",\"destination\":\"CDG\",\"date\":\"2026-05-12\"},\"name\":\"search_flights\",\"id\":\"call_p3\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"Error: flight API timed out after 400ms\",\"id\":\"call_p3\",\"type\":\"tool_call_response\"}]}]",
+        "gen_ai.output.messages": "[{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"origin\":\"JFK\",\"destination\":\"CDG\",\"date\":\"2026-05-12\"},\"name\":\"search_flights\",\"id\":\"call_p4\",\"type\":\"tool_call\"}],\"finish_reason\":\"tool_calls\"}]"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "execute_tool search_flights",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0x5187649d9285f9b2",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x9215e5eb352aab76",
+    "start_time": "2026-10-16T14:21:35.778637Z",
+    "end_time": "2026-10-16T14:21:36.180164Z",
+    "status": {
+        "status_code": "ERROR",
+        "description": "flight API timed out after 400ms"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "execute_tool",
+        "gen_ai.tool.name": "search_flights",
+        "gen_ai.tool.type": "function",
+        "gen_ai.tool.call.id": "call_p4",
+        "gen_ai.tool.call.arguments": "{\"origin\": \"JFK\", \"destination\": \"CDG\", \"date\": \"2026-05-12\"}",
+        "error.type": "TimeoutError"
+    },
+    "events": [
+        {
+            "name": "exception",
+            "timestamp": "2026-10-16T14:21:36.180106Z",
+            "attributes": {
+                "exception.type": "TimeoutError",
+                "exception.message": "flight API timed out after 400ms",
+                "exception.stacktrace": "Traceback (most recent call last):\n  File \"/app/agent.py\", line 60, in call_tool\n    out = tool_impl(name, args)\n          ^^^^^^^^^^^^^^^^^^^^^\n  File \"/app/agent.py\", line 41, in tool_impl\n    if name == \"search_flights\": time.sleep(0.4); raise TimeoutError(\"flight API timed out after 400ms\")\n                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTimeoutError: flight API timed out after 400ms\n",
+                "exception.escaped": "False"
+            }
+        }
+    ],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "chat gpt-4o-mini",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0x4ebf49ac090737f2",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.CLIENT",
+    "parent_id": "0x9215e5eb352aab76",
+    "start_time": "2026-10-16T14:21:36.181248Z",
+    "end_time": "2026-10-16T14:21:39.387947Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "chat",
+        "gen_ai.request.model": "gpt-4o-mini",
+        "gen_ai.provider.name": "openai",
+        "gen_ai.response.finish_reasons": [
+            "tool_calls"
+        ],
+        "gen_ai.response.model": "gpt-4o-mini-2024-07-18",
+        "gen_ai.response.id": "chatcmpl-mock99385",
+        "gen_ai.usage.input_tokens": 104,
+        "gen_ai.usage.output_tokens": 22,
+        "gen_ai.input.messages": "[{\"role\":\"system\",\"parts\":[{\"content\":\"You are the planner agent. Plan trips using tools.\",\"type\":\"text\"}]},{\"role\":\"user\",\"parts\":[{\"content\":\"Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.\",\"type\":\"text\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"city\":\"Paris\"},\"name\":\"get_weather\",\"id\":\"call_p1\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"{\\\"city\\\": \\\"Paris\\\", \\\"forecast\\\": \\\"rain\\\", \\\"temp_c\\\": 14}\",\"id\":\"call_p1\",\"type\":\"tool_call_response\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"origin\":\"JFK\",\"destination\":\"CDG\",\"date\":\"2026-05-12\"},\"name\":\"search_flights\",\"id\":\"call_p2\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"Error: flight API timed out after 400ms\",\"id\":\"call_p2\",\"type\":\"tool_call_response\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"origin\":\"JFK\",\"destination\":\"CDG\",\"date\":\"2026-05-12\"},\"name\":\"search_flights\",\"id\":\"call_p3\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"Error: flight API timed out after 400ms\",\"id\":\"call_p3\",\"type\":\"tool_call_response\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"origin\":\"JFK\",\"destination\":\"CDG\",\"date\":\"2026-05-12\"},\"name\":\"search_flights\",\"id\":\"call_p4\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"Error: flight API timed out after 400ms\",\"id\":\"call_p4\",\"type\":\"tool_call_response\"}]}]",
+        "gen_ai.output.messages": "[{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"topic\":\"hotels in Paris\"},\"name\":\"delegate_research\",\"id\":\"call_p5\",\"type\":\"tool_call\"}],\"finish_reason\":\"tool_calls\"}]"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "chat gpt-4o-mini",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0x4e624fae8fbfe2eb",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.CLIENT",
+    "parent_id": "0xd9954cb25c7aed30",
+    "start_time": "2026-10-16T14:21:39.388664Z",
+    "end_time": "2026-10-16T14:21:39.391505Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "chat",
+        "gen_ai.request.model": "gpt-4o-mini",
+        "gen_ai.provider.name": "openai",
+        "gen_ai.response.finish_reasons": [
+            "tool_calls"
+        ],
+        "gen_ai.response.model": "gpt-4o-mini-2024-07-18",
+        "gen_ai.response.id": "chatcmpl-mock99390",
+        "gen_ai.usage.input_tokens": 48,
+        "gen_ai.usage.output_tokens": 22,
+        "gen_ai.input.messages": "[{\"role\":\"system\",\"parts\":[{\"content\":\"You are the researcher agent. Find hotels near the Louvre\",\"type\":\"text\"}]},{\"role\":\"user\",\"parts\":[{\"content\":\"hotels in Paris\",\"type\":\"text\"}]}]",
+        "gen_ai.output.messages": "[{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"query\":\"Paris hotels near Louvre\"},\"name\":\"web_search\",\"id\":\"call_r1\",\"type\":\"tool_call\"}],\"finish_reason\":\"tool_calls\"}]"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "execute_tool web_search",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0x0790f70e1300a263",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xd9954cb25c7aed30",
+    "start_time": "2026-10-16T14:21:39.391738Z",
+    "end_time": "2026-10-16T14:21:39.692251Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "execute_tool",
+        "gen_ai.tool.name": "web_search",
+        "gen_ai.tool.type": "function",
+        "gen_ai.tool.call.id": "call_r1",
+        "gen_ai.tool.call.arguments": "{\"query\": \"Paris hotels near Louvre\"}",
+        "gen_ai.tool.call.result": "{\"results\": [\"Hotel Le Marais 180 EUR/night\", \"Hotel Louvre Vivienne 210 EUR/night\"]}"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "chat gpt-4o-mini",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0xf1a343571fffa639",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.CLIENT",
+    "parent_id": "0xd9954cb25c7aed30",
+    "start_time": "2026-10-16T14:21:39.692700Z",
+    "end_time": "2026-10-16T14:21:39.696041Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "chat",
+        "gen_ai.request.model": "gpt-4o-mini",
+        "gen_ai.provider.name": "openai",
+        "gen_ai.response.finish_reasons": [
+            "stop"
+        ],
+        "gen_ai.response.model": "gpt-4o-mini-2024-07-18",
+        "gen_ai.response.id": "chatcmpl-mock99695",
+        "gen_ai.usage.input_tokens": 69,
+        "gen_ai.usage.output_tokens": 41,
+        "gen_ai.input.messages": "[{\"role\":\"system\",\"parts\":[{\"content\":\"You are the researcher agent. Find hotels near the Louvre\",\"type\":\"text\"}]},{\"role\":\"user\",\"parts\":[{\"content\":\"hotels in Paris\",\"type\":\"text\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"query\":\"Paris hotels near Louvre\"},\"name\":\"web_search\",\"id\":\"call_r1\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"{\\\"results\\\": [\\\"Hotel Le Marais 180 EUR/night\\\", \\\"Hotel Louvre Vivienne 210 EUR/night\\\"]}\",\"id\":\"call_r1\",\"type\":\"tool_call_response\"}]}]",
+        "gen_ai.output.messages": "[{\"role\":\"assistant\",\"parts\":[{\"content\":\"Hotel Le Marais is 180 EUR per night and close to the Louvre.\",\"type\":\"text\"}],\"finish_reason\":\"stop\"}]"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "invoke_agent researcher",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0xd9954cb25c7aed30",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x0bc3f2a350a17926",
+    "start_time": "2026-10-16T14:21:39.388581Z",
+    "end_time": "2026-10-16T14:21:39.696278Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "invoke_agent",
+        "gen_ai.provider.name": "openai",
+        "gen_ai.agent.name": "researcher",
+        "gen_ai.agent.id": "agent-researcher",
+        "gen_ai.request.model": "gpt-4o-mini",
+        "gen_ai.conversation.id": "conv_demo_001"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "execute_tool delegate_research",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0x0bc3f2a350a17926",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0x9215e5eb352aab76",
+    "start_time": "2026-10-16T14:21:39.388524Z",
+    "end_time": "2026-10-16T14:21:39.696376Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "execute_tool",
+        "gen_ai.tool.name": "delegate_research",
+        "gen_ai.tool.type": "function",
+        "gen_ai.tool.call.id": "call_p5",
+        "gen_ai.tool.call.arguments": "{\"topic\": \"hotels in Paris\"}",
+        "gen_ai.tool.call.result": "Hotel Le Marais is 180 EUR per night and close to the Louvre."
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "chat gpt-4o-mini",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0x5324d6c3971928e0",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.CLIENT",
+    "parent_id": "0x9215e5eb352aab76",
+    "start_time": "2026-10-16T14:21:39.696507Z",
+    "end_time": "2026-10-16T14:21:39.699597Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "chat",
+        "gen_ai.request.model": "gpt-4o-mini",
+        "gen_ai.provider.name": "openai",
+        "gen_ai.response.finish_reasons": [
+            "stop"
+        ],
+        "gen_ai.response.model": "gpt-4o-mini-2024-07-18",
+        "gen_ai.response.id": "chatcmpl-mock99699",
+        "gen_ai.usage.input_tokens": 119,
+        "gen_ai.usage.output_tokens": 41,
+        "gen_ai.input.messages": "[{\"role\":\"system\",\"parts\":[{\"content\":\"You are the planner agent. Plan trips using tools.\",\"type\":\"text\"}]},{\"role\":\"user\",\"parts\":[{\"content\":\"Plan a 3 day trip to Paris from New York in May: weather, flights and a hotel.\",\"type\":\"text\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"city\":\"Paris\"},\"name\":\"get_weather\",\"id\":\"call_p1\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"{\\\"city\\\": \\\"Paris\\\", \\\"forecast\\\": \\\"rain\\\", \\\"temp_c\\\": 14}\",\"id\":\"call_p1\",\"type\":\"tool_call_response\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"origin\":\"JFK\",\"destination\":\"CDG\",\"date\":\"2026-05-12\"},\"name\":\"search_flights\",\"id\":\"call_p2\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"Error: flight API timed out after 400ms\",\"id\":\"call_p2\",\"type\":\"tool_call_response\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"origin\":\"JFK\",\"destination\":\"CDG\",\"date\":\"2026-05-12\"},\"name\":\"search_flights\",\"id\":\"call_p3\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"Error: flight API timed out after 400ms\",\"id\":\"call_p3\",\"type\":\"tool_call_response\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"origin\":\"JFK\",\"destination\":\"CDG\",\"date\":\"2026-05-12\"},\"name\":\"search_flights\",\"id\":\"call_p4\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"Error: flight API timed out after 400ms\",\"id\":\"call_p4\",\"type\":\"tool_call_response\"}]},{\"role\":\"assistant\",\"parts\":[{\"arguments\":{\"topic\":\"hotels in Paris\"},\"name\":\"delegate_research\",\"id\":\"call_p5\",\"type\":\"tool_call\"}]},{\"role\":\"tool\",\"parts\":[{\"response\":\"Hotel Le Marais is 180 EUR per night and close to the Louvre.\",\"id\":\"call_p5\",\"type\":\"tool_call_response\"}]}]",
+        "gen_ai.output.messages": "[{\"role\":\"assistant\",\"parts\":[{\"content\":\"Paris will be mild and rainy. Flight search was unavailable after 3 attempts, but a hotel near the Louvre costs about 180 EUR per night.\",\"type\":\"text\"}],\"finish_reason\":\"stop\"}]"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
+{
+    "name": "invoke_agent planner",
+    "context": {
+        "trace_id": "0x01bfc8770ed158bd09103bb3d3b485d0",
+        "span_id": "0x9215e5eb352aab76",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": null,
+    "start_time": "2026-10-16T14:21:34.822370Z",
+    "end_time": "2026-10-16T14:21:39.699776Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "gen_ai.operation.name": "invoke_agent",
+        "gen_ai.provider.name": "openai",
+        "gen_ai.agent.name": "planner",
+        "gen_ai.agent.id": "agent-planner",
+        "gen_ai.request.model": "gpt-4o-mini",
+        "gen_ai.conversation.id": "conv_demo_001"
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.45.1",
+            "service.instance.id": "891eb4f1-a5b9-4bc6-9281-108626239d37",
+            "service.name": "travel-planner-demo"
+        },
+        "schema_url": ""
+    }
+}
