@@ -1,0 +1,21 @@
+{
+  "name": "tracey-perf-spike",
+  "private": true,
+  "version": "0.0.0",
+  "description": "THROWAWAY performance spike (roadmap 1.4). Not part of the tracey monorepo.",
+  "type": "module",
+  "scripts": {
+    "gen": "node gen.mjs",
+    "bench": "node run.mjs",
+    "setup": "npm install && PLAYWRIGHT_BROWSERS_PATH=$PWD/.browsers npx playwright install chromium"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.0",
+    "esbuild": "^0.25.0",
+    "playwright": "^1.55.0",
+    "preact": "^10.27.0",
+    "solid-js": "^1.9.9",
+    "vite": "^7.1.0",
+    "vite-plugin-solid": "^2.11.8"
+  }
+}

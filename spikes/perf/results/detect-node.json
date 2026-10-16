@@ -1,0 +1,68 @@
+[
+ {
+  "file": "trace-1000-5mb.jsonl",
+  "sizeMB": 5.3,
+  "medianMs": 0.79,
+  "minMs": 0.72,
+  "maxMs": 3.12,
+  "result": {
+   "container": "otlp-json",
+   "jsonl": false,
+   "flavour": "mixed",
+   "scores": {
+    "oi": 12,
+    "genai": 16
+   },
+   "bytesRead": 1048576
+  },
+  "preciseMedianMs": 1.37,
+  "preciseResult": {
+   "flavour": "mixed",
+   "keys": 24
+  }
+ },
+ {
+  "file": "trace-10000.jsonl",
+  "sizeMB": 23.2,
+  "medianMs": 0.62,
+  "minMs": 0.59,
+  "maxMs": 2.83,
+  "result": {
+   "container": "otlp-json",
+   "jsonl": true,
+   "flavour": "mixed",
+   "scores": {
+    "oi": 12,
+    "genai": 16
+   },
+   "bytesRead": 1048576
+  },
+  "preciseMedianMs": 1.67,
+  "preciseResult": {
+   "flavour": "mixed",
+   "keys": 83
+  }
+ },
+ {
+  "file": "trace-100000.jsonl",
+  "sizeMB": 241.4,
+  "medianMs": 0.65,
+  "minMs": 0.63,
+  "maxMs": 1.26,
+  "result": {
+   "container": "otlp-json",
+   "jsonl": true,
+   "flavour": "mixed",
+   "scores": {
+    "oi": 12,
+    "genai": 16
+   },
+   "bytesRead": 1048576
+  },
+  "preciseMedianMs": 1.76,
+  "preciseResult": {
+   "flavour": "mixed",
+   "keys": 83
+  }
+ }
+]

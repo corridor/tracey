@@ -1,0 +1,358 @@
+[
+ {
+  "variant": "whole",
+  "file": "trace-1000-5mb.json",
+  "keepText": false,
+  "spans": 1000,
+  "ms": 11.3,
+  "firstChunkMs": 10.2,
+  "jsonParseMs": 5.5,
+  "buildMs": 1.3,
+  "retainedHeapMB": 0.2,
+  "peakRssMB": 77,
+  "sum": {
+   "n": 1000,
+   "dur": 1749418000,
+   "err": 20,
+   "tokens": 22378,
+   "kinds": [
+    0,
+    45,
+    205,
+    750,
+    0
+   ]
+  },
+  "fileMB": 5.3,
+  "runsMs": [
+   10.3,
+   11.3,
+   12.9
+  ]
+ },
+ {
+  "variant": "lines",
+  "file": "trace-1000-5mb.jsonl",
+  "keepText": false,
+  "spans": 1000,
+  "ms": 21.8,
+  "firstChunkMs": 6.3,
+  "retainedHeapMB": 0.5,
+  "peakRssMB": 66,
+  "sum": {
+   "n": 1000,
+   "dur": 1749418000,
+   "err": 20,
+   "tokens": 22378,
+   "kinds": [
+    0,
+    45,
+    205,
+    750,
+    0
+   ]
+  },
+  "fileMB": 5.3,
+  "runsMs": [
+   18.4,
+   21.8,
+   23.8
+  ]
+ },
+ {
+  "variant": "scan",
+  "file": "trace-1000-5mb.jsonl",
+  "keepText": false,
+  "spans": 1000,
+  "ms": 17.2,
+  "firstChunkMs": 5.8,
+  "retainedHeapMB": 0.7,
+  "peakRssMB": 69,
+  "sum": {
+   "n": 1000,
+   "dur": 1749418000,
+   "err": 20,
+   "tokens": 22378,
+   "kinds": [
+    0,
+    45,
+    205,
+    750,
+    0
+   ]
+  },
+  "fileMB": 5.3,
+  "runsMs": [
+   17.1,
+   17.2,
+   17.6
+  ]
+ },
+ {
+  "variant": "whole",
+  "file": "trace-10000.json",
+  "keepText": false,
+  "spans": 10003,
+  "ms": 51.8,
+  "firstChunkMs": 49.2,
+  "jsonParseMs": 38.2,
+  "buildMs": 4.5,
+  "retainedHeapMB": 1,
+  "peakRssMB": 167,
+  "sum": {
+   "n": 10003,
+   "dur": 18297423000,
+   "err": 175,
+   "tokens": 210852,
+   "kinds": [
+    0,
+    421,
+    1938,
+    7644,
+    0
+   ]
+  },
+  "fileMB": 23.2,
+  "runsMs": [
+   49.7,
+   51.8,
+   53.5
+  ]
+ },
+ {
+  "variant": "lines",
+  "file": "trace-10000.jsonl",
+  "keepText": false,
+  "spans": 10003,
+  "ms": 58.7,
+  "firstChunkMs": 2.8,
+  "retainedHeapMB": 1.3,
+  "peakRssMB": 78,
+  "sum": {
+   "n": 10003,
+   "dur": 18297423000,
+   "err": 175,
+   "tokens": 210852,
+   "kinds": [
+    0,
+    421,
+    1938,
+    7644,
+    0
+   ]
+  },
+  "fileMB": 23.2,
+  "runsMs": [
+   57,
+   58.7,
+   61.3
+  ]
+ },
+ {
+  "variant": "scan",
+  "file": "trace-10000.jsonl",
+  "keepText": false,
+  "spans": 10003,
+  "ms": 56.2,
+  "firstChunkMs": 3.5,
+  "retainedHeapMB": 2.5,
+  "peakRssMB": 81,
+  "sum": {
+   "n": 10003,
+   "dur": 18297423000,
+   "err": 175,
+   "tokens": 210852,
+   "kinds": [
+    0,
+    421,
+    1938,
+    7644,
+    0
+   ]
+  },
+  "fileMB": 23.2,
+  "runsMs": [
+   55.5,
+   56.2,
+   56.4
+  ]
+ },
+ {
+  "variant": "whole",
+  "file": "trace-100000.json",
+  "keepText": false,
+  "spans": 100000,
+  "ms": 474.6,
+  "firstChunkMs": 434.9,
+  "jsonParseMs": 350.8,
+  "buildMs": 37.2,
+  "retainedHeapMB": 6.5,
+  "peakRssMB": 1144,
+  "sum": {
+   "n": 100000,
+   "dur": 181373330000,
+   "err": 1852,
+   "tokens": 2088814,
+   "kinds": [
+    0,
+    4262,
+    19239,
+    76499,
+    0
+   ]
+  },
+  "fileMB": 241.4,
+  "runsMs": [
+   474,
+   474.6,
+   599.3
+  ]
+ },
+ {
+  "variant": "lines",
+  "file": "trace-100000.jsonl",
+  "keepText": false,
+  "spans": 100000,
+  "ms": 533.7,
+  "firstChunkMs": 2.9,
+  "retainedHeapMB": 6.5,
+  "peakRssMB": 162,
+  "sum": {
+   "n": 100000,
+   "dur": 181373330000,
+   "err": 1852,
+   "tokens": 2088814,
+   "kinds": [
+    0,
+    4262,
+    19239,
+    76499,
+    0
+   ]
+  },
+  "fileMB": 241.4,
+  "runsMs": [
+   533.4,
+   533.7,
+   544.3
+  ]
+ },
+ {
+  "variant": "scan",
+  "file": "trace-100000.jsonl",
+  "keepText": false,
+  "spans": 100000,
+  "ms": 569.9,
+  "firstChunkMs": 3.5,
+  "retainedHeapMB": 18.9,
+  "peakRssMB": 246,
+  "sum": {
+   "n": 100000,
+   "dur": 181373330000,
+   "err": 1852,
+   "tokens": 2088814,
+   "kinds": [
+    0,
+    4262,
+    19239,
+    76499,
+    0
+   ]
+  },
+  "fileMB": 241.4,
+  "runsMs": [
+   566.5,
+   569.9,
+   585.5
+  ]
+ },
+ {
+  "variant": "scan",
+  "file": "trace-100000.jsonl",
+  "keepText": true,
+  "spans": 100000,
+  "ms": 594.3,
+  "firstChunkMs": 3.5,
+  "retainedHeapMB": 161.2,
+  "peakRssMB": 436,
+  "sum": {
+   "n": 100000,
+   "dur": 181373330000,
+   "err": 1852,
+   "tokens": 2088814,
+   "kinds": [
+    0,
+    4262,
+    19239,
+    76499,
+    0
+   ]
+  },
+  "fileMB": 241.4,
+  "runsMs": [
+   591.2,
+   594.3,
+   598.8
+  ]
+ },
+ {
+  "variant": "lines",
+  "file": "trace-100000.jsonl",
+  "keepText": true,
+  "spans": 100000,
+  "ms": 573.6,
+  "firstChunkMs": 2.8,
+  "retainedHeapMB": 148.1,
+  "peakRssMB": 377,
+  "sum": {
+   "n": 100000,
+   "dur": 181373330000,
+   "err": 1852,
+   "tokens": 2088814,
+   "kinds": [
+    0,
+    4262,
+    19239,
+    76499,
+    0
+   ]
+  },
+  "fileMB": 241.4,
+  "runsMs": [
+   562.7,
+   573.6,
+   644
+  ]
+ },
+ {
+  "variant": "whole",
+  "file": "trace-100000.json",
+  "keepText": true,
+  "spans": 100000,
+  "ms": 495.5,
+  "firstChunkMs": 451.8,
+  "jsonParseMs": 358.2,
+  "buildMs": 41.4,
+  "retainedHeapMB": 147.1,
+  "peakRssMB": 1154,
+  "sum": {
+   "n": 100000,
+   "dur": 181373330000,
+   "err": 1852,
+   "tokens": 2088814,
+   "kinds": [
+    0,
+    4262,
+    19239,
+    76499,
+    0
+   ]
+  },
+  "fileMB": 241.4,
+  "runsMs": [
+   494.6,
+   495.5,
+   572.4
+  ]
+ }
+]

@@ -1,0 +1,52 @@
+{
+ "timeline: Canvas 2D renderer (cull+LOD+draw)": {
+  "minKB": 1.86,
+  "gzipKB": 1.01,
+  "brotliKB": 0.91
+ },
+ "timeline: WebGL2 renderer (cull+LOD+draw+shaders)": {
+  "minKB": 4.41,
+  "gzipKB": 2.11,
+  "brotliKB": 1.92
+ },
+ "timeline: lane layout": {
+  "minKB": 1.52,
+  "gzipKB": 0.77,
+  "brotliKB": 0.72
+ },
+ "graph: Canvas 2D renderer": {
+  "minKB": 1.98,
+  "gzipKB": 1.11,
+  "brotliKB": 1
+ },
+ "graph: WebGL2 renderer (+label overlay)": {
+  "minKB": 4.7,
+  "gzipKB": 2.11,
+  "brotliKB": 1.89
+ },
+ "graph: tidy-tree layout": {
+  "minKB": 1.09,
+  "gzipKB": 0.57,
+  "brotliKB": 0.54
+ },
+ "graph: layered DAG layout (+tidy)": {
+  "minKB": 2.54,
+  "gzipKB": 1.14,
+  "brotliKB": 1.07
+ },
+ "parse: byte scanner + SoA model": {
+  "minKB": 6.38,
+  "gzipKB": 2.52,
+  "brotliKB": 2.3
+ },
+ "parse: JSON.parse lines + SoA model": {
+  "minKB": 6.33,
+  "gzipKB": 2.5,
+  "brotliKB": 2.28
+ },
+ "detect (sniff + fingerprint)": {
+  "minKB": 2,
+  "gzipKB": 0.98,
+  "brotliKB": 0.9
+ }
+}

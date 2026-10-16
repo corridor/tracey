@@ -1,0 +1,293 @@
+[
+ {
+  "app": "vanilla",
+  "kind": "cold",
+  "size": {
+   "js": {
+    "raw": 3059,
+    "gzip": 1646,
+    "brotli": 1349
+   }
+  },
+  "readyMs": 34.7,
+  "readyMin": 33.4,
+  "readyMax": 35.8,
+  "fcpMs": 39.8
+ },
+ {
+  "app": "preact",
+  "kind": "cold",
+  "size": {
+   "js": {
+    "raw": 15687,
+    "gzip": 6787,
+    "brotli": 6139
+   }
+  },
+  "readyMs": 31.2,
+  "readyMin": 30.8,
+  "readyMax": 32.5,
+  "fcpMs": 40.5
+ },
+ {
+  "app": "solid",
+  "kind": "cold",
+  "size": {
+   "js": {
+    "raw": 12548,
+    "gzip": 5497,
+    "brotli": 4958
+   }
+  },
+  "readyMs": 31.1,
+  "readyMin": 30.6,
+  "readyMax": 36.3,
+  "fcpMs": 40.2
+ },
+ {
+  "app": "vanilla",
+  "kind": "cold-x4cpu",
+  "size": {
+   "js": {
+    "raw": 3059,
+    "gzip": 1646,
+    "brotli": 1349
+   }
+  },
+  "readyMs": 61,
+  "readyMin": 57.9,
+  "readyMax": 76.3,
+  "fcpMs": 69.6
+ },
+ {
+  "app": "preact",
+  "kind": "cold-x4cpu",
+  "size": {
+   "js": {
+    "raw": 15687,
+    "gzip": 6787,
+    "brotli": 6139
+   }
+  },
+  "readyMs": 48.6,
+  "readyMin": 47.6,
+  "readyMax": 57.3,
+  "fcpMs": 73.1
+ },
+ {
+  "app": "solid",
+  "kind": "cold-x4cpu",
+  "size": {
+   "js": {
+    "raw": 12548,
+    "gzip": 5497,
+    "brotli": 4958
+   }
+  },
+  "readyMs": 48.7,
+  "readyMin": 46.8,
+  "readyMax": 60.6,
+  "fcpMs": 72.7
+ },
+ {
+  "app": "vanilla",
+  "kind": "cold-x4cpu-4g",
+  "size": {
+   "js": {
+    "raw": 3059,
+    "gzip": 1646,
+    "brotli": 1349
+   }
+  },
+  "readyMs": 405.7,
+  "readyMin": 402.3,
+  "readyMax": 417.8,
+  "fcpMs": 415.2
+ },
+ {
+  "app": "preact",
+  "kind": "cold-x4cpu-4g",
+  "size": {
+   "js": {
+    "raw": 15687,
+    "gzip": 6787,
+    "brotli": 6139
+   }
+  },
+  "readyMs": 399.2,
+  "readyMin": 393.5,
+  "readyMax": 420.6,
+  "fcpMs": 423.8
+ },
+ {
+  "app": "solid",
+  "kind": "cold-x4cpu-4g",
+  "size": {
+   "js": {
+    "raw": 12548,
+    "gzip": 5497,
+    "brotli": 4958
+   }
+  },
+  "readyMs": 398.1,
+  "readyMin": 391.2,
+  "readyMax": 410.3,
+  "fcpMs": 422.5
+ },
+ {
+  "app": "vanilla",
+  "kind": "interact-x1",
+  "selectDomMs": {
+   "p50": 1.13,
+   "p95": 1.61,
+   "max": 3.53
+  },
+  "selectToPaintMs": {
+   "p50": 2.88,
+   "p95": 4.21,
+   "max": 16.91
+  },
+  "scrollDomMs": {
+   "p50": 0.34,
+   "p95": 0.51,
+   "max": 2.4
+  },
+  "scrollToPaintMs": {
+   "p50": 2.47,
+   "p95": 3.31,
+   "max": 6.18
+  },
+  "heapMB": 2.4,
+  "rowsInDom": 42
+ },
+ {
+  "app": "vanilla",
+  "kind": "interact-x4",
+  "selectDomMs": {
+   "p50": 0.99,
+   "p95": 1.82,
+   "max": 7.62
+  },
+  "selectToPaintMs": {
+   "p50": 3.2,
+   "p95": 4.81,
+   "max": 16.11
+  },
+  "scrollDomMs": {
+   "p50": 0.18,
+   "p95": 0.75,
+   "max": 1.21
+  },
+  "scrollToPaintMs": {
+   "p50": 3.49,
+   "p95": 5.39,
+   "max": 6.46
+  },
+  "heapMB": 2.4,
+  "rowsInDom": 42
+ },
+ {
+  "app": "preact",
+  "kind": "interact-x1",
+  "selectDomMs": {
+   "p50": 0.34,
+   "p95": 0.5,
+   "max": 3.35
+  },
+  "selectToPaintMs": {
+   "p50": 1.68,
+   "p95": 2.13,
+   "max": 18.44
+  },
+  "scrollDomMs": {
+   "p50": 0.6,
+   "p95": 0.91,
+   "max": 1.25
+  },
+  "scrollToPaintMs": {
+   "p50": 2.42,
+   "p95": 3.37,
+   "max": 3.63
+  },
+  "heapMB": 3.5,
+  "rowsInDom": 40
+ },
+ {
+  "app": "preact",
+  "kind": "interact-x4",
+  "selectDomMs": {
+   "p50": 0.13,
+   "p95": 0.84,
+   "max": 2.54
+  },
+  "selectToPaintMs": {
+   "p50": 1.32,
+   "p95": 2.88,
+   "max": 21.3
+  },
+  "scrollDomMs": {
+   "p50": 0.77,
+   "p95": 1.3,
+   "max": 1.91
+  },
+  "scrollToPaintMs": {
+   "p50": 3.63,
+   "p95": 5.56,
+   "max": 6.61
+  },
+  "heapMB": 3.4,
+  "rowsInDom": 40
+ },
+ {
+  "app": "solid",
+  "kind": "interact-x1",
+  "selectDomMs": {
+   "p50": 0.37,
+   "p95": 0.56,
+   "max": 1.07
+  },
+  "selectToPaintMs": {
+   "p50": 1.84,
+   "p95": 2.45,
+   "max": 18.5
+  },
+  "scrollDomMs": {
+   "p50": 0.52,
+   "p95": 0.79,
+   "max": 0.93
+  },
+  "scrollToPaintMs": {
+   "p50": 2.44,
+   "p95": 3.19,
+   "max": 3.69
+  },
+  "heapMB": 3.1,
+  "rowsInDom": 40
+ },
+ {
+  "app": "solid",
+  "kind": "interact-x4",
+  "selectDomMs": {
+   "p50": 0.11,
+   "p95": 0.46,
+   "max": 2.03
+  },
+  "selectToPaintMs": {
+   "p50": 1.32,
+   "p95": 3.18,
+   "max": 21.02
+  },
+  "scrollDomMs": {
+   "p50": 0.55,
+   "p95": 1.42,
+   "max": 3.13
+  },
+  "scrollToPaintMs": {
+   "p50": 3.42,
+   "p95": 5.46,
+   "max": 6.22
+  },
+  "heapMB": 3.2,
+  "rowsInDom": 40
+ }
+]
