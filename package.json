@@ -7,8 +7,13 @@
     "node": ">=20"
   },
   "scripts": {
+    "dev": "pnpm --filter @ggx/tracey-web dev",
+    "build": "pnpm --filter @ggx/tracey-web build && pnpm --filter @ggx/tracey-cli build",
+    "preview": "pnpm --filter @ggx/tracey-web preview",
+    "tracey": "pnpm --filter @ggx/tracey-cli build >/dev/null && node apps/cli/bin/tracey.js",
     "typecheck": "pnpm -r exec tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@types/node": "^24.19.2",
