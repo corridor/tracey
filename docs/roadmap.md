@@ -13,15 +13,17 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Next step
 
-> **4.1 The website shell** (`apps/web`): Vite + Solid, the landing page from
-> `docs/mockups/` (option A), drop/paste/sample, reading files in a worker with the streaming
-> parser, then the result view C. Technology is settled by `docs/verification/perf-spike.md`:
-> Solid, Canvas 2D with mandatory level-of-detail merging, streaming parse in a worker, no WASM.
-> Use `@ggx/trace-theme` for all colours.
+> **4.3 Graph canvas + timeline strip** replacing the interim DOM waterfall in
+> `apps/web/src/Result.tsx` (Canvas 2D, mandatory level-of-detail merging, layout in a worker,
+> floating findings/inspector panels per `docs/ux-principles.md`). Also pending for the web app:
+> move parsing into a worker with streaming (3.1), the verdict headline, keyboard navigation,
+> the Claude Code sub-agent folder drop, and a tabbed phone layout.
 >
-> Before that: the worker/streaming parse for `@ggx/trace-adapters` (3.1) and a Claude Code
-> sub-agent folder drop. Done so far: monorepo, trace-model, adapters (OTLP + Claude Code),
-> insights, theme, CLI (`tracey <file>`, `detect`, `check`).
+> Done so far: monorepo, trace-model, adapters (OTLP + Claude Code), insights, theme, CLI
+> (`tracey <file>`, `detect`, `check`), website shell with landing, findings, interim waterfall
+> and inspector (verified in Chromium at 390 and 1280 px, dark and light).
+> Local branch `docs/initial-design` is ahead of `master`; pushing was blocked by the permission
+> classifier, so the owner needs to push or allow it.
 
 ## Phase 0: Vision and docs (done)
 
@@ -71,12 +73,12 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Phase 4: The website (first shippable)
 
-- [ ] 4.1 Landing + drop/paste/sample ([ux-principles.md](ux-principles.md)).
-- [ ] 4.2 Overview: verdict strip, findings list.
+- [x] 4.1 Landing + drop/paste/sample (`apps/web`, Solid + Vite; main-thread parse for now) ([ux-principles.md](ux-principles.md)).
+- [~] 4.2 Overview: chips + findings list done; verdict headline ("This run failed at X") pending.
 - [ ] 4.3 Graph canvas (main view): worker layout, viewport culling, pan/zoom, framing the first
       error, 60 fps on 10k nodes. Floating findings/inspector panels.
 - [ ] 4.3b Timeline strip and waterfall view, virtualised, linked to the graph.
-- [ ] 4.4 Inspector + JSON explorer (virtualised tree, search, copy path).
+- [~] 4.4 Inspector done (pretty JSON, long-payload truncation); JSON explorer (virtualised tree, search, copy path).
 - [ ] 4.5 Keyboard navigation, themes, a11y pass, responsive layouts (360/768/1280/2560 px,
       touch and pinch-zoom) with Playwright visual checks.
 - [ ] 4.6 Bundled samples, PWA/offline, perf budgets enforced in CI.
