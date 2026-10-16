@@ -237,6 +237,12 @@ importers:
 
   packages/trace-theme: {}
 
+  packages/trace-view-graph:
+    dependencies:
+      '@ggx/trace-model':
+        specifier: workspace:*
+        version: link:../trace-model
+
 packages:
 
   '@babel/code-frame@7.29.7':
