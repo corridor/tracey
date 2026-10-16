@@ -19,6 +19,7 @@ Newest first. **Owner** = decided by the owner. **Mine** = my default, open to c
 | 2026-10-16 | UI is responsive across screen sizes (phone to ultrawide), container-query driven. | Owner |
 | 2026-10-16 | v1 sources accepted as proposed: OpenInference, OTel GenAI, Claude Code transcripts; no-tracing guides for Strands and OpenAI Agents; diff and JSON explorer right after; third-party apps later. | Owner ("go with your sources") |
 | 2026-10-16 | Website with drop-a-file is needed; sample traces bundled. | Owner |
+| 2026-10-16 | Landing: option A (centered, calm drop target). Result view: option C (graph canvas first, floating findings/inspector panels, timeline strip, waterfall as a view switch). See `docs/mockups/`. | Owner |
 | 2026-10-16 | Licence for all `@ggx/*` packages: Apache-2.0. | Owner |
 | 2026-10-16 | On start, the CLI and desktop app scan the common places traces are kept (`~/.claude*`, `~/.codex`, `~/.zed`, ...) and ask the user what to look at. | Owner |
 
