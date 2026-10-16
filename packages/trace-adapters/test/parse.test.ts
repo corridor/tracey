@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import { SpanKind, SpanStatus } from '@ggx/trace-model'
-import { parseTraceFile } from '../src/index'
+import { decodeOtlpProtobuf, parseTraceBytes, parseTraceFile } from '../src/index'
 
 const fixture = (p: string) => readFileSync(fileURLToPath(new URL(`../../../fixtures/${p}`, import.meta.url)), 'utf8')
 
@@ -80,5 +80,61 @@ describe('Claude Code transcripts', () => {
     const agentCall = withSub.where((i) => withSub.nameOf(i) === 'Agent')[0]!
     expect(withSub.isKind(agentCall, SpanKind.Agent)).toBe(true)
     expect(withSub.children(agentCall).length).toBeGreaterThan(0)
+  })
+})
+
+describe('OTLP protobuf', () => {
+  const bytes = () => new Uint8Array(readFileSync(fileURLToPath(new URL('../../../fixtures/otlp-protobuf/sample.pb', import.meta.url))))
+  const expected = JSON.parse(fixture('otlp-protobuf/expected.json')) as { spanCount: number; names: string[]; errors: number }
+
+  it('decodes a real exporter payload into the same trace as JSON would give', () => {
+    const { detection, traces } = parseTraceBytes(bytes())
+    expect(detection.source).toBe('openinference')
+    expect(traces).toHaveLength(1)
+    const t = traces[0]!.trace
+    expect(t.count).toBe(expected.spanCount)
+    expect(Array.from(t.order, (i) => t.nameOf(i)).sort()).toEqual([...expected.names].sort())
+    expect(t.where(SpanStatus.Error)).toHaveLength(expected.errors)
+    const err = t.where(SpanStatus.Error)[0]!
+    expect(t.errors[err]).toBe('flight API timed out')
+  })
+
+  it('keeps types, unicode, kinds and token counts', () => {
+    const t = parseTraceBytes(bytes()).traces[0]!.trace
+    const llm = t.where((i) => t.isKind(i, SpanKind.Llm))[0]!
+    expect(t.modelOf(llm)).toBe('gpt-4o-mini')
+    expect(t.tokensIn[llm]).toBe(120)
+    expect(t.tokensOut[llm]).toBe(30)
+    expect(t.outputs[llm]).toContain('ünïcode ✓')
+    const root = t.roots[0]!
+    expect(t.attrs[root]).toMatchObject({ n: 42, ratio: 0.5, flag: true, list: ['a', 'b'], big: 2 ** 40 })
+    expect(t.duration).toBeGreaterThan(0)
+  })
+
+  it('still reads JSON and text when given as bytes', () => {
+    const text = new TextEncoder().encode(fixture('otel-genai/travel-planner.collector-file.jsonl'))
+    expect(parseTraceBytes(text).detection.source).toBe('otel-genai')
+  })
+
+  it('returns unknown (not an exception) for truncated or random bytes', () => {
+    expect(parseTraceBytes(bytes().subarray(0, 100)).traces.length).toBeLessThanOrEqual(1)
+    expect(parseTraceBytes(new Uint8Array([1, 2, 3, 250, 250, 250])).traces).toHaveLength(0)
+    expect(parseTraceBytes(new Uint8Array()).traces).toHaveLength(0)
+  })
+
+  it('decodes negative ints and nested lists', () => {
+    // ExportTraceServiceRequest > ResourceSpans > ScopeSpans > Span with one int attribute = -5
+    const varintNeg5 = [0xfb, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x01]
+    const anyInt = [0x18, ...varintNeg5] // AnyValue.int_value
+    const kv = [0x0a, 1, 0x6e, 0x12, anyInt.length, ...anyInt] // key "n", value
+    const span = [0x2a, kv.length, ...kv] // Span.attributes (field 5? no: 9) fixed below
+    const spanBody = [0x4a, kv.length, ...kv] // field 9, wire 2
+    void span
+    const scope = [0x12, spanBody.length, ...spanBody] // ScopeSpans.spans (field 2)
+    const rs = [0x12, scope.length, ...scope] // ResourceSpans.scope_spans (field 2)
+    const req = [0x0a, rs.length, ...rs] // request.resource_spans (field 1)
+    const batch = decodeOtlpProtobuf(new Uint8Array(req))
+    const attr = batch.resourceSpans![0]!.scopeSpans![0]!.spans![0]!['attributes'] as { key: string; value: { intValue: string } }[]
+    expect(attr[0]).toEqual({ key: 'n', value: { intValue: '-5' } })
   })
 })

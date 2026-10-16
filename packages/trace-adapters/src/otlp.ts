@@ -48,7 +48,7 @@ function decodeAttrs(list: { key: string; value: OtlpValue }[] | undefined): Rec
 
 const nanosToMs = (n: string | number | undefined): number => (n === undefined ? 0 : Number(n) / 1e6)
 
-interface Batch {
+export interface Batch {
   resourceSpans?: {
     resource?: { attributes?: { key: string; value: OtlpValue }[] }
     scopeSpans?: {
@@ -75,6 +75,11 @@ export function parseOtlp(text: string): RawSpan[] {
       for (const line of t.split('\n')) if (line.trim()) batches.push(JSON.parse(line) as Batch)
     }
   }
+  return parseBatches(batches)
+}
+
+/** Flatten already-decoded OTLP batches (from JSON or from the protobuf decoder) into raw spans. */
+export function parseBatches(batches: Batch[]): RawSpan[] {
   const out: RawSpan[] = []
   for (const b of batches) {
     for (const rs of b.resourceSpans ?? []) {
