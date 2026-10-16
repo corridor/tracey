@@ -29,9 +29,9 @@ Newest first. **Owner** = decided by the owner. **Mine** = my default, open to c
 
 | Date | Decision | Status |
 |---|---|---|
-| 2026-10-16 | TypeScript everywhere; plain TS in a worker; Rust/WASM only if benchmarks demand | Proposed, spike 1.4 |
-| 2026-10-16 | Solid for app UI (Preact alternative) | Proposed, spike 1.4 |
-| 2026-10-16 | Canvas 2D first, WebGL if needed | Proposed, spike 1.4 |
+| 2026-10-16 | TypeScript everywhere; streaming parse in a worker; **no WASM** (100k spans parse in 330-430 ms in a worker) | Confirmed by spike 1.4 (one machine; see perf-spike.md) |
+| 2026-10-16 | Solid for app UI (5.4 KB gzip vs Preact 6.6 KB; performance is a tie, so ergonomics decide) | Confirmed by spike 1.4 |
+| 2026-10-16 | Canvas 2D with mandatory level-of-detail merging; WebGL2 only as a capability-gated fast path for 50k+ primitives (software WebGL costs 100-1500 ms/frame, Canvas 2D is unaffected) | Confirmed by spike 1.4 |
 | 2026-10-16 | Web component core wrapper + thin React wrapper | Proposed |
 | 2026-10-16 | Tauri for desktop (Electron fallback) | Proposed, QA on WebKitGTK |
 | 2026-10-16 | CLI in TypeScript single binary (Rust if budgets missed) | Proposed |

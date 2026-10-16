@@ -139,8 +139,8 @@ Performance is the top priority, so it has its own rules:
 
 ## Open decisions
 
-- Confirm Solid vs Preact, and Canvas 2D vs early WebGL, by building a spike with a 10k-span
-  fixture before committing. A throwaway spike is cheap and the right way to settle this.
+- ~~Solid vs Preact, Canvas 2D vs WebGL~~ settled by the perf spike: Solid, Canvas 2D with LOD, no WASM
+  (`docs/verification/perf-spike.md`, caveats: one fast machine, search not measured).
 - Licence for published packages.
 - Monorepo naming of packages (see split above).
 - CLI language if the TypeScript binary misses start-time budgets.

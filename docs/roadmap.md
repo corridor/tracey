@@ -13,15 +13,15 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Next step
 
-> **3.3b Claude Code transcript adapter** (JSONL, fixtures in `fixtures/claude-code/`, notes in
-> `docs/verification/claude-code.md`), then **4.1 the website shell** using the perf spike's
-> recommendations (`docs/verification/perf-spike.md`, being produced by a background agent;
-> check it first and update `docs/decisions.md` with the technology it settles).
+> **4.1 The website shell** (`apps/web`): Vite + Solid, the landing page from
+> `docs/mockups/` (option A), drop/paste/sample, reading files in a worker with the streaming
+> parser, then the result view C. Technology is settled by `docs/verification/perf-spike.md`:
+> Solid, Canvas 2D with mandatory level-of-detail merging, streaming parse in a worker, no WASM.
+> Use `@ggx/trace-theme` for all colours.
 >
-> Status 2026-10-16: owner said "just start working, tweak the plan later". Done so far:
-> monorepo, `@ggx/trace-model`, `@ggx/trace-adapters` (OTLP JSON: OpenInference, GenAI,
-> OpenLLMetry detection and mapping), `@ggx/trace-insights` (5 rules), `@ggx/trace-theme`.
-> Package names and the other 1.x leftovers are my calls now (see decisions.md); revisit later.
+> Before that: the worker/streaming parse for `@ggx/trace-adapters` (3.1) and a Claude Code
+> sub-agent folder drop. Done so far: monorepo, trace-model, adapters (OTLP + Claude Code),
+> insights, theme, CLI (`tracey <file>`, `detect`, `check`).
 
 ## Phase 0: Vision and docs (done)
 
@@ -49,7 +49,7 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 - [~] **1.3 Visual mockups.** DONE: landing A and result C chosen, saved in `docs/mockups/`.
       LEFT (do before Phase 4): mockups for diff, JSON explorer, CLI output, the desktop
       session picker (option B chosen), mobile sheets, and light theme; refine C at higher fidelity.
-- [ ] **1.4 Performance spike (throwaway, labelled).** 10k-span fixture; compare Canvas 2D vs
+- [x] **1.4 Performance spike (throwaway, labelled).** DONE (`docs/verification/perf-spike.md`). 10k-span fixture; compare Canvas 2D vs
       WebGL graph/timeline (graph is the main view, so include layout of 10k nodes), Solid vs Preact shell, JSON.parse vs streaming parse. Report numbers
       against budgets in [architecture.md](architecture.md). Settle the "open decisions".
 - [ ] **1.5 Write the implementation plan** for Phase 2-4 (use the writing-plans skill) and
