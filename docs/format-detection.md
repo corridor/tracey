@@ -13,9 +13,10 @@ override.
 | Source | Typical container | Strong fingerprint |
 |---|---|---|
 | **OTLP JSON** (any OpenTelemetry) | `resourceSpans[].scopeSpans[].spans[]` | That container shape itself. Then classify the *flavour* by attributes below. |
-| **OpenInference** (Arize Phoenix, Arize AX) | OTLP spans | `openinference.span.kind` (required by the spec). Flattened lists like `llm.input_messages.0.message.role`. |
-| **OTel GenAI conventions** (Dynatrace, Honeycomb, Grafana, etc.) | OTLP spans | `gen_ai.operation.name`, `gen_ai.provider.name`, `gen_ai.request.model`, `gen_ai.usage.input_tokens`; operation names like `invoke_agent`, `execute_tool`, `chat`. Span name pattern `invoke_agent {name}`. |
-| **OpenLLMetry / Traceloop** | OTLP spans | Older indexed attrs `gen_ai.prompt.0.content`, `gen_ai.completion.0.content`; `traceloop.*` keys **(verify)**. Dynatrace docs show both old and new naming appearing together. |
+| **OpenInference** (Arize Phoenix, Arize AX) | OTLP spans | `openinference.span.kind` (1.0, required by spec; values LLM, AGENT, TOOL, CHAIN, ...). Prefixes `llm.input_messages.`, `llm.output_messages.`, `llm.tools.`, `retrieval.documents.` (0.5). Scope name `openinference.instrumentation.*` (hint). Wins over `gen_ai.*` on the same span. Verified. |
+| **OTel GenAI conventions** (Dynatrace, Honeycomb, Grafana, Strands, etc.) | OTLP spans | `gen_ai.operation.name` (0.8), `gen_ai.provider.name` (0.6, replaced `gen_ai.system`), `gen_ai.input.messages`/`gen_ai.output.messages` as span attributes holding a JSON string with `parts[]` (0.5; older layouts use span events such as `gen_ai.user.message`), `gen_ai.usage.*`. Agent operations: `invoke_agent`, `create_agent`, `execute_tool`, `invoke_workflow`, `plan`. Verified with the Python SDK and Strands; full weights in `docs/verification/otel-openinference.md`. |
+| **OpenLLMetry / Traceloop** | OTLP spans | Legacy: indexed `gen_ai.prompt.N.*` / `gen_ai.completion.N.*` (0.9), `gen_ai.system`, `llm.request.type`. The latest release was reported to emit the new GenAI shape, so this is a version difference. `traceloop.*` keys **(unverified)**. |
+| **LangSmith OTel mode** | OTLP spans | `langsmith.*` attributes plus `gen_ai.prompt`; neither OpenInference nor clean GenAI (enable with `LANGSMITH_TRACING_MODE=otel`). See `docs/verification/frameworks.md`. |
 | **Datadog LLM Observability** (ddtrace) | Datadog LLMObs span JSON | Span `kind` in {agent, workflow, llm, tool, task, embedding, retrieval}; separate `input`, `output`, `error`, `metadata` fields; `metadata.model_name`, `metadata.model_provider`. Exact export file shape **(verify)**. Plain APM ddtrace spans carry no LLM payloads and are lower value. |
 | **Langfuse** | JSON with observations | Observation `type` in {SPAN, GENERATION, EVENT} (newer versions may add more **(verify)**); `parent_observation_id`; trace-level fields. |
 | **LangSmith** | Run records | `run_type` (llm, chain, tool, ...), `inputs`, `outputs`, `start_time`, `end_time`, `parent_run_id`/`dotted_order` **(verify)**. |
@@ -29,7 +30,7 @@ override.
 | **Vapi call** | Call object JSON; pipeline logs as JSONL | Call fields such as `transcript`, `messages`, `artifact`; log lines with categories (incl. Tool) **(verify)** |
 | **Salesforce Agentforce** | **(not yet researched)** | |
 | **HAR capture** | HAR JSON | Top-level `log.entries[]` with LLM-API-looking requests (OpenAI/Anthropic/Gemini style bodies). Universal fallback for third-party apps. |
-| **OTel SDK console output** | JSON per span | The SDK console exporter's span JSON (not OTLP shape) **(verify)**; supported because it is the lowest-effort way for a dev to get a file. |
+| **OTel SDK console output** | Concatenated pretty-printed JSON objects (not JSONL, not valid JSON as a whole) | Python `ConsoleSpanExporter`: snake_case keys, `"context": {` with `"trace_id": "0x..."` ids, `"kind": "SpanKind.INTERNAL"`. Needs a string-aware brace-depth splitter. Other languages' console exporters not checked. Fixtures in `fixtures/otel-sdk-console/`. |
 | **tracey native** | tracey model JSON | A `tracey` version marker. Always the lossless fallback. |
 
 ## How detection works
@@ -37,7 +38,7 @@ override.
 Three layers, cheapest first. Detection must be fast enough to be invisible (target well
 under 50 ms for typical files; only sample, don't scan all spans).
 
-1. **Container sniff.** Look at the top-level shape only: array vs object, `resourceSpans`,
+1. **Container sniff.** (Verified shapes: collector file exporter = one OTLP batch per line, so a trace can span several lines; SDK console = concatenated pretty JSON objects.) Look at the top-level shape only: array vs object, `resourceSpans`,
    `observations`, `run_type`, `spans` with `kind`, JSONL vs JSON, protobuf vs JSON.
    Decides which parser reads the file.
 2. **Attribute fingerprint.** Sample the first N spans (and a few random ones). Each known
