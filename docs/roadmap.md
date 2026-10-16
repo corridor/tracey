@@ -19,8 +19,11 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 > the fingerprints in `docs/format-detection.md`. Fixtures go in `fixtures/` (data only, no
 > product code, so the gate is not crossed). Ask the owner for access/keys if a tool needs it.
 >
-> Before step 1.5 the owner must still answer the leftovers in 1.1 (licence, `tracey listen`,
-> package names). Raise them when 1.2 and 1.3 are done, or sooner if they block anything.
+> Also pending from 1.3: more mockups (diff, JSON explorer, CLI, session picker, mobile, light).
+> Offer them via the visual companion before Phase 4.
+>
+> Before step 1.5 the owner must still answer the leftovers in 1.1 (`tracey listen`,
+> package names). Raise them when 1.2 is done, or sooner if they block anything.
 
 ## Phase 0: Vision and docs (done)
 
@@ -37,16 +40,16 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 - [~] **1.1 Confirm scope.** DONE: v1 sources (OpenInference, OTel GenAI, Claude Code
       transcripts, Strands and OpenAI Agents guides), drop-a-file site, responsive UI.
-      LEFT (needed before 1.5): licence; whether `tracey listen` (local OTLP receiver in
+      LEFT (needed before 1.5): whether `tracey listen` (local OTLP receiver in
       CLI/desktop) is in scope; package names under `@ggx/`.
 - [ ] **1.2 Collect real fixtures and verify the guides.** Run each v1 guide against the real
       tool, save real exported traces as fixtures (scrubbed), correct the guides and the
       detection fingerprints. Includes researching Codex and Salesforce if they're in scope.
-- [ ] **1.3 Visual mockups.** Landing, result view (timeline + findings + inspector), graph,
-      diff, CLI output. Use the visual companion. Output: images or HTML in `docs/mockups/`,
-      owner picks a direction.
+- [~] **1.3 Visual mockups.** DONE: landing A and result C chosen, saved in `docs/mockups/`.
+      LEFT (do before Phase 4): mockups for diff, JSON explorer, CLI output, the "Find my
+      sessions" picker, mobile sheets, and light theme; refine C at higher fidelity.
 - [ ] **1.4 Performance spike (throwaway, labelled).** 10k-span fixture; compare Canvas 2D vs
-      WebGL timeline, Solid vs Preact shell, JSON.parse vs streaming parse. Report numbers
+      WebGL graph/timeline (graph is the main view, so include layout of 10k nodes), Solid vs Preact shell, JSON.parse vs streaming parse. Report numbers
       against budgets in [architecture.md](architecture.md). Settle the "open decisions".
 - [ ] **1.5 Write the implementation plan** for Phase 2-4 (use the writing-plans skill) and
       get owner approval. This lifts the "no code" gate.
@@ -69,33 +72,35 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 - [ ] 4.1 Landing + drop/paste/sample ([ux-principles.md](ux-principles.md)).
 - [ ] 4.2 Overview: verdict strip, findings list.
-- [ ] 4.3 Timeline view (canvas), virtualised, 60 fps on 10k spans.
+- [ ] 4.3 Graph canvas (main view): worker layout, viewport culling, pan/zoom, framing the first
+      error, 60 fps on 10k nodes. Floating findings/inspector panels.
+- [ ] 4.3b Timeline strip and waterfall view, virtualised, linked to the graph.
 - [ ] 4.4 Inspector + JSON explorer (virtualised tree, search, copy path).
 - [ ] 4.5 Keyboard navigation, themes, a11y pass, responsive layouts (360/768/1280/2560 px,
       touch and pinch-zoom) with Playwright visual checks.
 - [ ] 4.6 Bundled samples, PWA/offline, perf budgets enforced in CI.
 - [ ] 4.7 Publish the site. **Milestone: "drop a file" website live.**
 
-## Phase 5: Graph and diff
+## Phase 5: Diff
 
-- [ ] 5.1 Graph view (worker layout, culling), netron-like properties panel.
-- [ ] 5.2 Run-vs-run diff: span alignment, text diff for payloads.
+- [ ] 5.1 Run-vs-run diff: span alignment, text diff for payloads.
 
 ## Phase 6: CLI
 
 - [ ] 6.1 `tracey <file>`, `detect`, `check`, `--json`; streaming; start-time budget.
+- [ ] 6.1b Session scan on start with no args: list found sessions, ask what to open.
 - [ ] 6.2 Terminal explorer (TTY), `diff`.
 - [ ] 6.3 Single-binary distribution.
 
 ## Phase 7: VS Code extension
 
 - [ ] 7.1 Custom editor hosting the web UI; open/diff commands.
-- [ ] 7.2 "Find sessions" and workspace watcher.
+- [ ] 7.2 "Find my sessions" and workspace watcher.
 
 ## Phase 8: Desktop app
 
 - [ ] 8.1 Tauri shell, file association, recent files.
-- [ ] 8.2 Folder watching, "Find sessions".
+- [ ] 8.2 Folder watching; session scan on start (see surfaces.md).
 - [ ] 8.3 Renderer QA on WebKit, WebView2, WebKitGTK; installers for macOS/Windows/Linux.
 
 ## Phase 9: More sources
