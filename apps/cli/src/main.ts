@@ -3,17 +3,25 @@ import { basename, dirname, join } from 'node:path'
 import { parseTraceFile } from '@ggx/trace-adapters'
 import type { ClaudeSubagent, ParsedFile } from '@ggx/trace-adapters'
 import { analyze, summarize } from '@ggx/trace-insights'
+import { discoverSessions, labelOf } from '@ggx/trace-discover'
+import type { SessionInfo } from '@ggx/trace-discover'
 import { detectionLines, findingLines, style, summaryLine } from './format'
 
 export interface IO {
   out: (s: string) => void
   err: (s: string) => void
   color: boolean
+  /** Present on an interactive terminal: lets `tracey` with no arguments offer a picker. */
+  pick?: (sessions: SessionInfo[]) => Promise<SessionInfo | undefined>
+  /** Overridable for tests; defaults to scanning this machine. */
+  discover?: () => Promise<SessionInfo[]>
 }
 
 const HELP = `tracey: see what your agent really did
 
 Usage
+  tracey                            pick from sessions found on this machine (interactive terminal)
+  tracey sessions [--json]          list sessions found on this machine, newest first
   tracey <file>                     open a trace: detect its source, show findings
   tracey detect <file>              only report what the file is
   tracey check <file> [--fail-on error|warning]
@@ -42,16 +50,35 @@ function load(file: string): ParsedFile {
   return parseTraceFile(text, { claudeSubagents: loadSubagents(file) })
 }
 
+function sessionLines(sessions: SessionInfo[], st: ReturnType<typeof style>): string {
+  if (sessions.length === 0) return 'No sessions found in the usual places (~/.claude*).\n'
+  return `${sessions.map((x) => `${labelOf(x).slice(0, 48).padEnd(48)} ${st.dim(`${x.source}  ${new Date(x.mtimeMs).toISOString().slice(0, 16).replace('T', ' ')}  ${x.path}`)}`).join('\n')}\n`
+}
+
 export async function main(argv: string[], io: IO): Promise<number> {
   const flags = new Set(argv.filter((a) => a.startsWith('-') && !a.includes('=')))
   const failOn = argv.find((a) => a.startsWith('--fail-on='))?.slice(10) ?? (argv.includes('--fail-on') ? argv[argv.indexOf('--fail-on') + 1] : undefined)
   const args = argv.filter((a, i) => !a.startsWith('-') && argv[i - 1] !== '--fail-on')
-  if (flags.has('-h') || flags.has('--help') || argv.length === 0) {
-    io.out(HELP)
-    return argv.length === 0 ? 0 : 0
-  }
   const json = flags.has('--json')
   const st = style(io.color)
+  if (flags.has('-h') || flags.has('--help') || (argv.length === 0 && !io.pick)) {
+    io.out(HELP)
+    return 0
+  }
+  if (argv.length === 0 || args[0] === 'sessions') {
+    const sessions = await (io.discover ?? discoverSessions)()
+    if (args[0] === 'sessions') {
+      io.out(json ? `${JSON.stringify(sessions)}\n` : sessionLines(sessions, st))
+      return 0
+    }
+    if (sessions.length === 0) {
+      io.out('No sessions found in the usual places (~/.claude*). Pass a file: tracey <file>\n')
+      return 1
+    }
+    const picked = await io.pick!(sessions)
+    if (!picked) return 0
+    return main([picked.path], io)
+  }
   const cmd = ['detect', 'check'].includes(args[0] ?? '') ? args.shift()! : 'open'
   const file = args[0]
   if (!file) {
@@ -99,3 +126,5 @@ export async function main(argv: string[], io: IO): Promise<number> {
   }
   return 0
 }
+
+export { runPicker } from './picker'

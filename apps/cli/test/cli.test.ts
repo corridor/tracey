@@ -1,13 +1,18 @@
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import { main } from '../src/main'
+import type { IO } from '../src/main'
 
 const fx = (p: string) => fileURLToPath(new URL(`../../../fixtures/${p}`, import.meta.url))
 
 async function run(...argv: string[]) {
+  return runWith({}, ...argv)
+}
+
+async function runWith(extra: Partial<IO>, ...argv: string[]) {
   let out = ''
   let err = ''
-  const code = await main(argv, { out: (s) => (out += s), err: (s) => (err += s), color: false })
+  const code = await main(argv, { out: (s) => (out += s), err: (s) => (err += s), color: false, ...extra })
   return { code, out, err }
 }
 
@@ -50,5 +55,41 @@ describe('tracey cli', () => {
   it('reports unreadable and unrecognised files', async () => {
     expect((await run('/nope.json')).code).toBe(2)
     expect((await run(fx('claude-code/README.md'))).code).toBe(1)
+  })
+})
+
+describe('sessions and the picker', () => {
+  const session = { source: 'claude-code' as const, path: fx('claude-code/session.jsonl'), title: 'Fix off-by-one', project: '/work/demo-app', mtimeMs: Date.UTC(2026, 0, 1, 12), size: 10 }
+
+  it('lists sessions, as text and as json', async () => {
+    const text = await runWith({ discover: async () => [session] }, 'sessions')
+    expect(text.out).toContain('Fix off-by-one')
+    expect(text.out).toContain('claude-code')
+    const json = JSON.parse((await runWith({ discover: async () => [session] }, 'sessions', '--json')).out)
+    expect(json[0].path).toBe(session.path)
+  })
+
+  it('with no arguments on a terminal, opens the session the user picks', async () => {
+    const r = await runWith({ discover: async () => [session], pick: async (s) => s[0] })
+    expect(r.code).toBe(0)
+    expect(r.out).toContain('Claude Code transcript')
+    expect(r.out).toContain('Bash failed')
+  })
+
+  it('does nothing and succeeds when the user quits the picker', async () => {
+    const r = await runWith({ discover: async () => [session], pick: async () => undefined })
+    expect(r).toEqual({ code: 0, out: '', err: '' })
+  })
+
+  it('says where it looked when there are no sessions', async () => {
+    const r = await runWith({ discover: async () => [], pick: async () => undefined })
+    expect(r.code).toBe(1)
+    expect(r.out).toContain('~/.claude*')
+  })
+
+  it('without a terminal, no arguments prints the help', async () => {
+    const r = await run()
+    expect(r.out).toContain('Usage')
+    expect(r.out).toContain('tracey sessions')
   })
 })
