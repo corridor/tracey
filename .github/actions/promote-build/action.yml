@@ -1,0 +1,56 @@
+name: 'Promote Build'
+description: 'Upload a staged app to the deploy host, activate it, and remove the SSH key'
+inputs:
+    app:
+        description: 'App to deploy (tracey)'
+        required: true
+    dry_run:
+        description: 'Preview the upload only; skip activation'
+        required: false
+        default: 'false'
+    host:
+        description: 'Deploy host'
+        required: true
+    user:
+        description: 'SSH user on the deploy host'
+        required: true
+    ssh_key:
+        description: 'Private key used to log in to the deploy host'
+        required: true
+    known_hosts:
+        description: 'known_hosts entry for the deploy host (StrictHostKeyChecking=yes)'
+        required: true
+runs:
+    using: 'composite'
+    steps:
+        - name: Configure SSH
+          shell: bash
+          env:
+              SSH_KEY: ${{ inputs.ssh_key }}
+              KNOWN_HOSTS: ${{ inputs.known_hosts }}
+          run: |
+              install -m 700 -d ~/.ssh
+              printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+              chmod 600 ~/.ssh/deploy_key
+              printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+        - name: Upload
+          shell: bash
+          env:
+              DEPLOY_HOST: ${{ inputs.host }}
+              DEPLOY_USER: ${{ inputs.user }}
+              DRY_RUN: ${{ inputs.dry_run }}
+          run: deploy/upload.sh "${{ inputs.app }}"
+
+        - name: Activate and health check
+          if: inputs.dry_run != 'true'
+          shell: bash
+          env:
+              DEPLOY_HOST: ${{ inputs.host }}
+              DEPLOY_USER: ${{ inputs.user }}
+          run: deploy/activate.sh "${{ inputs.app }}"
+
+        - name: Remove SSH key
+          if: always()
+          shell: bash
+          run: rm -f ~/.ssh/deploy_key
