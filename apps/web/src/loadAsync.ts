@@ -5,7 +5,7 @@ import type { WorkerRequest, WorkerResponse } from './worker'
 let worker: Worker | undefined
 
 /** Parse, detect and analyse off the main thread so the page stays responsive on large files. */
-export function loadInWorker(name: string, source: File | string): Promise<Loaded> {
+export function loadInWorker(name: string, source: File | string, subagents?: WorkerRequest['subagents']): Promise<Loaded> {
   worker ??= new Worker(new URL('./worker.ts', import.meta.url), { type: 'module' })
   const w = worker
   return new Promise((resolve, reject) => {
@@ -33,6 +33,6 @@ export function loadInWorker(name: string, source: File | string): Promise<Loade
     }
     w.addEventListener('message', onMessage)
     w.addEventListener('error', onError)
-    w.postMessage({ name, source } satisfies WorkerRequest)
+    w.postMessage({ name, source, ...(subagents?.length ? { subagents } : {}) } satisfies WorkerRequest)
   })
 }

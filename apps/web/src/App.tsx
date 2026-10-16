@@ -2,6 +2,8 @@ import { Show, createSignal, onMount } from 'solid-js'
 import { applyTheme } from '@ggx/trace-theme'
 import type { Theme } from '@ggx/trace-theme'
 import { loadInWorker } from './loadAsync'
+import { filesFromDrop, planDrop } from './dropfiles'
+import type { DropPlan } from './dropfiles'
 import type { Loaded } from './load'
 import { SAMPLE_NAME, SAMPLE_TEXT } from './sample'
 import { Landing } from './Landing'
@@ -90,11 +92,11 @@ export function App() {
     if (l) setLoaded(l)
   }
 
-  const open = async (name: string, source: File | string) => {
+  const open = async (name: string, source: File | string, subagents?: DropPlan['subagents']) => {
     setBusy(name)
     setError(undefined)
     try {
-      setLoaded(await loadInWorker(name, source))
+      setLoaded(await loadInWorker(name, source, subagents))
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e))
     } finally {
@@ -103,6 +105,7 @@ export function App() {
   }
 
   const openFile = (file: File) => open(file.name, file)
+  const openPlan = (plan: DropPlan) => open(plan.main.name, plan.main, plan.subagents)
 
   const cycleTheme = () => {
     const next = THEMES[(THEMES.indexOf(theme()) + 1) % THEMES.length]!
@@ -132,8 +135,13 @@ export function App() {
   window.addEventListener('dragover', (e) => e.preventDefault())
   window.addEventListener('drop', (e) => {
     e.preventDefault()
-    const f = e.dataTransfer?.files[0]
-    if (f) void openFile(f)
+    if (!e.dataTransfer) return
+    // Files, or folders (a session folder with its sub-agents): collect, then pick what to open.
+    void filesFromDrop(e.dataTransfer).then((files) => {
+      const plan = planDrop(files)
+      if (plan) void openPlan(plan)
+      else setError('Drop the session file too: those are sub-agent files, which open with their session.')
+    })
   })
 
   return (
