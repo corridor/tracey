@@ -34,6 +34,7 @@ export interface GraphViewOptions {
 }
 
 export interface GraphView {
+  /** Programmatic selection. Does not call onSelect (that is for user input only). */
   select(index: number, opts?: { frame?: boolean }): void
   /** Outline a set of spans (for example the spans behind a finding). */
   highlight(indices: readonly number[]): void
@@ -319,7 +320,7 @@ export function createGraphView(canvas: HTMLCanvasElement, trace: Trace, opts: G
     if (dragStart && !dragStart.moved && e.type === 'pointerup') {
       const [x, y] = pos(e)
       const h = hit(x, y)
-      if (h >= 0) api.select(h)
+      if (h >= 0) pick(h)
     }
     if (pointers.size === 0) dragStart = undefined
   }
@@ -370,12 +371,18 @@ export function createGraphView(canvas: HTMLCanvasElement, trace: Trace, opts: G
   canvas.addEventListener('keydown', (e) => {
     if (e.key.startsWith('Arrow')) {
       const n = neighbour(e.key)
-      if (n >= 0) api.select(n, { frame: true })
+      if (n >= 0) pick(n, true)
       e.preventDefault()
     } else if (e.key === 'f' || e.key === '0') api.fit()
     else if (e.key === '+' || e.key === '=') zoomAt(W / 2, H / 2, 1.25)
     else if (e.key === '-') zoomAt(W / 2, H / 2, 0.8)
   })
+
+  /** A user chose a span: update, then tell the host. Programmatic select() never calls back. */
+  function pick(i: number, frame = false) {
+    api.select(i, { frame })
+    opts.onSelect?.(i)
+  }
 
   const ro = new ResizeObserver(resize)
   ro.observe(canvas)
@@ -385,7 +392,6 @@ export function createGraphView(canvas: HTMLCanvasElement, trace: Trace, opts: G
       selected = i
       if (o?.frame && i >= 0) animateTo(...frameTarget(i))
       else request()
-      opts.onSelect?.(i)
     },
     highlight(indices) {
       marked = new Set(indices)

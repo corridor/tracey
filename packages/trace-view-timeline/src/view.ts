@@ -21,6 +21,7 @@ export interface StripOptions {
 }
 
 export interface StripView {
+  /** Programmatic selection. Does not call onSelect (that is for user input only). */
   select(index: number): void
   highlight(indices: readonly number[]): void
   setPalette(p: StripPalette): void
@@ -124,7 +125,10 @@ export function createStripView(canvas: HTMLCanvasElement, trace: Trace, opts: S
   canvas.addEventListener('pointerdown', (e) => {
     const r = canvas.getBoundingClientRect()
     const h = hit(e.clientX - r.left, e.clientY - r.top)
-    if (h >= 0) api.select(h)
+    if (h >= 0) {
+      api.select(h)
+      opts.onSelect?.(h)
+    }
   })
   canvas.style.cursor = 'pointer'
   const ro = new ResizeObserver(resize)
@@ -134,7 +138,6 @@ export function createStripView(canvas: HTMLCanvasElement, trace: Trace, opts: S
     select(i) {
       selected = i
       request()
-      opts.onSelect?.(i)
     },
     highlight(indices) {
       marked = new Set(indices)
