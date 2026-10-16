@@ -1,0 +1,58 @@
+name: Publish website (tracey.genguardx.ai)
+
+# Builds apps/web and publishes it with GitHub Pages (Settings > Pages > Source: GitHub Actions,
+# custom domain tracey.genguardx.ai). Runs on master pushes that touch the site, or by hand.
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - apps/web/**
+      - packages/**
+      - fixtures/openinference/**
+      - pnpm-lock.yaml
+      - .github/workflows/pages.yml
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: light-job
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - uses: pnpm/action-setup@v6
+        with:
+          cache: true
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm --filter @ggx/tracey-web build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/web/dist
+
+  deploy:
+    needs: build
+    runs-on: light-job
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
