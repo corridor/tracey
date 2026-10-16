@@ -176,6 +176,22 @@ importers:
         specifier: ^3.2.0
         version: 3.2.7(@types/node@24.19.2)
 
+  apps/cli:
+    dependencies:
+      '@ggx/trace-adapters':
+        specifier: workspace:*
+        version: link:../../packages/trace-adapters
+      '@ggx/trace-insights':
+        specifier: workspace:*
+        version: link:../../packages/trace-insights
+      '@ggx/trace-model':
+        specifier: workspace:*
+        version: link:../../packages/trace-model
+    devDependencies:
+      esbuild:
+        specifier: ^0.28.0
+        version: 0.28.2
+
   packages/trace-adapters:
     dependencies:
       '@ggx/trace-model':
@@ -193,6 +209,8 @@ importers:
         version: link:../trace-adapters
 
   packages/trace-model: {}
+
+  packages/trace-theme: {}
 
 packages:
 
