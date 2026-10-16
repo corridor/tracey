@@ -32,10 +32,20 @@ pull request and push to `master`.
 | `tracey listen`: JSON, protobuf and gzip bodies, bad payloads, joined batches, `--save` round trip, live render, port in use, non-loopback warning | `apps/cli/test/listen.test.ts` |
 | CLI output, `detect`, `check` exit codes, `--json`, bad input | `apps/cli/test` |
 | Offline and install: manifest and icons served, site reopens and loads a sample with the network off (production build on port 4199) | `apps/web/e2e/offline.spec.ts` |
+| Dropping a session with its sub-agents (folder, or loose `agent-*.jsonl`), project folders (newest wins), `.pb` files, sub-agent-only drops, phone first view | `apps/web/test/dropfiles.test.ts`, `apps/web/e2e/app.spec.ts` |
 | Website: landing, sample, every supported format, paste, finding clicks, keyboard walk, list view, close inspector, theme change repaints the canvas, phone/tablet/wide viewports, unrecognised file, 20,000-span trace under 5 s | `apps/web/e2e` |
 
 When you fix a bug, add a test that fails without the fix (the selection-echo bug between the graph
 and the strip is covered by the "arrow keys walk the tree" browser test).
+
+### Performance budgets in CI
+
+- **Speed:** `packages/trace-insights/test/perf.test.ts` reads, detects and analyses 50,000 spans in under 3 s and
+  100,000 in under 6 s, and checks that 4x the spans costs well under 12x the time (an accidental O(n^2) fails it).
+  The limits are loose for shared CI machines; typical local times are a few hundred ms. The 20,000-span browser test
+  and the 50,000-span layout test add the UI and graph sides.
+- **Size:** `pnpm check:size` (run in CI after the build) fails if the website entry JS exceeds 40 KB gzip, the parser
+  worker 14 KB, the CSS 6 KB, everything together 55 KB, or the CLI 20 KB. Today: 26.5, 7.6, 3.2, 37.3 and 12.1 KB.
 
 ## By hand, with the dev server
 

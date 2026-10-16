@@ -13,13 +13,14 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Next step
 
-> **Website items and diff.** (1) Dropping a Claude Code session folder (sub-agents) and `.pb` protobuf files on the
-> website; (2) a tabbed phone layout; (3) perf budgets enforced in CI; (4) run-vs-run diff (Phase 5); (5) VS Code
-> extension (Phase 7, reuses the web UI in a custom editor). Also pending: a CI job that builds the desktop app on
-> macOS/Linux/Windows (8.3), and hand-verifying the desktop start screen and Listen in the real window
-> (checklist in `docs/testing.md`).
+> **Run-vs-run diff (Phase 5)**, then the **VS Code extension (Phase 7)**: load two traces, align their span trees, show
+> added / removed / changed / slower steps, and a text diff for a step's input and output (the "diffchecker" feel from
+> the vision). Also pending: a CI job that builds the desktop app on macOS/Linux/Windows (8.3), hand-verifying the
+> desktop start screen and Listen in the real window (`docs/testing.md`), more sources (Datadog, Langfuse, LangSmith,
+> Codex, Zed, VS Code Copilot, HAR) once real exports are available, and a verified Phoenix/Dynatrace/Datadog guide set.
 >
-> Done so far: see the git log. Desktop: shell, open-with, start screen with sessions and Listen.
+> Done so far: see the git log. Website items from the earlier plan are finished: folder and sub-agent drops, protobuf
+> files, a phone first view (graph visible, sheets on demand), perf and size budgets in CI.
 
 ## Phase 0: Vision and docs (done)
 
@@ -77,7 +78,7 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 - [~] 4.4 Inspector done (pretty JSON, long-payload truncation); JSON explorer (virtualised tree, search, copy path).
 - [ ] 4.5 Keyboard navigation, themes, a11y pass, responsive layouts (360/768/1280/2560 px,
       touch and pinch-zoom) with Playwright visual checks.
-- [~] 4.6 Bundled sample, PWA/offline done (manifest, icons, service worker, tested). Perf budgets in CI pending.
+- [x] 4.6 Bundled sample, PWA/offline (manifest, icons, service worker, tested), perf and size budgets enforced in CI.
 - [ ] 4.7 Publish the site. **Milestone: "drop a file" website live.**
 
 ## Phase 5: Diff
