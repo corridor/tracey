@@ -82,6 +82,9 @@ but a second implementation of parsing/detection/findings). See architecture dec
 ## 4. Desktop app
 
 - Same UI as the website, packaged as a native window for macOS, Linux, Windows.
+- **Start screen (built):** a list of the Claude Code sessions found on this machine (the same scan as the CLI, done in
+  Rust), with a source sidebar, search, and a **Listen** toggle that starts a loopback OTLP receiver in the shell. Live
+  runs appear in the list and, when opened, grow in place as spans arrive without losing pan or zoom.
 - Adds: open files via OS file association and double-click, "Open with tracey", recent
   files, watching a file/folder for new traces (live-reload as the agent runs), native menus,
   offline always.

@@ -82,6 +82,9 @@ pnpm --filter @ggx/tracey-desktop build        # all installers for this OS
 pnpm --filter @ggx/tracey-desktop test         # Rust unit tests
 ```
 
+The start screen lists Claude Code sessions found on the machine and has a **Listen for a running agent** toggle
+(the receiver on `127.0.0.1:4318`; the page shows the `OTEL_EXPORTER_OTLP_ENDPOINT` line to export).
+
 Open a file with it: `open -a apps/desktop/src-tauri/target/release/bundle/macos/tracey.app path/to/trace.jsonl`
 on macOS, or pass the path as an argument on Windows and Linux. Dropping a file onto the window and
 **Choose one** work as on the website.

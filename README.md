@@ -97,7 +97,7 @@ tracey is a set of small, separately usable packages under the `@ggx/` scope, pl
 | `@ggx/trace-discover` | Finds sessions already on this machine (Node) |
 | `apps/web` | The website |
 | `apps/cli` | The terminal app |
-| `apps/desktop` | Desktop app (Tauri, about 3 MB) |
+| `apps/desktop` | Desktop app (Tauri, about 3 MB): session list, live receiver |
 
 Not published to npm yet.
 
@@ -121,7 +121,7 @@ See [docs/testing.md](docs/testing.md) for what is covered and how to test by ha
 ## Status
 
 Early. The core packages, CLI (with a session picker and a live receiver), website and a macOS desktop
-build work; the VS Code extension, a desktop session picker and more sources are planned.
+build (session list and live receiver) work; the VS Code extension and more sources are planned.
 
 ## License
 

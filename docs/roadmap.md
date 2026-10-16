@@ -13,13 +13,13 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Next step
 
-> **Desktop: session picker and a Listen toggle** (8.2, 8.4): a Rust scan using the same locations as
-> `@ggx/trace-discover` (`$CLAUDE_CONFIG_DIR`, every `~/.claude*`), the option B picker UI in the web app when
-> running inside the desktop shell, and the receiver started from a toggle (spawn the CLI's logic or port the
-> receiver). Then website items (Claude Code sub-agent folder drop, tabbed phone layout, perf budgets in CI),
-> website drop of `.pb` protobuf files, diff (Phase 5), VS Code extension (Phase 7).
+> **Website items and diff.** (1) Dropping a Claude Code session folder (sub-agents) and `.pb` protobuf files on the
+> website; (2) a tabbed phone layout; (3) perf budgets enforced in CI; (4) run-vs-run diff (Phase 5); (5) VS Code
+> extension (Phase 7, reuses the web UI in a custom editor). Also pending: a CI job that builds the desktop app on
+> macOS/Linux/Windows (8.3), and hand-verifying the desktop start screen and Listen in the real window
+> (checklist in `docs/testing.md`).
 >
-> Done so far: see the git log. CLI: `tracey` (picker), `sessions`, `listen`, `<file>`, `detect`, `check`.
+> Done so far: see the git log. Desktop: shell, open-with, start screen with sessions and Listen.
 
 ## Phase 0: Vision and docs (done)
 
@@ -102,9 +102,9 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 ## Phase 8: Desktop app
 
 - [~] 8.1 Tauri shell (`apps/desktop`), file association and open-with built; macOS .app builds at 3.2 MB and launches with a file. Recent files pending. Linux/Windows untested.
-- [ ] 8.2 Folder watching; session scan on start (see surfaces.md).
+- [~] 8.2 Session scan on start: done (Rust scan + picker UI, tested in Rust and in the browser against a stand-in shell). Folder watching pending.
 - [ ] 8.3 Renderer QA on WebKit, WebView2, WebKitGTK; installers for macOS/Windows/Linux.
-- [ ] 8.4 "Listen" toggle in the desktop app (shared receiver), endpoint shown with copy button.
+- [x] 8.4 "Listen" toggle in the desktop app (Rust receiver hands raw bodies to the shared TypeScript decoder; endpoint shown). Copy button pending. The real window could not be driven here; verified by Rust tests, browser tests with a stand-in shell, and the app building and launching.
 
 ## Phase 9: More sources
 

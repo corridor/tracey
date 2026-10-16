@@ -23,7 +23,9 @@ pull request and push to `master`.
 | Format detection and mapping for OpenInference, OTel GenAI, OpenLLMetry, Claude Code | `packages/trace-adapters/test`, against the real fixtures in `fixtures/` |
 | Findings: failed, swallowed, repeated, slow, grouping | `packages/trace-insights/test` |
 | Graph layout (no overlaps, 50k spans) and timeline strip level-of-detail | `packages/trace-view-*/test` |
-| Desktop bridge (asset-protocol read, launch file, later opens): `apps/web/test/desktop.test.ts`; Rust argument parsing: `pnpm --filter @ggx/tracey-desktop test` | automated |
+| Desktop bridge (asset-protocol read, launch file, later opens): `apps/web/test/desktop.test.ts`; Rust: argument parsing, session scan (folders, ordering, titles, limits), and the OTLP receiver with real HTTP requests: `pnpm --filter @ggx/tracey-desktop test` | automated |
+| Desktop start screen against a stand-in for the shell (list, filter, open, empty state, phone width, Listen on/off, live run that grows, port in use): `apps/web/e2e/desktop.spec.ts` | automated |
+| Live run decoding and grouping (protobuf, gzip, JSON): `apps/web/test/live.test.ts` | automated |
 | Session discovery (config dirs, ordering, titles, limits, sub-agent exclusion) | `packages/trace-discover/test`, with temp folders |
 | Picker state machine, key decoding, rendering, `sessions` and bare `tracey` | `apps/cli/test` |
 | OTLP protobuf decoding (real Python-encoder bytes, negative ints, truncated input) | `packages/trace-adapters/test` |
@@ -103,3 +105,6 @@ There is no automated UI test for the native window (Tauri's WebDriver does not 
 5. Right-click a `.jsonl` file in Finder: *Open With > tracey* is offered.
 6. Drop a file onto the window, and use *Choose one*.
 7. The offline service worker is deliberately not registered in the desktop app.
+8. **Start screen:** launching with no file lists your Claude Code sessions; search filters; clicking one opens it; the logo returns.
+9. **Listen:** click *Listen for a running agent*, run `OTEL_EXPORTER_OTLP_ENDPOINT=http://127.0.0.1:4318 python your_agent.py`
+   (or `curl` a fixture, see development.md). A live run appears under Live; open it and watch it grow. Turn Listen off and the port frees.
