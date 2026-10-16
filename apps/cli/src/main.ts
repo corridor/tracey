@@ -5,6 +5,8 @@ import type { ClaudeSubagent, ParsedFile } from '@ggx/trace-adapters'
 import { analyze, summarize } from '@ggx/trace-insights'
 import { discoverSessions, labelOf } from '@ggx/trace-discover'
 import type { SessionInfo } from '@ggx/trace-discover'
+import { runListen } from './listen'
+import type { ListenIO } from './listen'
 import { detectionLines, findingLines, style, summaryLine } from './format'
 
 export interface IO {
@@ -15,11 +17,15 @@ export interface IO {
   pick?: (sessions: SessionInfo[]) => Promise<SessionInfo | undefined>
   /** Overridable for tests; defaults to scanning this machine. */
   discover?: () => Promise<SessionInfo[]>
+  /** For `tracey listen`: terminal mode, a stop signal, and a hook for tests. */
+  listen?: Pick<ListenIO, 'tty' | 'stop' | 'ready'>
 }
 
 const HELP = `tracey: see what your agent really did
 
 Usage
+  tracey listen [--port 4318] [--host 127.0.0.1] [--save file.jsonl]
+                                    receive OTLP traces from a running agent and show them live
   tracey                            pick from sessions found on this machine (interactive terminal)
   tracey sessions [--json]          list sessions found on this machine, newest first
   tracey <file>                     open a trace: detect its source, show findings
@@ -65,6 +71,7 @@ export async function main(argv: string[], io: IO): Promise<number> {
     io.out(HELP)
     return 0
   }
+  if (args[0] === 'listen') return runListen(argv.slice(argv.indexOf('listen') + 1), { out: io.out, err: io.err, color: io.color, ...io.listen })
   if (argv.length === 0 || args[0] === 'sessions') {
     const sessions = await (io.discover ?? discoverSessions)()
     if (args[0] === 'sessions') {
