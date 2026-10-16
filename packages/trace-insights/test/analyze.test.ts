@@ -60,3 +60,13 @@ describe('rules', () => {
     expect(analyze(new TraceBuilder().build())).toEqual([])
   })
 })
+
+describe('analyze on a Claude Code transcript', () => {
+  it('flags the failed Bash call that the model carried on past', () => {
+    const trace = parseTraceFile(fixture('claude-code/session.jsonl')).traces[0]!.trace
+    const findings = analyze(trace)
+    const failed = findings.find((x) => x.rule === 'failed-span')!
+    expect(trace.nameOf(failed.spans[0]!)).toBe('Bash')
+    expect(findings.map((x) => x.rule)).toContain('swallowed-error')
+  })
+})
