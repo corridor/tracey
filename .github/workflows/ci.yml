@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   check:
-    runs-on: light-job
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
 
@@ -30,3 +30,9 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm build
+
+      - name: Install Chromium for the browser tests
+        run: pnpm --filter @ggx/tracey-web exec playwright install --with-deps chromium
+
+      - name: Browser tests
+        run: pnpm test:e2e
