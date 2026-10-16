@@ -1,0 +1,119 @@
+# Roadmap
+
+This file is how work continues across sessions. When the owner says **"let's continue with
+the next step"**, an agent should:
+
+1. Read `AGENTS.md`, then this file, then `docs/decisions.md`.
+2. Find the **Next step** below. Do it, following the linked docs.
+3. Tick its boxes, update **Next step** to the following item, update `docs/decisions.md` if
+   anything was decided, and add new steps if the work revealed them.
+4. Report what was done and what is next. Commit only if asked.
+
+Rule: before any step that creates code, check the gate in `AGENTS.md` (owner approval).
+
+## Next step
+
+> **1.2 Collect real fixtures and verify the guides** for the v1 sources: OpenInference,
+> OTel GenAI, Claude Code transcripts, Strands, OpenAI Agents. Run each guide in
+> `docs/guides/` against the real tool, save scrubbed exports as fixtures, fix the guides and
+> the fingerprints in `docs/format-detection.md`. Fixtures go in `fixtures/` (data only, no
+> product code, so the gate is not crossed). Ask the owner for access/keys if a tool needs it.
+>
+> Before step 1.5 the owner must still answer the leftovers in 1.1 (licence, `tracey listen`,
+> package names). Raise them when 1.2 and 1.3 are done, or sooner if they block anything.
+
+## Phase 0: Vision and docs (done)
+
+- [x] Vision, goals, non-goals ([vision.md](vision.md))
+- [x] Competitive analysis ([competitive-analysis.md](competitive-analysis.md))
+- [x] Architecture proposal ([architecture.md](architecture.md))
+- [x] Design system: GGX theme ([design.md](design.md))
+- [x] Surfaces ([surfaces.md](surfaces.md)), flows ([user-flows.md](user-flows.md)), format detection ([format-detection.md](format-detection.md))
+- [x] Getting-started guides, draft ([guides/](guides/README.md))
+- [x] UX principles incl. responsive rules ([ux-principles.md](ux-principles.md))
+- [x] Roadmap and decision log (this file, [decisions.md](decisions.md))
+
+## Phase 1: Decide and de-risk (no product code)
+
+- [~] **1.1 Confirm scope.** DONE: v1 sources (OpenInference, OTel GenAI, Claude Code
+      transcripts, Strands and OpenAI Agents guides), drop-a-file site, responsive UI.
+      LEFT (needed before 1.5): licence; whether `tracey listen` (local OTLP receiver in
+      CLI/desktop) is in scope; package names under `@ggx/`.
+- [ ] **1.2 Collect real fixtures and verify the guides.** Run each v1 guide against the real
+      tool, save real exported traces as fixtures (scrubbed), correct the guides and the
+      detection fingerprints. Includes researching Codex and Salesforce if they're in scope.
+- [ ] **1.3 Visual mockups.** Landing, result view (timeline + findings + inspector), graph,
+      diff, CLI output. Use the visual companion. Output: images or HTML in `docs/mockups/`,
+      owner picks a direction.
+- [ ] **1.4 Performance spike (throwaway, labelled).** 10k-span fixture; compare Canvas 2D vs
+      WebGL timeline, Solid vs Preact shell, JSON.parse vs streaming parse. Report numbers
+      against budgets in [architecture.md](architecture.md). Settle the "open decisions".
+- [ ] **1.5 Write the implementation plan** for Phase 2-4 (use the writing-plans skill) and
+      get owner approval. This lifts the "no code" gate.
+
+## Phase 2: Foundation
+
+- [ ] 2.1 Monorepo (pnpm workspaces), TypeScript, lint, test, CI, size and perf budget checks.
+- [ ] 2.2 Design tokens package: GGX light/dark/auto, fonts ([design.md](design.md)).
+- [ ] 2.3 `@ggx/trace-model`: struct-of-arrays model, ids, kinds, usage, tests.
+
+## Phase 3: Ingest
+
+- [ ] 3.1 Streaming parser + worker pipeline (JSON, JSONL), tested on 1k / 10k / 100k fixtures.
+- [ ] 3.2 Format detection ([format-detection.md](format-detection.md)) with evidence output.
+- [ ] 3.3 Adapters for v1 sources (one at a time, each with real fixtures).
+- [ ] 3.4 Findings engine: first rules (errors, retries/loops, slow, cost/token outliers,
+      truncated/empty output, swallowed tool error).
+
+## Phase 4: The website (first shippable)
+
+- [ ] 4.1 Landing + drop/paste/sample ([ux-principles.md](ux-principles.md)).
+- [ ] 4.2 Overview: verdict strip, findings list.
+- [ ] 4.3 Timeline view (canvas), virtualised, 60 fps on 10k spans.
+- [ ] 4.4 Inspector + JSON explorer (virtualised tree, search, copy path).
+- [ ] 4.5 Keyboard navigation, themes, a11y pass, responsive layouts (360/768/1280/2560 px,
+      touch and pinch-zoom) with Playwright visual checks.
+- [ ] 4.6 Bundled samples, PWA/offline, perf budgets enforced in CI.
+- [ ] 4.7 Publish the site. **Milestone: "drop a file" website live.**
+
+## Phase 5: Graph and diff
+
+- [ ] 5.1 Graph view (worker layout, culling), netron-like properties panel.
+- [ ] 5.2 Run-vs-run diff: span alignment, text diff for payloads.
+
+## Phase 6: CLI
+
+- [ ] 6.1 `tracey <file>`, `detect`, `check`, `--json`; streaming; start-time budget.
+- [ ] 6.2 Terminal explorer (TTY), `diff`.
+- [ ] 6.3 Single-binary distribution.
+
+## Phase 7: VS Code extension
+
+- [ ] 7.1 Custom editor hosting the web UI; open/diff commands.
+- [ ] 7.2 "Find sessions" and workspace watcher.
+
+## Phase 8: Desktop app
+
+- [ ] 8.1 Tauri shell, file association, recent files.
+- [ ] 8.2 Folder watching, "Find sessions".
+- [ ] 8.3 Renderer QA on WebKit, WebView2, WebKitGTK; installers for macOS/Windows/Linux.
+
+## Phase 9: More sources
+
+- [ ] 9.1 Datadog, Langfuse, LangSmith, OpenLLMetry.
+- [ ] 9.2 Harness sessions: Claude Code (v1 if chosen), Codex, VS Code Copilot, Zed.
+- [ ] 9.3 Third-party: Vapi, HAR capture; Salesforce after research.
+- [ ] 9.4 `tracey listen` live mode (if approved in 1.1).
+
+## Phase 10: Open-source release
+
+- [ ] 10.1 Split and publish `@ggx/*` packages, each with README, examples, size badge.
+- [ ] 10.2 Web component + React wrapper.
+- [ ] 10.3 Docs site, contribution guide, issue templates.
+
+## Parking lot (ideas not scheduled)
+
+- Share a redacted trace (one-click redaction) without a server.
+- Source-line jumping from a span (VS Code).
+- Watch mode comparing the latest run to the previous one automatically.
+- MCP server / agent-readable summary of findings.
