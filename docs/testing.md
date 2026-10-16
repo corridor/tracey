@@ -10,7 +10,7 @@ pnpm test:e2e       # browser tests (Playwright, Chromium) against the real site
 
 The first time, install the browser once: `pnpm --filter @ggx/tracey-web exec playwright install chromium`.
 If you already have a Playwright Chromium, set `PLAYWRIGHT_BROWSERS_PATH` to its folder.
-`pnpm test:e2e` starts its own dev server on port 5199 (and reuses one if it is already running).
+`pnpm test:e2e` starts its own dev server on port 5199 and a production build preview on port 4199 (and reuses them if already running).
 
 CI (`.github/workflows/ci.yml`) runs typecheck, unit tests, build and the browser tests on every
 pull request and push to `master`.
@@ -24,6 +24,7 @@ pull request and push to `master`.
 | Findings: failed, swallowed, repeated, slow, grouping | `packages/trace-insights/test` |
 | Graph layout (no overlaps, 50k spans) and timeline strip level-of-detail | `packages/trace-view-*/test` |
 | CLI output, `detect`, `check` exit codes, `--json`, bad input | `apps/cli/test` |
+| Offline and install: manifest and icons served, site reopens and loads a sample with the network off (production build on port 4199) | `apps/web/e2e/offline.spec.ts` |
 | Website: landing, sample, every supported format, paste, finding clicks, keyboard walk, list view, close inspector, theme change repaints the canvas, phone/tablet/wide viewports, unrecognised file, 20,000-span trace under 5 s | `apps/web/e2e` |
 
 When you fix a bug, add a test that fails without the fix (the selection-echo bug between the graph

@@ -81,7 +81,7 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 - [~] 4.4 Inspector done (pretty JSON, long-payload truncation); JSON explorer (virtualised tree, search, copy path).
 - [ ] 4.5 Keyboard navigation, themes, a11y pass, responsive layouts (360/768/1280/2560 px,
       touch and pinch-zoom) with Playwright visual checks.
-- [ ] 4.6 Bundled samples, PWA/offline, perf budgets enforced in CI.
+- [~] 4.6 Bundled sample, PWA/offline done (manifest, icons, service worker, tested). Perf budgets in CI pending.
 - [ ] 4.7 Publish the site. **Milestone: "drop a file" website live.**
 
 ## Phase 5: Diff
