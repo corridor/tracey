@@ -1,0 +1,22 @@
+{
+  "name": "@ggx/trace-insights",
+  "version": "0.0.0",
+  "description": "Findings for agent traces: errors, loops, slow steps, swallowed failures.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "@ggx/trace-model": "workspace:*"
+  },
+  "devDependencies": {
+    "@ggx/trace-adapters": "workspace:*"
+  }
+}

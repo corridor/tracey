@@ -182,6 +182,16 @@ importers:
         specifier: workspace:*
         version: link:../trace-model
 
+  packages/trace-insights:
+    dependencies:
+      '@ggx/trace-model':
+        specifier: workspace:*
+        version: link:../trace-model
+    devDependencies:
+      '@ggx/trace-adapters':
+        specifier: workspace:*
+        version: link:../trace-adapters
+
   packages/trace-model: {}
 
 packages:
