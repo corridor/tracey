@@ -11,7 +11,7 @@
     "build": "pnpm --filter @ggx/tracey-web build && pnpm --filter @ggx/tracey-cli build",
     "preview": "pnpm --filter @ggx/tracey-web preview",
     "tracey": "pnpm --filter @ggx/tracey-cli build >/dev/null && node apps/cli/bin/tracey.js",
-    "typecheck": "pnpm -r exec tsc --noEmit",
+    "typecheck": "pnpm -r --filter '!@ggx/tracey-desktop' exec tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "pnpm --filter @ggx/tracey-web test:e2e"

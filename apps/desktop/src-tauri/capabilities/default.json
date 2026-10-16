@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "What the tracey window may do: use core APIs (events and the asset protocol for opening files).",
+  "windows": ["main"],
+  "permissions": ["core:default"]
+}

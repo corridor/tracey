@@ -1,0 +1,26 @@
+[package]
+name = "tracey-desktop"
+version = "0.0.0"
+description = "tracey desktop app"
+license = "Apache-2.0"
+edition = "2021"
+rust-version = "1.77"
+
+[lib]
+name = "tracey_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["protocol-asset"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"

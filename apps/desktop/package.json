@@ -1,0 +1,17 @@
+{
+  "name": "@ggx/tracey-desktop",
+  "version": "0.0.0",
+  "private": true,
+  "description": "tracey as a native desktop app (Tauri around the website).",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "build:app": "tauri build --bundles app",
+    "test": "cargo test --manifest-path src-tauri/Cargo.toml"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.0"
+  }
+}
