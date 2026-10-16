@@ -50,9 +50,9 @@ Either:
 - Or enable the agent debug log (`github.copilot.chat.agentDebugLog.fileLogging.enabled`)
   and export it as OTLP JSON, which is richer. **(verify)**
 
-## The easy way (desktop, VS Code, CLI)
+## The easy way (desktop app and CLI)
 
-"Find sessions" lists the known session locations on your machine, newest first, with your
+Starting `tracey` (CLI) or the desktop app with no file shows a picker that lists the known session locations on your machine, newest first, with your
 permission. Pick one and it opens. No hunting for paths.
 
 ## What to look at first

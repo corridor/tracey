@@ -9,7 +9,7 @@ and colours.
 ## Chosen by the owner
 
 - **Landing A**: centered and calm. Headline "Drop a trace to see what your agent really did.",
-  one drop/paste target, buttons "Try a sample" and "Find my sessions", and the line "Runs
+  one drop/paste target, a "Try a sample" button (the mockup also showed "Find my sessions"; owner later decided the website and VS Code stay file-only, so that button is desktop/CLI only), and the line "Runs
   entirely in your browser. Nothing is uploaded."
 - **Result C**: canvas-first. Graph is the main canvas with pan/zoom; findings and inspector
   are floating panels; a timeline strip runs along the bottom; the waterfall is a view

@@ -140,9 +140,9 @@ durations, token usage is recorded (cost is computed from it; transcripts store 
 
 Steps for the user:
 
-1. `tracey` surfaces a **"Find sessions"** helper: on desktop/CLI/VS Code it can list known
-   session locations on this machine (with permission) and offer the most recent. On the
-   website the user drags the file in.
+1. On the **desktop app and CLI**, starting with no file shows a picker of sessions found on
+   this machine (with permission), newest first. On the **website and VS Code** the user just
+   opens or drops the file; there is no scanning.
 2. Open a session. Detection says e.g. "Claude Code transcript, version X".
 3. The Overview adds harness-specific findings: a tool call that errored and the model kept
    going, repeated reads of the same file, a very long context, a retry loop, a subagent that
@@ -202,7 +202,7 @@ its format.
 |---|---|---|---|---|
 | A. Already tracing | drop file | open file | `tracey file` | open file |
 | B. No tracing yet | drop file | open file, watch workspace | `tracey --watch dir` | watch folder |
-| F. Harness sessions | drop file | "Find sessions" | `tracey sessions` | "Find sessions" |
+| F. Harness sessions | drop file | open file | `tracey` (picker) | session picker |
 | G. Third-party apps | drop export/HAR | open export/HAR | `tracey file` | open export/HAR |
 | C. Compare | two drops | "Diff two traces" | `tracey diff a b` | two files |
 

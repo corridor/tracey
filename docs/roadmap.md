@@ -48,8 +48,8 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
       tool, save real exported traces as fixtures (scrubbed), correct the guides and the
       detection fingerprints. Includes researching Codex and Salesforce if they're in scope.
 - [~] **1.3 Visual mockups.** DONE: landing A and result C chosen, saved in `docs/mockups/`.
-      LEFT (do before Phase 4): mockups for diff, JSON explorer, CLI output, the "Find my
-      sessions" picker, mobile sheets, and light theme; refine C at higher fidelity.
+      LEFT (do before Phase 4): mockups for diff, JSON explorer, CLI output, the desktop
+      session picker (option B chosen), mobile sheets, and light theme; refine C at higher fidelity.
 - [ ] **1.4 Performance spike (throwaway, labelled).** 10k-span fixture; compare Canvas 2D vs
       WebGL graph/timeline (graph is the main view, so include layout of 10k nodes), Solid vs Preact shell, JSON.parse vs streaming parse. Report numbers
       against budgets in [architecture.md](architecture.md). Settle the "open decisions".
@@ -100,7 +100,7 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 ## Phase 7: VS Code extension
 
 - [ ] 7.1 Custom editor hosting the web UI; open/diff commands.
-- [ ] 7.2 "Find my sessions" and workspace watcher.
+- [ ] 7.2 Workspace watcher for new trace files (no session scanning in VS Code; keep it simple).
 
 ## Phase 8: Desktop app
 
