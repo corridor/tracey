@@ -1,0 +1,11 @@
+{
+  "spanCount": 5,
+  "names": [
+    "ChatCompletion",
+    "search_flights",
+    "search_flights",
+    "search_flights",
+    "planner"
+  ],
+  "errors": 3
+}
