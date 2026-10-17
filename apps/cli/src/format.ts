@@ -22,6 +22,7 @@ export const SOURCE_NAMES: Record<string, string> = {
   'otel-genai': 'OpenTelemetry GenAI',
   openllmetry: 'OpenLLMetry',
   'claude-code': 'Claude Code transcript',
+  'ggx-platform': 'GGX platform export',
   'unknown-otlp': 'OpenTelemetry (unrecognised convention)',
 }
 

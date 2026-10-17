@@ -1,6 +1,6 @@
 import type { RawSpan } from './otlp'
 
-export type SourceId = 'openinference' | 'otel-genai' | 'openllmetry' | 'claude-code' | 'unknown-otlp'
+export type SourceId = 'openinference' | 'otel-genai' | 'openllmetry' | 'claude-code' | 'ggx-platform' | 'unknown-otlp'
 
 export interface Detection {
   container: 'otlp-json' | 'jsonl' | 'unknown'
@@ -26,7 +26,7 @@ const indexed = (p: string) => (a: Record<string, unknown>) => {
 }
 
 // Weights follow docs/verification/otel-openinference.md (1.0 is decisive).
-const RULES: Record<Exclude<SourceId, 'unknown-otlp' | 'claude-code'>, Rule[]> = {
+const RULES: Record<Exclude<SourceId, 'unknown-otlp' | 'claude-code' | 'ggx-platform'>, Rule[]> = {
   openinference: [
     { label: 'openinference.span.kind', weight: 1, test: has('openinference.span.kind') },
     { label: 'llm.input_messages.*', weight: 0.5, test: prefix('llm.input_messages.') },
@@ -109,6 +109,17 @@ export function claudeCodeDetection(version: string | undefined): Detection {
     container: 'jsonl',
     candidates: [{ source: 'claude-code', score: 1, evidence: ['sessionId + uuid + semver version on conversation records', ...(version ? [`version ${version}`] : [])] }],
     source: 'claude-code',
+    confidence: 'high',
+    mixed: false,
+    sampled: 0,
+  }
+}
+
+export function ggxDetection(spans: number): Detection {
+  return {
+    container: 'jsonl',
+    candidates: [{ source: 'ggx-platform', score: 1, evidence: ['span records with trace_id, span_id, start_time and a document of OpenInference attributes', `${spans} span records`] }],
+    source: 'ggx-platform',
     confidence: 'high',
     mixed: false,
     sampled: 0,

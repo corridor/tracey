@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import { SpanKind, SpanStatus } from '@ggx/trace-model'
+import { isoMs } from '../src/ggx'
 import { decodeOtlpProtobuf, explainUnrecognised, parseTraceBytes, parseTraceFile, spansFromBody } from '../src/index'
 
 const fixture = (p: string) => readFileSync(fileURLToPath(new URL(`../../../fixtures/${p}`, import.meta.url)), 'utf8')
@@ -149,6 +150,17 @@ describe('spansFromBody', () => {
   })
 })
 
+describe('isoMs', () => {
+  it('keeps microseconds, honours explicit zones, and tolerates junk', () => {
+    expect(isoMs('2026-01-01T00:00:00')).toBe(Date.UTC(2026, 0, 1))
+    expect(isoMs('2026-01-01T00:00:00.123456')).toBeCloseTo(Date.UTC(2026, 0, 1) + 123.456, 3)
+    expect(isoMs('2026-01-01T05:30:00+05:30')).toBe(Date.UTC(2026, 0, 1))
+    expect(isoMs('2026-01-01T00:00:00.5Z')).toBe(Date.UTC(2026, 0, 1) + 500)
+    expect(isoMs('nonsense')).toBe(0)
+    expect(isoMs(undefined)).toBe(0)
+  })
+})
+
 describe('explainUnrecognised', () => {
   const enc = (s: string) => new TextEncoder().encode(s)
   const claudeHint = /~\/\.claude\/projects/
@@ -175,5 +187,60 @@ describe('explainUnrecognised', () => {
     expect(log).toContain('main.log')
     expect(log).not.toContain('secret-token-123')
     expect(explainUnrecognised(new Uint8Array(Array.from({ length: 200 }, (_, i) => i % 7)))).toContain('binary')
+  })
+})
+
+describe('GGX platform span export', () => {
+  const smoke = fixture('ggx-platform/smoke.jsonl')
+
+  it('reads the real export: detection, the CHAIN with its two LLM calls, models, tokens and times', () => {
+    const { detection, traces } = parseTraceFile(smoke)
+    expect(detection.source).toBe('ggx-platform')
+    expect(detection.confidence).toBe('high')
+    expect(traces).toHaveLength(1)
+    const t = traces[0]!.trace
+    expect(t.count).toBe(3)
+    expect(t.roots).toHaveLength(1)
+    expect(t.nameOf(t.roots[0]!)).toBe('answer_question')
+    expect(t.isKind(t.roots[0]!, SpanKind.Chain)).toBe(true)
+    const llm = t.where((i) => t.isKind(i, SpanKind.Llm))
+    expect(llm.map((i) => t.modelOf(i)).sort()).toEqual(['claude-sonnet-4-5', 'gpt-4o-mini'])
+    expect(t.totalTokens()).toEqual({ input: 420, output: 130 })
+    expect(t.inputs[t.roots[0]!]).toBe('What is GGX?')
+    expect(t.outputs[llm[0]!]).toBe('A governance platform.')
+    expect(t.t0).toBeCloseTo(Date.parse('2026-10-16T04:00:21Z') + 66.064, 3) // naive ISO times are read as UTC, microseconds kept
+    expect(t.duration).toBeCloseTo(0.079, 3)
+    const [first, second] = t.where((i) => t.isKind(i, SpanKind.Llm))
+    expect(t.start[second!]).toBeGreaterThan(t.start[first!]!) // order survives sub-millisecond gaps
+  })
+
+  it('maps status, error messages and parent links, from JSONL or a JSON array', () => {
+    const rec = (id: string, parent: string | null, extra: object = {}) => ({
+      trace_id: 't1', span_id: id, parent_span_id: parent, name: id, kind: 'TOOL', status: 'UNSET', status_message: null,
+      start_time: '2026-10-16T04:00:00.000000', end_time: '2026-10-16T04:00:01.000000', document: { attributes: {}, resource: {}, events: [] }, ...extra,
+    })
+    const records = [rec('root', null, { kind: 'AGENT' }), rec('a', 'root', { status: 'ERROR', status_message: 'timed out' }), rec('b', 'root', { status: 'OK' })]
+    for (const text of [records.map((r) => JSON.stringify(r)).join('\n'), JSON.stringify(records)]) {
+      const t = parseTraceFile(text).traces[0]!.trace
+      expect(t.count).toBe(3)
+      expect(t.where(SpanStatus.Error).map((i) => t.nameOf(i))).toEqual(['a'])
+      expect(t.errors[t.where(SpanStatus.Error)[0]!]).toBe('timed out')
+      expect(t.where(SpanStatus.Ok).map((i) => t.nameOf(i))).toEqual(['b'])
+      expect(t.children(t.roots[0]!)).toHaveLength(2)
+    }
+  })
+
+  it('back-fills model and tokens from the flat columns when the document lacks them', () => {
+    const line = JSON.stringify({ trace_id: 't', span_id: 's', name: 'call', kind: 'LLM', status: 'OK', start_time: '2026-10-16T04:00:00', end_time: '2026-10-16T04:00:02', model: 'm1', input_tokens: 7, output_tokens: 3, document: { attributes: {} } })
+    const t = parseTraceFile(line).traces[0]!.trace
+    expect(t.modelOf(0)).toBe('m1')
+    expect(t.totalTokens()).toEqual({ input: 7, output: 3 })
+    expect(t.spanDuration(0)).toBe(2000)
+  })
+
+  it('does not claim other formats, and works through parseTraceBytes', () => {
+    expect(parseTraceFile(fixture('openinference/travel-planner.collector-file.jsonl')).detection.source).toBe('openinference')
+    expect(parseTraceFile(fixture('claude-code/session.jsonl')).detection.source).toBe('claude-code')
+    expect(parseTraceBytes(new TextEncoder().encode(smoke)).detection.source).toBe('ggx-platform')
   })
 })

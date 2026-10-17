@@ -1,6 +1,7 @@
 import { TraceBuilder } from '@ggx/trace-model'
 import type { Trace } from '@ggx/trace-model'
-import { claudeCodeDetection, detectSpans, unknownDetection } from './detect'
+import { claudeCodeDetection, detectSpans, ggxDetection, unknownDetection } from './detect'
+import { ggxToRawSpans, looksLikeGgxSpans, readGgxRecords } from './ggx'
 import { claudeCodeSpans, looksLikeClaudeCode } from './claude-code'
 import type { ClaudeSubagent } from './claude-code'
 import type { Detection } from './detect'
@@ -15,6 +16,8 @@ export { detectSpans } from './detect'
 export { parseOtlp, parseBatches, looksLikeOtlp } from './otlp'
 export { decodeOtlpProtobuf } from './protobuf'
 export { explainUnrecognised } from './explain'
+export { ggxToRawSpans, looksLikeGgxSpans, readGgxRecords } from './ggx'
+export type { GgxRecord } from './ggx'
 export type { ClaudeSubagent } from './claude-code'
 
 export interface ParsedTrace {
@@ -29,6 +32,10 @@ export interface ParsedFile {
 
 /** Read a trace file's text, detect where it came from, and build one Trace per trace id. */
 export function parseTraceFile(text: string, extras: { claudeSubagents?: ClaudeSubagent[] } = {}): ParsedFile {
+  if (looksLikeGgxSpans(text.slice(0, 16384))) {
+    const raw = ggxToRawSpans(readGgxRecords(text))
+    if (raw.length) return buildTraces(raw, ggxDetection(raw.length))
+  }
   if (looksLikeClaudeCode(text.slice(0, 16384))) {
     const { spans, version, sessionId } = claudeCodeSpans(text, extras.claudeSubagents)
     const b = new TraceBuilder()
@@ -40,13 +47,13 @@ export function parseTraceFile(text: string, extras: { claudeSubagents?: ClaudeS
 }
 
 /** Detect the convention, then build one Trace per trace id from decoded OTLP spans. */
-export function buildTraces(raw: RawSpan[]): ParsedFile {
-  const detection = detectSpans(raw)
+export function buildTraces(raw: RawSpan[], forced?: Detection): ParsedFile {
+  const detection = forced ?? detectSpans(raw)
   const builders = new Map<string, TraceBuilder>()
   for (const s of raw) {
     let b = builders.get(s.traceId)
     if (!b) builders.set(s.traceId, (b = new TraceBuilder()))
-    b.add(mapSpan(s, detection.source, detection.mixed))
+    b.add(mapSpan(s, forced ? 'openinference' : detection.source, forced ? false : detection.mixed))
   }
   const traces = [...builders.entries()]
     .map(([traceId, b]) => ({ traceId, trace: b.build() }))
