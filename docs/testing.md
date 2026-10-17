@@ -26,6 +26,7 @@ pull request and push to `master`.
 | Desktop bridge (asset-protocol read, launch file, later opens): `apps/web/test/desktop.test.ts`; Rust: argument parsing, session scan (folders, ordering, titles, limits), and the OTLP receiver with real HTTP requests: `pnpm --filter @ggx/tracey-desktop test` | automated |
 | Desktop start screen against a stand-in for the shell (list, filter, open, empty state, phone width, Listen on/off, live run that grows, port in use): `apps/web/e2e/desktop.spec.ts` | automated |
 | Live run decoding and grouping (protobuf, gzip, JSON): `apps/web/test/live.test.ts` | automated |
+| GGX platform export: detection, the real fixture (models, tokens, microsecond times, UTC), status and error mapping, JSONL and JSON array, flat-column back-fill, no false positives | `packages/trace-adapters/test`, `apps/cli/test`, `apps/web/e2e` |
 | Run diff: Myers matching (classic cases, 20,000 items, capped on very different input), alignment, retries, new failures, fixes, noise filtering, whole subtrees, text diff | `packages/trace-diff/test` |
 | Opening and downloading from links against a real local HTTP server: redirects, gzip by magic bytes and by content-encoding, protobuf, headers (and 401/403 advice), web pages, 404/500, unreachable host, size limit declared and streamed, timeout, bad options, no overwrite, no partial file, naming | `apps/cli/test/url.test.ts` |
 | `tracey diff`: no differences, removed and added steps, regression exit code, `--all`, `--json`, bad usage | `apps/cli/test` |

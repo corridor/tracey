@@ -81,6 +81,7 @@ agent at tracey and watch it live (`OTEL_EXPORTER_OTLP_ENDPOINT=http://127.0.0.1
 | OpenTelemetry GenAI (Strands, Dynatrace, Honeycomb, ...) | OTLP JSON or protobuf |
 | OpenLLMetry / Traceloop | OTLP JSON |
 | Claude Code session transcripts | JSONL, sub-agents included |
+| GGX platform span exports | JSONL, one span per line |
 
 Planned: Datadog LLM Observability, Langfuse, LangSmith, Codex, VS Code Copilot, Zed, HAR
 captures. See the [roadmap](docs/roadmap.md).
