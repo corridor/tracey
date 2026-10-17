@@ -1,5 +1,5 @@
 /// <reference lib="webworker" />
-import { parseTraceBytes } from '@ggx/trace-adapters'
+import { explainUnrecognised, parseTraceBytes } from '@ggx/trace-adapters'
 import type { ClaudeSubagent } from '@ggx/trace-adapters'
 import { analyze, summarize } from '@ggx/trace-insights'
 import type { Detection } from '@ggx/trace-adapters'
@@ -18,9 +18,6 @@ export type WorkerResponse =
   | { ok: true; name: string; detection: Detection; trace: TraceTransfer; findings: Finding[]; summary: Summary; traceCount: number }
   | { ok: false; error: string }
 
-const NOT_RECOGNISED =
-  "This doesn't look like a trace tracey knows yet. Supported: OTLP JSON (OpenInference, OpenTelemetry GenAI, OpenLLMetry) and Claude Code transcripts."
-
 self.onmessage = async (e: MessageEvent<WorkerRequest>) => {
   try {
     const src = e.data.source
@@ -37,7 +34,7 @@ self.onmessage = async (e: MessageEvent<WorkerRequest>) => {
     }
     const parsed = parseTraceBytes(bytes, { claudeSubagents })
     const first = parsed.traces[0]
-    if (!first) return post({ ok: false, error: NOT_RECOGNISED })
+    if (!first) return post({ ok: false, error: explainUnrecognised(bytes, typeof src === 'string' ? '' : src.name) })
     const findings = analyze(first.trace)
     const { data, buffers } = first.trace.toTransfer()
     post(

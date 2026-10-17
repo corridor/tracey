@@ -14,6 +14,7 @@ export type { RawSpan } from './otlp'
 export { detectSpans } from './detect'
 export { parseOtlp, parseBatches, looksLikeOtlp } from './otlp'
 export { decodeOtlpProtobuf } from './protobuf'
+export { explainUnrecognised } from './explain'
 export type { ClaudeSubagent } from './claude-code'
 
 export interface ParsedTrace {
