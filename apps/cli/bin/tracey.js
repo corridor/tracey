@@ -11,6 +11,9 @@ process.exitCode = await main(process.argv.slice(2), {
   out: (s) => process.stdout.write(s),
   err: (s) => process.stderr.write(s),
   color: !process.env.NO_COLOR && process.stdout.isTTY === true,
+  ...(process.stderr.isTTY && {
+    progress: (n) => process.stderr.write(n < 0 ? '\r\x1b[K' : `\r\x1b[KDownloading… ${(n / 1024 / 1024).toFixed(1)} MB`),
+  }),
   ...(interactive && {
     pick: (sessions) =>
       runPicker(sessions, { stdin: process.stdin, write: (s) => process.stdout.write(s), color: !process.env.NO_COLOR }),
