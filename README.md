@@ -26,6 +26,8 @@ the result, and one model call took two thirds of the run. tracey found all thre
   slow steps. Click one to jump to it; hover to outline every span involved.
 - **A timeline strip** along the bottom that shows where the time went and where it broke.
 - **An inspector** with a step's status, input, output and error, pretty-printed.
+- **Compare two runs.** Open a run, press *Compare…*, pick another file: steps are lined up and you see what was added,
+  removed, newly failing or slower, with a line diff of the changed inputs and outputs. `tracey diff a b` does it in the terminal.
 - **Source detection.** tracey works out where a file came from and says how sure it is.
 - **Light, dark and auto themes**, and layouts that work from a phone to an ultrawide monitor.
 - **Fast.** The graph is drawn on a 2D canvas with level-of-detail rendering; a 100,000-span
@@ -66,6 +68,10 @@ pnpm tracey fixtures/openinference/travel-planner.collector-file.jsonl
 file to pick from the Claude Code sessions already on your machine, or `tracey listen` to point a running
 agent at tracey and watch it live (`OTEL_EXPORTER_OTLP_ENDPOINT=http://127.0.0.1:4318`).
 
+<p align="center">
+  <img alt="tracey comparing two runs: one step removed, one step's input changed from Paris to Rome, shown as a line diff" src="docs/images/diff-dark.png" width="820">
+</p>
+
 ## What it reads
 
 | Source | Notes |
@@ -93,6 +99,7 @@ tracey is a set of small, separately usable packages under the `@ggx/` scope, pl
 | `@ggx/trace-insights` | The findings engine |
 | `@ggx/trace-view-graph` | Pan-and-zoom call graph on a 2D canvas |
 | `@ggx/trace-view-timeline` | Compact timeline strip |
+| `@ggx/trace-diff` | Aligns two runs and finds what changed (plus a line diff) |
 | `@ggx/trace-theme` | GGX design tokens (dark, light, auto) |
 | `@ggx/trace-discover` | Finds sessions already on this machine (Node) |
 | `apps/web` | The website |

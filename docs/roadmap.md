@@ -13,9 +13,10 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Next step
 
-> **Run-vs-run diff (Phase 5)**: headless engine (`packages/trace-diff`: tree alignment, change detection, text diff) in
-> progress, then the website view, then `tracey diff a b`. After that, in order: **open from a URL** (CLI 6.5, website 4.8,
-> desktop 8.5; owner request, see `docs/user-flows.md`), the **VS Code extension** (Phase 7), a desktop CI job for
+> **Open from a URL** (owner request): CLI first (`tracey <url>`, `tracey download <url>`, `--header`, no CORS), then the website
+> (`?url=` and a paste field, CORS-bound, with a clear message when blocked) and the desktop app (a Rust fetch to a temp file).
+> Rules and flows are in `docs/user-flows.md`, Flow H. Then the **VS Code extension** (Phase 7), diff polish (colour changed steps on
+> the graph, normalise step names across conventions so a cross-convention comparison is useful), a desktop CI job for
 > macOS/Linux/Windows (8.3), hand-verifying the desktop window (`docs/testing.md`), and more sources once real exports exist.
 
 ## Phase 0: Vision and docs (done)
@@ -83,7 +84,7 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Phase 5: Diff
 
-- [ ] 5.1 Run-vs-run diff: span alignment, text diff for payloads.
+- [x] 5.1 Run-vs-run diff (engine `@ggx/trace-diff`, website view, `tracey diff`; the graph does not colour changed steps yet): span alignment, text diff for payloads.
 
 ## Phase 6: CLI
 

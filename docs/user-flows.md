@@ -196,10 +196,11 @@ header. A link to a folder of sessions or an HTML page gets a plain explanation,
 
 ## Flow C: "Compare two runs" (diffchecker feel)
 
-1. Load run A and run B (two files, or two drops).
-2. tracey aligns the two span trees and shows added, removed, changed, slower, costlier steps.
-3. Click a step to see an input/output text diff.
-4. Typical use: good run vs bad run, before vs after a prompt change.
+1. Open run A, then press **Compare…** and pick run B (website and desktop); in the terminal run `tracey diff a b`.
+2. tracey aligns the two span trees among siblings by kind and name, and lists what was added, removed, newly failing, fixed, slower or faster, and which steps changed input, output, model or tokens (built).
+3. Click a step for its fields side by side and a line diff of input, output and error (JSON is pretty-printed first).
+4. Typical use: good run vs bad run, before vs after a prompt change. `tracey diff a b --fail-on-regression` exits 1 if a step fails in B that did not in A.
+5. Limits: compare runs from one source; two conventions name steps differently (`planner` vs `invoke_agent planner`), so a cross-convention comparison reads as all added and removed. Steps are matched by name and order, not by identity, so renaming a step shows as removed plus added.
 
 ## Flow D: "Just look at the JSON" (jsonviewer feel)
 

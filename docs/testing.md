@@ -26,6 +26,9 @@ pull request and push to `master`.
 | Desktop bridge (asset-protocol read, launch file, later opens): `apps/web/test/desktop.test.ts`; Rust: argument parsing, session scan (folders, ordering, titles, limits), and the OTLP receiver with real HTTP requests: `pnpm --filter @ggx/tracey-desktop test` | automated |
 | Desktop start screen against a stand-in for the shell (list, filter, open, empty state, phone width, Listen on/off, live run that grows, port in use): `apps/web/e2e/desktop.spec.ts` | automated |
 | Live run decoding and grouping (protobuf, gzip, JSON): `apps/web/test/live.test.ts` | automated |
+| Run diff: Myers matching (classic cases, 20,000 items, capped on very different input), alignment, retries, new failures, fixes, noise filtering, whole subtrees, text diff | `packages/trace-diff/test` |
+| `tracey diff`: no differences, removed and added steps, regression exit code, `--all`, `--json`, bad usage | `apps/cli/test` |
+| Comparison view: summary, changes-only toggle, line diff of an input, removed step, close, bad second file, phone layout | `apps/web/e2e/diff.spec.ts` |
 | Session discovery (config dirs, ordering, titles, limits, sub-agent exclusion) | `packages/trace-discover/test`, with temp folders |
 | Picker state machine, key decoding, rendering, `sessions` and bare `tracey` | `apps/cli/test` |
 | OTLP protobuf decoding (real Python-encoder bytes, negative ints, truncated input) | `packages/trace-adapters/test` |
@@ -63,6 +66,9 @@ A short checklist (about five minutes):
 4. **Findings.** Hover a finding: its spans get an outline in the graph and the strip. Click one: the
    inspector shows that step.
 5. **Strip.** Click a bar: the graph frames that step.
+6. **Compare.** Press *Compare…* in the header and pick another trace (try `fixtures/otel-genai/...`, or a copy of a fixture you edited). Steps that
+   differ are listed; click one for its fields and a line diff. *Only changes* toggles the unchanged steps. Note: the same run captured by two
+   different conventions (OpenInference vs OTel GenAI) names its steps differently, so it reads as all added and removed; compare runs from one source.
 6. **List view.** Toggle *List*: every span is a row with a bar; click a row to inspect it.
 7. **Themes.** Click the half-circle button: dark, light, auto. The canvases recolour.
 8. **Formats.** Drop each file in `fixtures/` (see the table in [development.md](development.md)).

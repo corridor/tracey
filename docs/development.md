@@ -44,6 +44,7 @@ pnpm tracey fixtures/openinference/travel-planner.collector-file.jsonl
 pnpm tracey detect fixtures/claude-code/session.jsonl
 pnpm tracey check fixtures/otel-genai/travel-planner.collector-file.jsonl --fail-on error
 pnpm tracey fixtures/openinference/travel-planner.collector-file.jsonl --json
+pnpm tracey diff a.jsonl b.jsonl [--all] [--json] [--fail-on-regression]   # compare two runs
 pnpm tracey                    # interactive picker of sessions found on this machine (needs a terminal)
 pnpm tracey sessions [--json]  # the same list, non-interactive
 ```
@@ -106,6 +107,7 @@ apps/desktop             desktop app (Tauri shell around apps/web)
 packages/trace-model     span model (typed arrays)
 packages/trace-adapters  read + detect OTLP JSON and Claude Code transcripts
 packages/trace-insights  findings (errors, loops, slow steps, ...)
+packages/trace-diff      align two runs, find what changed, line diff
 packages/trace-theme     GGX design tokens (dark / light / auto)
 packages/trace-discover  find sessions already on this machine (Node)
 fixtures/                real and synthetic traces used by tests and the sample
