@@ -209,6 +209,9 @@ importers:
       '@ggx/trace-adapters':
         specifier: workspace:*
         version: link:../../packages/trace-adapters
+      '@ggx/trace-diff':
+        specifier: workspace:*
+        version: link:../../packages/trace-diff
       '@ggx/trace-insights':
         specifier: workspace:*
         version: link:../../packages/trace-insights

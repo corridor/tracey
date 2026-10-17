@@ -7,6 +7,7 @@ import type { DropPlan } from './dropfiles'
 import type { Loaded } from './load'
 import { SAMPLE_NAME, SAMPLE_TEXT } from './sample'
 import { Landing } from './Landing'
+import { DiffView } from './DiffView'
 import { fileFromPath, isDesktop, listenForOpens, listenStart, listenStop, onOtlp, scanSessions } from './desktop'
 import type { SessionRow } from './desktop'
 import { DesktopHome } from './DesktopHome'
@@ -34,6 +35,19 @@ export function App() {
   applyTheme(theme())
 
   const [busy, setBusy] = createSignal<string>()
+  const [compareWith, setCompareWith] = createSignal<Loaded>()
+  let compareInput!: HTMLInputElement
+  const compare = async (file: File) => {
+    setBusy(file.name)
+    try {
+      setCompareWith(await loadInWorker(file.name, file))
+      setError(undefined)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e))
+    } finally {
+      setBusy(undefined)
+    }
+  }
 
   // Desktop only: sessions found on this machine, and runs arriving from the local receiver.
   const desktop = isDesktop()
@@ -151,6 +165,7 @@ export function App() {
           class="logo"
           onClick={() => {
             setLoaded(undefined)
+            setCompareWith(undefined)
             setLiveId(undefined)
             if (desktop) void scanSessions().then(setSessions).catch(() => {})
           }}
@@ -159,6 +174,25 @@ export function App() {
           tracey
         </button>
         <Show when={loaded()}>{(l) => <Chips loaded={l()} />}</Show>
+        <Show when={loaded()}>
+          <input
+            ref={compareInput}
+            type="file"
+            hidden
+            data-testid="compare-input"
+            onChange={(e) => {
+              const f = e.currentTarget.files?.[0]
+              if (f) void compare(f)
+              e.currentTarget.value = ''
+            }}
+          />
+        </Show>
+        <Show when={loaded() && !compareWith()}>
+          <button class="btn small-btn" onClick={() => compareInput.click()} title="Compare this run with another trace">
+            Compare…
+          </button>
+        </Show>
+
         <span class="grow" />
         <button class="icon-btn" onClick={() => setHelp((h) => !h)} title="Keyboard shortcuts (?)" aria-label="Keyboard shortcuts" aria-expanded={help()}>
           ?
@@ -188,7 +222,11 @@ export function App() {
           )
         }
       >
-        {(l) => <Result loaded={l()} />}
+        {(l) => (
+          <Show when={compareWith()} fallback={<Result loaded={l()} />}>
+            {(b) => <DiffView a={l()} b={b()} onClose={() => setCompareWith(undefined)} />}
+          </Show>
+        )}
       </Show>
       <Show when={help()}>
         <Shortcuts />

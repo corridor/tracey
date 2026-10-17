@@ -157,3 +157,55 @@ kbd { border: 1px solid var(--tracey-border); border-bottom-width: 2px; border-r
   .dh-src { width: auto; gap: 8px; }
   .dh-listen { width: 100%; margin-top: 4px; }
 }
+
+.small-btn { min-height: 1.75rem; padding: 0 10px; font-size: 12px; white-space: nowrap; }
+.error-line { color: var(--tracey-error); }
+
+/* Comparison view */
+.diff { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.diff-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 8px 16px; border-bottom: 1px solid var(--tracey-border); }
+.diff-runs { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.diff-runs .chip { max-width: 28ch; overflow: hidden; text-overflow: ellipsis; }
+.diff-summary { margin: 0; font-weight: 600; color: var(--tracey-text-strong); }
+.diff-summary.bad { color: var(--tracey-error); }
+.check { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--tracey-text-secondary); }
+.diff-body { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 420px); container-type: inline-size; }
+.diff-list { display: flex; flex-direction: column; overflow: hidden; padding: 0; }
+.diff-list .rows { margin: 0; }
+.drow { position: absolute; left: 0; right: 0; display: grid; grid-template-columns: 22px minmax(120px, 1fr) auto auto; align-items: center; gap: 8px; padding: 0 14px; background: none; border: 0; text-align: left; }
+.drow:hover { background: var(--tracey-hover); }
+.drow.sel { background: var(--tracey-active); }
+.drow .mark { font: 600 13px var(--tracey-font-mono); text-align: center; }
+.drow.added .mark { color: var(--tracey-success); }
+.drow.removed .mark { color: var(--tracey-error); }
+.drow.changed .mark { color: var(--tracey-warning); }
+.drow.same .mark, .drow.same .dname { color: var(--tracey-text-muted); }
+.dname { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; color: var(--tracey-text-strong); }
+.dwhy { display: flex; gap: 4px; font-size: 11px; color: var(--tracey-text-secondary); }
+.reason { border: 1px solid var(--tracey-border); border-radius: 999px; padding: 0 7px; font-size: 11px; color: var(--tracey-text-secondary); white-space: nowrap; }
+.reason.failed, .reason.removed { color: var(--tracey-error); border-color: var(--tracey-error); }
+.reason.slower, .reason.changed { color: var(--tracey-warning); border-color: var(--tracey-warning); }
+.reason.fixed, .reason.added, .reason.faster { color: var(--tracey-success); border-color: var(--tracey-success); }
+.diff-detail h2 { text-transform: none; letter-spacing: 0; font-size: 15px; color: var(--tracey-text-max); display: flex; gap: 8px; align-items: center; }
+.cmp { width: 100%; border-collapse: collapse; font-size: 12px; margin: 8px 0 12px; }
+.cmp th { text-align: left; color: var(--tracey-text-muted); font-weight: 600; padding: 2px 8px 2px 0; }
+.cmp td { padding: 3px 8px 3px 0; color: var(--tracey-text-strong); }
+.cmp td:first-child { color: var(--tracey-text-muted); }
+.cmp tr.diff td:not(:first-child) { color: var(--tracey-warning); }
+.same-note { text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--tracey-text-muted); }
+.same-note .add { color: var(--tracey-success); }
+.same-note .del { color: var(--tracey-error); }
+.tdiff { margin: 0; padding: 6px 0; background: var(--tracey-surface); border: 1px solid var(--tracey-border); border-radius: var(--tracey-radius); font-size: 11.5px; line-height: 1.5; max-height: 320px; overflow: auto; white-space: pre; }
+.tline { display: block; padding: 0 8px; }
+.tline.add { background: color-mix(in srgb, var(--tracey-success) 14%, transparent); }
+.tline.del { background: color-mix(in srgb, var(--tracey-error) 14%, transparent); }
+.tsign { display: inline-block; width: 1.4ch; color: var(--tracey-text-muted); user-select: none; }
+.tline.add .tsign { color: var(--tracey-success); }
+.tline.del .tsign { color: var(--tracey-error); }
+@container (max-width: 760px) {
+  .diff-body { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) minmax(0, 45%); }
+}
+@media (max-width: 760px) {
+  .diff-body { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) minmax(0, 45%); }
+  .dur { display: none; }
+}
