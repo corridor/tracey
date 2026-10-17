@@ -1,3 +1,6 @@
+import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import { main } from '../src/main'
@@ -91,5 +94,57 @@ describe('sessions and the picker', () => {
     const r = await run()
     expect(r.out).toContain('Usage')
     expect(r.out).toContain('tracey sessions')
+  })
+})
+
+describe('tracey diff', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'tracey-diff-'))
+  const original = fx('openinference/travel-planner.collector-file.jsonl')
+  // A variant of the same run: the last failing search_flights call removed and one input changed.
+  const batch = JSON.parse(readFileSync(original, 'utf8'))
+  const spans = batch.resourceSpans[0].scopeSpans.flatMap((s: { spans: { name: string }[] }) => s.spans)
+  const flights = spans.filter((s: { name: string }) => s.name === 'search_flights')
+  const dropId = flights[flights.length - 1].spanId
+  for (const ss of batch.resourceSpans[0].scopeSpans) ss.spans = ss.spans.filter((s: { spanId: string }) => s.spanId !== dropId)
+  const variant = join(dir, 'variant.jsonl')
+  writeFileSync(variant, JSON.stringify(batch))
+
+  it('says there are no differences for a run against itself', async () => {
+    const r = await run('diff', original, original)
+    expect(r.code).toBe(0)
+    expect(r.out).toContain('No differences')
+    expect(r.out).not.toMatch(/^[+\-≠] /m)
+  })
+
+  it('lists what was removed, with the nesting and a summary', async () => {
+    const r = await run('diff', original, variant)
+    expect(r.code).toBe(0)
+    expect(r.out).toContain('1 removed')
+    expect(r.out).toMatch(/- search_flights\s+removed/)
+    expect(r.out).toContain('16 spans')
+    expect(r.out).toContain('15 spans')
+  })
+
+  it('shows added steps and new failures the other way round, and can fail CI on a regression', async () => {
+    const r = await run('diff', variant, original, '--fail-on-regression')
+    expect(r.out).toMatch(/\+ search_flights\s+added/)
+    expect(r.out).toContain('1 new failure')
+    expect(r.code).toBe(1)
+    expect((await run('diff', original, variant, '--fail-on-regression')).code).toBe(0)
+  })
+
+  it('--all includes unchanged steps and --json is machine-readable', async () => {
+    const all = await run('diff', original, variant, '--all')
+    expect(all.out).toMatch(/= planner/)
+    const j = JSON.parse((await run('diff', original, variant, '--json')).out)
+    expect(j.summary.removed).toBe(1)
+    expect(j.rows).toHaveLength(1)
+    expect(j.rows[0]).toMatchObject({ state: 'removed', name: 'search_flights' })
+  })
+
+  it('explains bad usage and unreadable files', async () => {
+    expect((await run('diff', original)).code).toBe(2)
+    expect((await run('diff', original, '/nope.json')).code).toBe(2)
+    expect((await run('diff', original, fx('claude-code/README.md'))).code).toBe(1)
   })
 })

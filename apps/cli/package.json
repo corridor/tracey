@@ -15,7 +15,8 @@
     "@ggx/trace-adapters": "workspace:*",
     "@ggx/trace-insights": "workspace:*",
     "@ggx/trace-model": "workspace:*",
-    "@ggx/trace-discover": "workspace:*"
+    "@ggx/trace-discover": "workspace:*",
+    "@ggx/trace-diff": "workspace:*"
   },
   "devDependencies": {
     "esbuild": "^0.28.0"

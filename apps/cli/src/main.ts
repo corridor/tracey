@@ -3,8 +3,11 @@ import { basename, dirname, join } from 'node:path'
 import { parseTraceFile } from '@ggx/trace-adapters'
 import type { ClaudeSubagent, ParsedFile } from '@ggx/trace-adapters'
 import { analyze, summarize } from '@ggx/trace-insights'
+import { duration } from './format'
 import { discoverSessions, labelOf } from '@ggx/trace-discover'
 import type { SessionInfo } from '@ggx/trace-discover'
+import { describeSummary, diffTraces } from '@ggx/trace-diff'
+import type { DiffRow } from '@ggx/trace-diff'
 import { runListen } from './listen'
 import type { ListenIO } from './listen'
 import { detectionLines, findingLines, style, summaryLine } from './format'
@@ -24,6 +27,8 @@ export interface IO {
 const HELP = `tracey: see what your agent really did
 
 Usage
+  tracey diff <a> <b> [--all] [--fail-on-regression]
+                                    compare two runs: what was added, removed, slower, newly failing
   tracey listen [--port 4318] [--host 127.0.0.1] [--save file.jsonl]
                                     receive OTLP traces from a running agent and show them live
   tracey                            pick from sessions found on this machine (interactive terminal)
@@ -61,6 +66,54 @@ function sessionLines(sessions: SessionInfo[], st: ReturnType<typeof style>): st
   return `${sessions.map((x) => `${labelOf(x).slice(0, 48).padEnd(48)} ${st.dim(`${x.source}  ${new Date(x.mtimeMs).toISOString().slice(0, 16).replace('T', ' ')}  ${x.path}`)}`).join('\n')}\n`
 }
 
+function firstTrace(file: string) {
+  const parsed = load(file)
+  const t = parsed.traces[0]
+  return t ? { file, parsed, trace: t.trace } : undefined
+}
+
+const MARK: Record<DiffRow['state'], string> = { same: '=', changed: '≠', added: '+', removed: '-' }
+
+function signed(ms: number): string {
+  const d = duration(Math.abs(ms))
+  return `${ms < 0 ? '-' : '+'}${d}`
+}
+
+async function runDiff(files: string[], opt: { json: boolean; all: boolean; failOnRegression: boolean }, io: IO, st: ReturnType<typeof style>): Promise<number> {
+  if (files.length !== 2) {
+    io.err('tracey diff: give two files, tracey diff <a> <b>\n')
+    return 2
+  }
+  for (const f of files) {
+    if (!existsSync(f)) {
+      io.err(`tracey: cannot read ${f}\n`)
+      return 2
+    }
+  }
+  const [a, b] = files.map(firstTrace)
+  if (!a || !b) {
+    io.err(`tracey: could not recognise ${!a ? files[0] : files[1]}\n`)
+    return 1
+  }
+  const d = diffTraces(a.trace, b.trace)
+  const nameOf = (r: DiffRow) => (r.a >= 0 ? a.trace.nameOf(r.a) : b.trace.nameOf(r.b))
+  const shown = opt.all ? d.rows : d.rows.filter((r) => r.state !== 'same')
+  const regression = d.summary.newFailures > 0
+  if (opt.json) {
+    io.out(`${JSON.stringify({ a: { file: a.file, spans: a.trace.count, durationMs: a.trace.duration }, b: { file: b.file, spans: b.trace.count, durationMs: b.trace.duration }, summary: d.summary, rows: shown.map((r) => ({ state: r.state, name: nameOf(r), depth: r.depth, reasons: r.reasons, deltaMs: r.deltaMs })) })}\n`)
+  } else {
+    const side = (tag: string, x: NonNullable<typeof a>) => `${st.bold(tag)}  ${x.file}  ${st.dim(`${x.trace.count} spans · ${duration(x.trace.duration)}`)}`
+    const lines = [side('A', a), side('B', b), '', `${regression ? st.red('▲') : st.green('✓')} ${describeSummary(d.summary)}`, '']
+    for (const r of shown) {
+      const paint = r.state === 'added' ? st.green : r.state === 'removed' ? st.red : st.orange
+      const why = r.state === 'changed' ? r.reasons.map((x) => (x === 'slower' || x === 'faster' ? `${x} ${signed(r.deltaMs)}` : x === 'failed' ? st.red('now fails') : x === 'fixed' ? st.green('fixed') : x)).join(', ') : r.state
+      lines.push(`${'  '.repeat(r.depth)}${paint(MARK[r.state])} ${nameOf(r)}  ${st.dim(why)}`)
+    }
+    io.out(`${lines.join('\n')}\n`)
+  }
+  return opt.failOnRegression && regression ? 1 : 0
+}
+
 export async function main(argv: string[], io: IO): Promise<number> {
   const flags = new Set(argv.filter((a) => a.startsWith('-') && !a.includes('=')))
   const failOn = argv.find((a) => a.startsWith('--fail-on='))?.slice(10) ?? (argv.includes('--fail-on') ? argv[argv.indexOf('--fail-on') + 1] : undefined)
@@ -71,6 +124,7 @@ export async function main(argv: string[], io: IO): Promise<number> {
     io.out(HELP)
     return 0
   }
+  if (args[0] === 'diff') return runDiff(args.slice(1), { json, all: flags.has('--all'), failOnRegression: flags.has('--fail-on-regression') }, io, st)
   if (args[0] === 'listen') return runListen(argv.slice(argv.indexOf('listen') + 1), { out: io.out, err: io.err, color: io.color, ...io.listen })
   if (argv.length === 0 || args[0] === 'sessions') {
     const sessions = await (io.discover ?? discoverSessions)()
