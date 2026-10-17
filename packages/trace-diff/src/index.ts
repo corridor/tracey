@@ -1,0 +1,5 @@
+export { diffTraces, describeSummary } from './diff'
+export type { DiffOptions, DiffRow, DiffSummary, Reason, RowState, TraceDiff } from './diff'
+export { diffText, prettyIfJson, countChanges } from './text'
+export type { TextChange } from './text'
+export { matchSequences } from './seq'

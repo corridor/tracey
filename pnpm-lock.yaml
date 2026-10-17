@@ -241,6 +241,16 @@ importers:
         specifier: workspace:*
         version: link:../trace-model
 
+  packages/trace-diff:
+    dependencies:
+      '@ggx/trace-model':
+        specifier: workspace:*
+        version: link:../trace-model
+    devDependencies:
+      '@ggx/trace-adapters':
+        specifier: workspace:*
+        version: link:../trace-adapters
+
   packages/trace-discover: {}
 
   packages/trace-insights:
