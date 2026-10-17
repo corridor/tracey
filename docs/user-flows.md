@@ -178,6 +178,22 @@ the Overview, e.g. "no timing data in this export, durations are estimated from 
 timestamps" or "no tool inputs captured". Findings that need missing data are skipped, not
 faked.
 
+## Flow H: "Open a trace from a link"
+
+Someone shares a trace by URL (a gist, an S3 or GCS link, a CI artifact, an internal file server) and you want to look at it
+without saving it by hand. Planned for every surface (owner request; roadmap 4.8, 6.5, 8.5):
+
+| Surface | How | Limits |
+|---|---|---|
+| Website | Paste a link in the landing page, or open `https://tracey.genguardx.ai/?url=https://...` | The browser fetches the file, so the host must allow cross-origin reads (CORS). `raw.githubusercontent.com` and gist raw links do; many private buckets do not. When blocked, tracey says so and suggests downloading and dropping, the desktop app, or the CLI. |
+| CLI | `tracey https://...` opens it, `tracey download <url> [-o file]` saves it | No CORS. `--header 'Authorization: Bearer ...'` for private links. Redirects followed, size cap, timeout. |
+| Desktop | "Paste a link" on the start screen | Fetched by the shell, no CORS; streamed to a temp file. |
+
+Rules: only `http` and `https`; the format is detected from the bytes, never the URL; gzip (magic bytes `1f 8b`) is unpacked; there is
+a size cap (default 200 MB) with progress; a `?url=` link carries only the address, never trace data, and tracey never sends a trace
+anywhere. Credentials are not placed in links (a shared link would leak them); private URLs go through the CLI or desktop with a
+header. A link to a folder of sessions or an HTML page gets a plain explanation, not a crash.
+
 ## Flow C: "Compare two runs" (diffchecker feel)
 
 1. Load run A and run B (two files, or two drops).

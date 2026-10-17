@@ -112,6 +112,13 @@ richer rows (title, project path, turns, tool calls, duration, error/warning bad
 in `docs/mockups/`. The CLI picker is a terminal version of the same list; live runs appear in
 it too, tagged "Listening" **(proposal; owner has not answered)**.
 
+## Open from a URL (planned)
+
+All three runnable surfaces will open a trace from an `http(s)` link (details in `docs/user-flows.md`, Flow H): the website via a
+"Paste a link" field and `?url=` (browser fetch, so CORS applies), the CLI via `tracey <url>` and `tracey download <url>` (no CORS,
+`--header` for private links), and the desktop app via a Rust fetch streamed to a temp file. The VS Code extension can use the
+CLI's fetch or the editor's own file handling.
+
 ## Cross-surface capability matrix
 
 | Capability | Web | VS Code | CLI | Desktop |
@@ -119,6 +126,7 @@ it too, tagged "Listening" **(proposal; owner has not answered)**.
 | Open file | drag/drop, picker | custom editor | arg | OS open, drag/drop |
 | Paste | yes | yes | stdin | yes |
 | Watch for new traces | no | workspace watcher | `--watch` | folder watch |
+| Open from a URL | `?url=` / paste a link (CORS applies) | planned | `tracey <url>`, `tracey download` | planned (no CORS) |
 | Live receiver (`tracey listen`) | no | via extension host | yes | yes (toggle) |
 | Full visual (timeline, graph, diff) | yes | yes | no (TUI subset) | yes |
 | Findings | yes | yes | yes | yes |

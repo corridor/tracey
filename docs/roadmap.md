@@ -13,14 +13,10 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Next step
 
-> **Run-vs-run diff (Phase 5)**, then the **VS Code extension (Phase 7)**: load two traces, align their span trees, show
-> added / removed / changed / slower steps, and a text diff for a step's input and output (the "diffchecker" feel from
-> the vision). Also pending: a CI job that builds the desktop app on macOS/Linux/Windows (8.3), hand-verifying the
-> desktop start screen and Listen in the real window (`docs/testing.md`), more sources (Datadog, Langfuse, LangSmith,
-> Codex, Zed, VS Code Copilot, HAR) once real exports are available, and a verified Phoenix/Dynatrace/Datadog guide set.
->
-> Done so far: see the git log. Website items from the earlier plan are finished: folder and sub-agent drops, protobuf
-> files, a phone first view (graph visible, sheets on demand), perf and size budgets in CI.
+> **Run-vs-run diff (Phase 5)**: headless engine (`packages/trace-diff`: tree alignment, change detection, text diff) in
+> progress, then the website view, then `tracey diff a b`. After that, in order: **open from a URL** (CLI 6.5, website 4.8,
+> desktop 8.5; owner request, see `docs/user-flows.md`), the **VS Code extension** (Phase 7), a desktop CI job for
+> macOS/Linux/Windows (8.3), hand-verifying the desktop window (`docs/testing.md`), and more sources once real exports exist.
 
 ## Phase 0: Vision and docs (done)
 
@@ -79,6 +75,10 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 - [ ] 4.5 Keyboard navigation, themes, a11y pass, responsive layouts (360/768/1280/2560 px,
       touch and pinch-zoom) with Playwright visual checks.
 - [x] 4.6 Bundled sample, PWA/offline (manifest, icons, service worker, tested), perf and size budgets enforced in CI.
+- [ ] 4.8 **Open from a URL** (website): a "Paste a link" field on the landing page and `?url=https://...` that loads the
+      trace in the browser (CORS permitting), with a size cap, progress, and a clear message when the host blocks
+      cross-origin reads (use download-and-drop, the desktop app, or the CLI). Also gzip (`.gz`) files by magic bytes.
+      The link carries only the URL, never trace data. See "Open from a URL" in `docs/user-flows.md`.
 - [ ] 4.7 Publish the site. **Milestone: "drop a file" website live.**
 
 ## Phase 5: Diff
@@ -91,6 +91,8 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 - [x] 6.1b Session scan on start with no args: picker of found sessions (Claude Code only so far; verified in a pty on real sessions).
 - [ ] 6.2 Terminal explorer (TTY), `diff`.
 - [ ] 6.3 Single-binary distribution.
+- [ ] 6.5 **Fetch from a URL** (CLI): `tracey <https://...>` opens a remote trace, `tracey download <url> [-o file]` saves it,
+      with `--header 'Authorization: ...'` for private links (no CORS limits in Node), redirects, a size cap and a timeout.
 - [x] 6.4 `tracey listen` (done; verified with the real Python OTLP protobuf exporter, including a pty check of the live view): local OTLP/HTTP receiver (JSON + protobuf), loopback-only, in-memory,
       `--save`, live-updating graph, runs by trace id. Test with a real Strands/OpenAI Agents/
       LangGraph script. Update `docs/guides/no-tracing.md` when it ships.
@@ -105,6 +107,8 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 - [~] 8.1 Tauri shell (`apps/desktop`), file association and open-with built; macOS .app builds at 3.2 MB and launches with a file. Recent files pending. Linux/Windows untested.
 - [~] 8.2 Session scan on start: done (Rust scan + picker UI, tested in Rust and in the browser against a stand-in shell). Folder watching pending.
 - [ ] 8.3 Renderer QA on WebKit, WebView2, WebKitGTK; installers for macOS/Windows/Linux.
+- [ ] 8.5 **Open from a URL** (desktop): a "Paste a link" box in the start screen, fetched by the shell (a Rust command that
+      streams to a temp file, so there is no CORS limit and large files do not cross the IPC), with optional headers.
 - [x] 8.4 "Listen" toggle in the desktop app (Rust receiver hands raw bodies to the shared TypeScript decoder; endpoint shown). Copy button pending. The real window could not be driven here; verified by Rust tests, browser tests with a stand-in shell, and the app building and launching.
 
 ## Phase 9: More sources
