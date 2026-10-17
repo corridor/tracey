@@ -139,6 +139,7 @@ test.describe('other formats', () => {
     ['claude-code/session.jsonl', 'Claude Code', /spans/],
     ['frameworks/strands/otlp-default.json', 'OpenTelemetry GenAI', /spans/],
     ['frameworks/openai-agents/otlp-openinference.json', 'OpenInference', /spans/],
+    ['ggx-platform/smoke.jsonl', 'GGX platform', /3 spans/],
   ]
   for (const [file, source, spans] of cases) {
     test(`opens ${file}`, async ({ page }) => {

@@ -61,6 +61,17 @@ describe('tracey cli', () => {
   })
 })
 
+describe('GGX platform exports', () => {
+  it('opens a platform span export, with its detection and summary', async () => {
+    const r = await run(fx('ggx-platform/smoke.jsonl'))
+    expect(r.code).toBe(0)
+    expect(r.out).toContain('GGX platform export')
+    expect(r.out).toContain('3 spans')
+    expect(r.out).toContain('2 llm')
+    expect((await run('detect', fx('ggx-platform/smoke.jsonl'))).out).toContain('GGX platform export')
+  })
+})
+
 describe('sessions and the picker', () => {
   const session = { source: 'claude-code' as const, path: fx('claude-code/session.jsonl'), title: 'Fix off-by-one', project: '/work/demo-app', mtimeMs: Date.UTC(2026, 0, 1, 12), size: 10 }
 

@@ -34,7 +34,7 @@ export function Result(props: { loaded: Loaded }) {
   const FindingsList = () => (
     <>
       <Verdict loaded={props.loaded} />
-      <Show when={findings().length} fallback={<p class="ok-note">✓ No problems found</p>}>
+      <Show when={findings().length}>
       <For each={findings()}>
         {(f) => (
           <FindingCard
