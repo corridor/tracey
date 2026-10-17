@@ -35,6 +35,21 @@ async function uploadFile(page: Page, path: string) {
 }
 
 test.describe('landing', () => {
+  test('tells people where Claude Code keeps its logs and how to reach the hidden folder', async ({ page }) => {
+    await page.goto('/')
+    await page.getByText('Where are my Claude Code logs?').click()
+    await expect(page.locator('.where')).toContainText('~/.claude/projects/')
+    await expect(page.locator('.where')).toContainText('hidden')
+    await expect(page.locator('.where kbd').first()).toBeVisible()
+  })
+
+  test('explains Claude Code prompt history instead of failing silently', async ({ page }) => {
+    await page.goto('/')
+    const history = '{"display":"a","pastedContents":{},"timestamp":1,"project":"/x"}\n'.repeat(4)
+    await page.locator('input[type=file]').setInputFiles({ name: 'history.jsonl', mimeType: 'application/json', buffer: Buffer.from(history) })
+    await expect(page.getByRole('alert')).toContainText('prompt history')
+  })
+
   test('shows the headline, drop target and sample button', async ({ page }) => {
     const errs = watchErrors(page)
     await page.goto('/')
@@ -46,7 +61,8 @@ test.describe('landing', () => {
 
   test('rejects a file it does not recognise with a readable message', async ({ page }) => {
     await uploadFile(page, fixture('claude-code/README.md'))
-    await expect(page.getByRole('alert')).toContainText("doesn't look like a trace")
+    await expect(page.getByRole('alert')).toContainText('plain-text log')
+    await expect(page.getByRole('alert')).toContainText('~/.claude/projects')
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   })
 })

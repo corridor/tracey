@@ -42,6 +42,14 @@ export function Landing(props: { error: string | undefined; busy: string | undef
         </p>
       </Show>
       <p class="fine">Runs entirely in your browser. Nothing is uploaded.</p>
+      <details class="where">
+        <summary>Where are my Claude Code logs?</summary>
+        <p>
+          Sessions are the <code class="mono">.jsonl</code> files in <code class="mono">~/.claude/projects/&lt;project&gt;/</code>. That folder is hidden: in the file
+          picker press <kbd>⌘</kbd> <kbd>⇧</kbd> <kbd>.</kbd> on macOS (<kbd>Ctrl</kbd> <kbd>H</kbd> on Linux) to show it, or press <kbd>⌘</kbd> <kbd>⇧</kbd> <kbd>G</kbd> and type
+          the path. Drop a session together with its sub-agents folder to see those too. The desktop app and the CLI list your sessions for you.
+        </p>
+      </details>
     </main>
   )
 }
