@@ -45,6 +45,9 @@ pnpm tracey detect fixtures/claude-code/session.jsonl
 pnpm tracey check fixtures/otel-genai/travel-planner.collector-file.jsonl --fail-on error
 pnpm tracey fixtures/openinference/travel-planner.collector-file.jsonl --json
 pnpm tracey diff a.jsonl b.jsonl [--all] [--json] [--fail-on-regression]   # compare two runs
+pnpm tracey https://example.com/run.jsonl                        # open a trace from a link
+pnpm tracey https://host/private.jsonl -H 'Authorization: Bearer $TOKEN'   # private link
+pnpm tracey download https://host/run.pb -o run.pb               # save it without opening
 pnpm tracey                    # interactive picker of sessions found on this machine (needs a terminal)
 pnpm tracey sessions [--json]  # the same list, non-interactive
 ```
@@ -63,6 +66,9 @@ To try it without an agent, send a fixture: `curl -s -X POST --data-binary @fixt
 
 The picker looks in `$CLAUDE_CONFIG_DIR` and every `~/.claude*` folder (for example `~/.claude_work`) for Claude Code
 sessions, lists the newest first, and filters as you type (`↑↓` move, `↵` open, `esc` quit).
+Links work anywhere a file does (`detect`, `check`, `diff a.jsonl https://...`). The format comes from the bytes, `.gz` files are
+unpacked, redirects are followed, and downloads stop at 200 MB (`--max-size <MB>`) or 60 s (`--timeout <s>`). `Authorization` is not
+forwarded to a different host after a redirect. `download` will not overwrite a file unless you pass `--force`.
 `check` exits 1 when findings reach the chosen severity, so it can gate CI.
 
 Claude Code sessions: sub-agent files next to a session

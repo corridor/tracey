@@ -13,11 +13,12 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 
 ## Next step
 
-> **Open from a URL** (owner request): CLI first (`tracey <url>`, `tracey download <url>`, `--header`, no CORS), then the website
-> (`?url=` and a paste field, CORS-bound, with a clear message when blocked) and the desktop app (a Rust fetch to a temp file).
-> Rules and flows are in `docs/user-flows.md`, Flow H. Then the **VS Code extension** (Phase 7), diff polish (colour changed steps on
-> the graph, normalise step names across conventions so a cross-convention comparison is useful), a desktop CI job for
-> macOS/Linux/Windows (8.3), hand-verifying the desktop window (`docs/testing.md`), and more sources once real exports exist.
+> **Open from a URL on the website (4.8) and the desktop app (8.5)**: a "Paste a link" field and `?url=` (browser fetch, so CORS applies:
+> say so clearly when a host blocks it), and a Rust fetch in the desktop shell that streams to a temp file. Reuse the CLI's rules (http(s)
+> only, bytes decide the format, gzip by magic bytes, size cap, no credentials in links). Then the **VS Code extension** (Phase 7), diff polish
+> (colour changed steps on the graph, normalise step names across conventions), a desktop CI job for macOS/Linux/Windows (8.3), distribution
+> (publish `@ggx/*` packages and the CLI to npm, desktop installers on GitHub Releases) so people can install tracey without cloning the repo,
+> and more sources once real exports exist.
 
 ## Phase 0: Vision and docs (done)
 
@@ -92,7 +93,7 @@ Rule: before any step that creates code, check the gate in `AGENTS.md` (owner ap
 - [x] 6.1b Session scan on start with no args: picker of found sessions (Claude Code only so far; verified in a pty on real sessions).
 - [ ] 6.2 Terminal explorer (TTY), `diff`.
 - [ ] 6.3 Single-binary distribution.
-- [ ] 6.5 **Fetch from a URL** (CLI): `tracey <https://...>` opens a remote trace, `tracey download <url> [-o file]` saves it,
+- [x] 6.5 **Fetch from a URL** (CLI; built and tested against a real HTTP server and one real GitHub raw link): `tracey <https://...>` opens a remote trace, `tracey download <url> [-o file]` saves it,
       with `--header 'Authorization: ...'` for private links (no CORS limits in Node), redirects, a size cap and a timeout.
 - [x] 6.4 `tracey listen` (done; verified with the real Python OTLP protobuf exporter, including a pty check of the live view): local OTLP/HTTP receiver (JSON + protobuf), loopback-only, in-memory,
       `--save`, live-updating graph, runs by trace id. Test with a real Strands/OpenAI Agents/

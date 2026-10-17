@@ -186,7 +186,7 @@ without saving it by hand. Planned for every surface (owner request; roadmap 4.8
 | Surface | How | Limits |
 |---|---|---|
 | Website | Paste a link in the landing page, or open `https://tracey.genguardx.ai/?url=https://...` | The browser fetches the file, so the host must allow cross-origin reads (CORS). `raw.githubusercontent.com` and gist raw links do; many private buckets do not. When blocked, tracey says so and suggests downloading and dropping, the desktop app, or the CLI. |
-| CLI | `tracey https://...` opens it, `tracey download <url> [-o file]` saves it | No CORS. `--header 'Authorization: Bearer ...'` for private links. Redirects followed, size cap, timeout. |
+| CLI (built) | `tracey https://...` opens it, `tracey download <url> [-o file]` saves it | No CORS. `--header 'Authorization: Bearer ...'` for private links. Redirects followed, size cap, timeout. |
 | Desktop | "Paste a link" on the start screen | Fetched by the shell, no CORS; streamed to a temp file. |
 
 Rules: only `http` and `https`; the format is detected from the bytes, never the URL; gzip (magic bytes `1f 8b`) is unpacked; there is

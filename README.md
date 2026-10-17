@@ -64,7 +64,8 @@ pnpm tracey fixtures/openinference/travel-planner.collector-file.jsonl
 ▲ ChatCompletion took 3.2s  (66% of the run)
 ```
 
-`tracey check <file>` exits non-zero when findings reach a severity, for CI. Run `tracey` with no
+Any command takes a link instead of a file (`tracey https://…`, with `-H 'Authorization: …'` for private ones), and `tracey download <url>`
+saves one. `tracey check <file>` exits non-zero when findings reach a severity, for CI. Run `tracey` with no
 file to pick from the Claude Code sessions already on your machine, or `tracey listen` to point a running
 agent at tracey and watch it live (`OTEL_EXPORTER_OTLP_ENDPOINT=http://127.0.0.1:4318`).
 
